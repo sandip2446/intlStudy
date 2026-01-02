@@ -336,6 +336,451 @@
         .demo-badge { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: var(--primary); padding: 8px 15px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 999; display: none; }
         .error-message { color: var(--danger); font-size: 0.9rem; margin-top: 10px; display: none; }
 
+        /* --- NEW FEATURES STYLES --- */
+        /* Notification Center */
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .notification-bell:hover { background: rgba(0,43,91,0.1); }
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .notification-panel {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            z-index: 1001;
+            display: none;
+            overflow: hidden;
+        }
+        .notification-panel.active { display: block; }
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+        }
+        .notification-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .notification-item:hover { background: #f8f9fa; }
+        .notification-item.unread { background: #e3f2fd; }
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+        }
+        .notification-time {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* Status Tracker */
+        .status-tracker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 30px 0;
+        }
+        .status-tracker::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+        .status-step {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .status-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .status-step.active .status-circle {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        .status-step.completed .status-circle {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        .status-step.completed .status-circle::after {
+            content: '✓';
+        }
+        .status-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+        }
+        .status-step.active .status-label { color: var(--primary); font-weight: 600; }
+
+        /* Test Score Card */
+        .test-score-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+        .test-score-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .test-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .score-expiry {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .score-expiry.valid { background: #d1e7dd; color: #0f5132; }
+        .score-expiry.expiring { background: #fff3cd; color: #856404; }
+        .score-expiry.expired { background: #f8d7da; color: #842029; }
+
+        /* Document Checklist */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .checklist-item:hover { background: #f8f9fa; }
+        .checklist-item.completed {
+            background: #f0f9ff;
+            opacity: 0.8;
+        }
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .checklist-progress {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .checklist-progress-bar {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        /* Task Card */
+        .task-card {
+            background: white;
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .task-card.priority-high { border-left-color: var(--danger); }
+        .task-card.priority-medium { border-left-color: var(--warning); }
+        .task-card.priority-low { border-left-color: var(--success); }
+        .task-card.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+        .task-due-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        .task-due-date.overdue { color: var(--danger); font-weight: 600; }
+
+        /* Notes Section */
+        .notes-container {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        .note-item {
+            background: #f8f9fa;
+            border-left: 3px solid var(--primary);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .note-date {
+            font-size: 0.75rem;
+            color: #999;
+        }
+        .note-tags {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .note-tag {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        /* Appointment Card */
+        .appointment-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .appointment-time {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .appointment-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .appointment-status.scheduled { background: #cfe2ff; color: #084298; }
+        .appointment-status.completed { background: #d1e7dd; color: #0f5132; }
+        .appointment-status.cancelled { background: #f8d7da; color: #842029; }
+
+        /* Payment Card */
+        .payment-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .payment-amount {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .payment-status.paid { color: var(--success); }
+        .payment-status.pending { color: var(--warning); }
+        .payment-status.overdue { color: var(--danger); }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e0e0e0;
+        }
+        .timeline-item.completed .timeline-dot {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        .timeline-item.active .timeline-dot {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .timeline-content {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        .modal-close:hover { color: var(--danger); }
+
+        /* Search & Filter */
+        .search-filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+
+        /* Email Template */
+        .email-template-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .email-template-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        /* Report Card */
+        .report-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .report-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .report-metric {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        .report-metric-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .report-metric-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
         /* --- TAGS FOR SELECTED UNIVERSITIES --- */
         .uni-tag {
             display: inline-flex;
@@ -1031,9 +1476,27 @@
             <button onclick="router('auth', 'student')" class="nav-cta">Login</button>
         </nav>
         <nav id="private-nav" style="display: none;">
+            <div class="notification-bell" onclick="toggleNotificationPanel()" style="position: relative;">
+                <i class="fas fa-bell" style="font-size: 1.2rem; color: var(--primary);"></i>
+                <span class="notification-badge" id="notification-count" style="display: none;">0</span>
+            </div>
             <span id="user-display" style="font-weight: 600; color: var(--primary);"></span>
             <button onclick="handleLogout()" class="logout-btn">Logout</button>
         </nav>
+        
+        <!-- Notification Panel -->
+        <div id="notification-panel" class="notification-panel">
+            <div class="notification-header">
+                <h4 style="margin: 0; color: white;"><i class="fas fa-bell"></i> Notifications</h4>
+                <button onclick="markAllNotificationsRead()" style="background: none; border: none; color: white; cursor: pointer; font-size: 0.85rem;">Mark all read</button>
+            </div>
+            <div id="notification-list" class="notification-list">
+                <div style="padding: 40px; text-align: center; color: #999;">
+                    <i class="fas fa-bell-slash" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.3;"></i>
+                    <p>No notifications</p>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- DEMO BADGE -->
@@ -1817,67 +2280,84 @@
             </div>
 
             <div class="dash-main">
-                <h2 style="margin-bottom: 30px;">Welcome, Student</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <h2 style="margin: 0 0 5px 0;">Welcome Back!</h2>
+                        <p style="margin: 0; color: #666; font-size: 0.95rem;" id="student-welcome-email">Student</p>
+                    </div>
+                    <span class="status-badge status-submitted" id="dash-status-badge" style="display: none;"><i class="fas fa-check-circle"></i> Application Submitted</span>
+                </div>
                 
-                <!-- Profile Summary Card (Visible after submit) -->
+                <!-- Quick Stats -->
+                <div class="grid-3" style="margin-bottom: 30px;">
+                    <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="openStatusTrackerModal()" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-route" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                        <h3 style="margin-bottom:0; font-size: 1.1rem;">Application Status</h3>
+                        <p style="margin-top:5px; font-size:0.85rem; color: #666;">View Progress</p>
+                    </div>
+                    <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="openDocumentChecklistModal()" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-check-square" style="font-size:2rem; color:var(--accent); margin-bottom:10px;"></i>
+                        <h3 style="margin-bottom:0; font-size: 1.1rem;" id="dash-checklist-count">0/8</h3>
+                        <p style="margin-top:5px; font-size:0.85rem; color: #666;">Documents</p>
+                    </div>
+                    <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="openPaymentsModal()" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-money-bill-wave" style="font-size:2rem; color:var(--success); margin-bottom:10px;"></i>
+                        <h3 style="margin-bottom:0; font-size: 1.1rem;" id="dash-payment-status">$0</h3>
+                        <p style="margin-top:5px; font-size:0.85rem; color: #666;">Payments</p>
+                    </div>
+                </div>
+
+                <!-- Main Action Buttons -->
+                <div class="grid-2" style="gap: 20px; margin-bottom: 30px;">
+                    <div class="dash-card" style="padding: 30px; text-align: center; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white;" onclick="openChatModal()" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,43,91,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.9;"></i>
+                        <h3 style="color: white; margin-bottom: 10px;">Chat with Counselor</h3>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin: 0;">Get instant help and support</p>
+                    </div>
+                    <div class="dash-card" style="padding: 30px; text-align: center; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, var(--accent) 0%, #e6c81b 100%); color: var(--primary);" onclick="openTestScoresModal()" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(249,217,35,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                        <i class="fas fa-certificate" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Test Scores</h3>
+                        <p style="color: var(--primary); font-size: 0.9rem; margin: 0; opacity: 0.8;">Manage your test results</p>
+                    </div>
+                </div>
+
+                <!-- Secondary Actions -->
+                <div class="grid-4" style="gap: 15px; margin-bottom: 30px;">
+                    <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="openStatusTrackerModal()" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-route" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                        <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Status Tracker</p>
+                    </div>
+                    <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="openDocumentChecklistModal()" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-file-check" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+                        <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Documents</p>
+                    </div>
+                    <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="openPaymentsModal()" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-credit-card" style="font-size: 2rem; color: var(--success); margin-bottom: 10px;"></i>
+                        <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Payments</p>
+                    </div>
+                    <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="router('student-apps')" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-edit" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                        <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Edit Profile</p>
+                    </div>
+                </div>
+
+                <!-- Profile Summary (Compact) -->
                 <div id="dash-profile-view" class="dash-card" style="display:none; margin-bottom: 25px; border-left: 5px solid var(--accent);">
                     <div style="display:flex; justify-content:space-between; align-items:start;">
                         <div>
-                            <h3 style="margin-bottom: 5px; color: var(--primary);"><i class="fas fa-id-card-alt"></i> My Student Profile</h3>
-                            <p style="margin:0; font-size:1.1rem; font-weight:600; color:var(--text-dark);" id="dash-full-name">Student Name</p>
+                            <h3 style="margin-bottom: 5px; color: var(--primary);"><i class="fas fa-id-card-alt"></i> My Profile</h3>
+                            <p style="margin:0; font-size:1rem; font-weight:600; color:var(--text-dark);" id="dash-full-name">Student Name</p>
                         </div>
-                        <span class="status-badge status-submitted"><i class="fas fa-check-circle"></i> Application Submitted</span>
                     </div>
-                    <hr style="margin: 15px 0; border:0; border-top:1px solid #eee;">
-                    <div class="grid-2" style="gap: 20px;">
+                    <div class="grid-2" style="gap: 20px; margin-top: 15px;">
                         <div>
-                            <p style="margin:5px 0;"><strong>Phone:</strong> <span id="dash-phone"></span></p>
-                            <p style="margin:5px 0;"><strong>Address:</strong> <span id="dash-address"></span></p>
+                            <p style="margin:5px 0; font-size: 0.9rem;"><strong>Target:</strong> <span id="dash-target"></span></p>
+                            <p style="margin:5px 0; font-size: 0.9rem;"><strong>Intake:</strong> <span id="dash-intake-val"></span></p>
                         </div>
                         <div>
-                            <p style="margin:5px 0;"><strong>Target Country:</strong> <span id="dash-target"></span></p>
-                            <p style="margin:5px 0;"><strong>Intake:</strong> <span id="dash-intake-val"></span></p>
+                            <p style="margin:5px 0; font-size: 0.9rem;"><strong>Phone:</strong> <span id="dash-phone"></span></p>
+                            <p style="margin:5px 0; font-size: 0.9rem;"><strong>Address:</strong> <span id="dash-address"></span></p>
                         </div>
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <button class="btn btn-sm btn-outline" style="color:var(--primary); border-color:var(--primary);" onclick="router('student-apps')"><i class="fas fa-edit"></i> Edit Profile</button>
-                    </div>
-                </div>
-
-                <div class="grid-3" style="margin-bottom: 30px;">
-                    <div class="dash-card" style="text-align:center;">
-                        <i class="fas fa-globe-americas" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
-                        <h3 style="margin-bottom:0;" id="dash-countries-count">0</h3>
-                        <p style="margin-top:0; font-size:0.9rem;">Countries Applied</p>
-                    </div>
-                    <div class="dash-card" style="text-align:center;">
-                        <i class="fas fa-university" style="font-size:2rem; color:var(--accent); margin-bottom:10px;"></i>
-                        <h3 style="margin-bottom:0;" id="dash-colleges-count">0</h3>
-                        <p style="margin-top:0; font-size:0.9rem;">Colleges Selected</p>
-                    </div>
-                    <div class="dash-card" style="text-align:center;">
-                        <i class="fas fa-user-tie" style="font-size:2rem; color:var(--success); margin-bottom:10px;"></i>
-                        <h3 style="margin-bottom:0;" id="stu-match-status">Active</h3>
-                        <p style="margin-top:0; font-size:0.9rem;">Counselor Status</p>
-                    </div>
-                </div>
-
-                <div class="chat-wrapper">
-                    <div class="chat-header">
-                        <div style="width: 40px; height: 40px; background: #ddd; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div>
-                            <strong style="display: block;">Your Counselor</strong>
-                            <span style="font-size: 0.8rem; color: var(--success);">Online</span>
-                        </div>
-                    </div>
-                    <div id="stu-chat-box" class="chat-body">
-                        <div class="message msg-in">Namaste! How can I help you with your study abroad plans today?</div>
-                    </div>
-                    <div class="chat-footer">
-                        <input type="text" id="stu-chat-input" placeholder="Type a message..." style="margin: 0; border: none; background: #f0f2f5; border-radius: 20px;" onkeypress="if(event.key === 'Enter') sendMessage('student')">
-                        <button class="btn" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="sendMessage('student')"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
@@ -2102,92 +2582,176 @@
 
     <!-- === COUNSELOR PORTAL === -->
     <div id="page-counselor-dash" class="section" style="padding: 0;">
-        <div class="dashboard-layout">
-            <div class="dash-sidebar">
-                <div style="margin-bottom: 40px;">
-                    <h3 style="color: white;">Counselor Panel</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Staff Access</p>
-                </div>
-                <a class="dash-menu-item" onclick="renderStudentList('active')">
-                    <i class="fas fa-users"></i> Active Students
-                    <span class="nav-badge-simple" id="nav-active-count"></span>
-                </a>
-                <a class="dash-menu-item" onclick="renderStudentList('inactive')">
-                    <i class="fas fa-user-slash"></i> Inactive Students
-                    <span class="nav-badge-simple" id="nav-inactive-count"></span>
-                </a>
-                <a class="dash-menu-item active" onclick="renderAvailableStudents()">
-                    <i class="fas fa-user-check"></i> Available Students
-                </a>
-                <a class="dash-menu-item" onclick="renderStudentList('archived')">
-                    <i class="fas fa-archive"></i> Archives
-                </a>
-            </div>
-
-            <div class="dash-main">
-                <div class="grid-2" style="grid-template-columns: 1fr 2fr; gap: 20px;">
-                    <div>
-                        <div class="dash-card" style="padding: 0; overflow: hidden;">
-                            <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                                <h3 id="coun-list-header" style="margin:0;">Students</h3>
-                                <div id="coun-list-actions">
-                                    <button class="btn btn-sm btn-success" onclick="addStudent()"><i class="fas fa-plus"></i> Add</button>
-                                </div>
-                            </div>
-                            <div id="coun-student-list" style="max-height: 600px; overflow-y: auto; padding: 10px;">
-                                <!-- Populated by JS -->
-                            </div>
+        <div class="dashboard-layout" style="grid-template-columns: 1fr;">
+            <div class="dash-main" style="width: 100%; max-width: 1400px; margin: 0 auto;">
+                <!-- Main Dashboard View (when no student selected) -->
+                <div id="coun-dashboard-view">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <div>
+                            <h2 style="margin: 0 0 5px 0;">Counselor Dashboard</h2>
+                            <p style="margin: 0; color: #666; font-size: 0.95rem;">Manage your students and track their progress</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="addStudent()"><i class="fas fa-plus"></i> Add Student</button>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="grid-4" style="margin-bottom: 30px;">
+                        <div class="dash-card" style="text-align:center; border-left: 4px solid var(--primary);">
+                            <i class="fas fa-users" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.5rem;" id="coun-stat-active">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Active Students</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; border-left: 4px solid var(--accent);">
+                            <i class="fas fa-tasks" style="font-size:2rem; color:var(--accent); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.5rem;" id="coun-stat-tasks">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Pending Tasks</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; border-left: 4px solid var(--success);">
+                            <i class="fas fa-calendar-check" style="font-size:2rem; color:var(--success); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.5rem;" id="coun-stat-appointments">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Upcoming Appointments</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; border-left: 4px solid var(--danger);">
+                            <i class="fas fa-exclamation-circle" style="font-size:2rem; color:var(--danger); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.5rem;" id="coun-stat-alerts">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Alerts</p>
                         </div>
                     </div>
 
-                    <div>
-                        <div id="coun-empty-state" class="dash-card" style="text-align: center; padding: 50px;">
-                            <i class="fas fa-user-check" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
-                            <h3>Select Students to Assign</h3>
-                            <p>Use the checkboxes to select students from the list, then click "Assign Selected" to add them to your student list.</p>
-                            <p style="margin-top: 15px; font-size: 0.9rem; color: #999;">After assigning students, switch to "Active Students" to view and manage them.</p>
-                        </div>
-
-                        <div id="coun-interaction" style="display: none;">
-                            <!-- Student Header Card -->
-                            <div class="dash-card" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; margin-bottom: 20px;">
-                                <div style="display: flex; justify-content: space-between; align-items: start;">
-                                    <div>
-                                        <h2 id="coun-header-name" style="color: white; margin-bottom: 8px; font-size: 1.5rem;">
-                                            <i class="fas fa-user-graduate" style="margin-right: 10px;"></i>Student Name
-                                        </h2>
-                                        <p id="coun-header-status" style="font-size: 0.95rem; color: rgba(255,255,255,0.9); margin: 0;">
-                                            <i class="fas fa-envelope" style="margin-right: 5px;"></i>Email: N/A
-                                        </p>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; display: inline-block; margin-bottom: 5px;">
-                                            <span id="cp-status-badge" style="font-size: 0.85rem; font-weight: 600;">Active</span>
-                                        </div>
-                                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin: 5px 0 0 0;">
-                                            <i class="fas fa-calendar"></i> <span id="cp-last-updated">Recently Active</span>
-                                        </p>
-                                    </div>
-                                </div>
+                    <!-- Student List -->
+                    <div class="dash-card" style="padding: 0; overflow: hidden;">
+                        <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 id="coun-list-header" style="margin:0;">My Students</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-sm" onclick="renderStudentList('active')" id="btn-filter-active">Active</button>
+                                <button class="btn btn-sm" onclick="renderStudentList('inactive')" id="btn-filter-inactive">Inactive</button>
+                                <button class="btn btn-sm" onclick="renderAvailableStudents()" id="btn-filter-available">Available</button>
                             </div>
-                                
-                            <!-- Tabs -->
-                            <div class="dash-card" style="padding: 0;">
-                                <div class="coun-tabs" style="border-bottom: 2px solid #eee;">
-                                    <div class="coun-tab active" onclick="switchCounselorTab('profile')">
-                                        <i class="fas fa-user-circle"></i> Profile
-                                    </div>
-                                    <div class="coun-tab" onclick="switchCounselorTab('docs')">
-                                        <i class="fas fa-file-alt"></i> Documents
-                                        <span id="cp-docs-count" style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; margin-left: 5px;">0</span>
-                                    </div>
-                                    <div class="coun-tab" onclick="switchCounselorTab('chat')">
-                                        <i class="fas fa-comments"></i> Chat
-                                    </div>
-                                </div>
+                        </div>
+                        <div id="coun-student-list" style="max-height: 500px; overflow-y: auto; padding: 10px;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
 
-                                <!-- 1. PROFILE TAB -->
-                                <div id="tab-profile" class="coun-content" style="padding: 25px;">
+                <!-- Student Detail View (when student is selected) -->
+                <div id="coun-interaction" style="display: none;">
+                    <!-- Back Button -->
+                    <button class="btn btn-sm" onclick="clearStudentSelection()" style="margin-bottom: 20px;">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                    
+                    <!-- Student Header Card -->
+                    <div class="dash-card" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h2 id="coun-header-name" style="color: white; margin-bottom: 8px; font-size: 1.5rem;">
+                                    <i class="fas fa-user-graduate" style="margin-right: 10px;"></i>Student Name
+                                </h2>
+                                <p id="coun-header-status" style="font-size: 0.95rem; color: rgba(255,255,255,0.9); margin: 0;">
+                                    <i class="fas fa-envelope" style="margin-right: 5px;"></i>Email: N/A
+                                </p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; display: inline-block; margin-bottom: 5px;">
+                                    <span id="cp-status-badge" style="font-size: 0.85rem; font-weight: 600;">Active</span>
+                                </div>
+                                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin: 5px 0 0 0;">
+                                    <i class="fas fa-calendar"></i> <span id="cp-last-updated">Recently Active</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats for Selected Student -->
+                    <div class="grid-4" style="margin-bottom: 30px;">
+                        <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('docs')" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-file-alt" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.1rem;" id="cp-docs-count-dash">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Documents</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('tasks')" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-tasks" style="font-size:2rem; color:var(--accent); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.1rem;" id="cp-tasks-count-dash">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Tasks</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('appointments')" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-calendar-check" style="font-size:2rem; color:var(--success); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.1rem;" id="cp-appointments-count-dash">0</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">Appointments</p>
+                        </div>
+                        <div class="dash-card" style="text-align:center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('notes')" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-sticky-note" style="font-size:2rem; color:var(--primary); margin-bottom:10px;"></i>
+                            <h3 style="margin-bottom:0; font-size: 1.1rem;">Notes</h3>
+                            <p style="margin-top:5px; font-size:0.85rem; color: #666;">View All</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Action Buttons -->
+                    <div class="grid-2" style="gap: 20px; margin-bottom: 30px;">
+                        <div class="dash-card" style="padding: 30px; text-align: center; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white;" onclick="openTaskModal()" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,43,91,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-tasks" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.9;"></i>
+                            <h3 style="color: white; margin-bottom: 10px;">Create Task</h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin: 0;">Assign tasks and track progress</p>
+                        </div>
+                        <div class="dash-card" style="padding: 30px; text-align: center; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, var(--accent) 0%, #e6c81b 100%); color: var(--primary);" onclick="openAppointmentModal()" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(249,217,35,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'">
+                            <i class="fas fa-calendar-plus" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <h3 style="color: var(--primary); margin-bottom: 10px;">Schedule Appointment</h3>
+                            <p style="color: var(--primary); font-size: 0.9rem; margin: 0; opacity: 0.8;">Book a meeting with student</p>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Actions -->
+                    <div class="grid-4" style="gap: 15px; margin-bottom: 30px;">
+                        <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="openNoteModal()" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-sticky-note" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                            <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Add Note</p>
+                        </div>
+                        <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('chat')" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-comments" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
+                            <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Chat</p>
+                        </div>
+                        <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('timeline')" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-history" style="font-size: 2rem; color: var(--success); margin-bottom: 10px;"></i>
+                            <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Timeline</p>
+                        </div>
+                        <div class="dash-card" style="padding: 20px; text-align: center; cursor: pointer; transition: 0.2s;" onclick="switchCounselorTab('profile')" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#e5e5e5'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-user-circle" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                            <p style="margin: 0; font-weight: 600; font-size: 0.9rem;">Profile</p>
+                        </div>
+                    </div>
+                                
+                    <!-- Tabs (Hidden by default, shown when clicking specific actions) -->
+                    <div class="dash-card" style="padding: 0; display: none;" id="coun-tabs-container">
+                        <div class="coun-tabs" style="border-bottom: 2px solid #eee;">
+                            <div class="coun-tab active" onclick="switchCounselorTab('profile')">
+                                <i class="fas fa-user-circle"></i> Profile
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('docs')">
+                                <i class="fas fa-file-alt"></i> Documents
+                                <span id="cp-docs-count" style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; margin-left: 5px;">0</span>
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('tasks')">
+                                <i class="fas fa-tasks"></i> Tasks
+                                <span id="cp-tasks-count" style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; margin-left: 5px;">0</span>
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('notes')">
+                                <i class="fas fa-sticky-note"></i> Notes
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('timeline')">
+                                <i class="fas fa-history"></i> Timeline
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('appointments')">
+                                <i class="fas fa-calendar-check"></i> Appointments
+                            </div>
+                            <div class="coun-tab" onclick="switchCounselorTab('chat')">
+                                <i class="fas fa-comments"></i> Chat
+                            </div>
+                        </div>
+                                
+                        <!-- Tab Content -->
+                        <!-- 1. PROFILE TAB -->
+                        <div id="tab-profile" class="coun-content" style="padding: 25px;">
                                     <div style="margin-bottom: 25px;">
                                         <h4 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 8px;">
                                             <i class="fas fa-info-circle"></i> Personal Information
@@ -2316,6 +2880,47 @@
                                 </div>
 
                                 <!-- 3. CHAT TAB -->
+                                <!-- TASKS TAB -->
+                                <div id="tab-tasks" class="coun-content" style="display: none; padding: 25px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                        <h4 style="color: var(--primary); margin: 0;"><i class="fas fa-tasks"></i> Tasks & Reminders</h4>
+                                        <button class="btn btn-sm" onclick="openTaskModal()"><i class="fas fa-plus"></i> Add Task</button>
+                                    </div>
+                                    <div id="tasks-list">
+                                        <p style="color: #999; text-align: center; padding: 20px;">No tasks created yet</p>
+                                    </div>
+                                </div>
+
+                                <!-- NOTES TAB -->
+                                <div id="tab-notes" class="coun-content" style="display: none; padding: 25px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                        <h4 style="color: var(--primary); margin: 0;"><i class="fas fa-sticky-note"></i> Internal Notes</h4>
+                                        <button class="btn btn-sm" onclick="openNoteModal()"><i class="fas fa-plus"></i> Add Note</button>
+                                    </div>
+                                    <div id="notes-list" class="notes-container">
+                                        <p style="color: #999; text-align: center; padding: 20px;">No notes added yet</p>
+                                    </div>
+                                </div>
+
+                                <!-- TIMELINE TAB -->
+                                <div id="tab-timeline" class="coun-content" style="display: none; padding: 25px;">
+                                    <h4 style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-history"></i> Student Journey Timeline</h4>
+                                    <div id="student-timeline" class="timeline">
+                                        <p style="color: #999; text-align: center; padding: 20px;">Timeline will appear here</p>
+                                    </div>
+                                </div>
+
+                                <!-- APPOINTMENTS TAB -->
+                                <div id="tab-appointments" class="coun-content" style="display: none; padding: 25px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                        <h4 style="color: var(--primary); margin: 0;"><i class="fas fa-calendar-check"></i> Appointments</h4>
+                                        <button class="btn btn-sm" onclick="openAppointmentModal()"><i class="fas fa-plus"></i> Schedule</button>
+                                    </div>
+                                    <div id="appointments-list">
+                                        <p style="color: #999; text-align: center; padding: 20px;">No appointments scheduled</p>
+                                    </div>
+                                </div>
+
                                 <div id="tab-chat" class="coun-content" style="display: none; padding: 0;">
                                     <div class="chat-wrapper" style="height: 500px;">
                                         <div class="chat-header" style="background: var(--primary); color: white;">
@@ -2486,13 +3091,30 @@
                     </div>
 
                     <div class="dash-card" style="padding: 0;">
-                        <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                            <h3 id="admin-list-header" style="margin:0;">All Users</h3>
-                            <div style="display: flex; gap: 10px; align-items: center;">
-                                <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                                    <input type="checkbox" id="admin-select-all" onchange="toggleSelectAllUsers()">
-                                    <span style="font-size: 0.9rem;">Select All</span>
-                                </label>
+                        <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3 id="admin-list-header" style="margin:0;">All Users</h3>
+                                <div style="display: flex; gap: 10px; align-items: center;">
+                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                                        <input type="checkbox" id="admin-select-all" onchange="toggleSelectAllUsers()">
+                                        <span style="font-size: 0.9rem;">Select All</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search-filter-bar">
+                                <input type="text" id="admin-search-users" class="search-input" placeholder="Search users..." onkeyup="filterAdminUsers()">
+                                <select id="admin-filter-role" class="filter-select" onchange="filterAdminUsers()">
+                                    <option value="all">All Roles</option>
+                                    <option value="student">Students</option>
+                                    <option value="counselor">Counselors</option>
+                                    <option value="admin">Admins</option>
+                                </select>
+                                <select id="admin-filter-status" class="filter-select" onchange="filterAdminUsers()">
+                                    <option value="all">All Status</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="submitted">Submitted</option>
+                                </select>
+                                <button class="btn btn-sm" onclick="clearAdminFilters()" style="padding: 10px 15px;"><i class="fas fa-times"></i> Clear</button>
                             </div>
                         </div>
                         <div id="admin-users-list" style="max-height: 600px; overflow-y: auto;">
@@ -2702,6 +3324,308 @@
                     </p>
                 </div>
                 <button class="btn btn-primary" style="width: 100%;" onclick="saveUserChanges()"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEST SCORE MODAL -->
+    <div id="test-score-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-certificate"></i> Add Test Score</h3>
+                <button class="modal-close" onclick="closeTestScoreModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Test Type</label>
+                    <select id="test-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="IELTS">IELTS</option>
+                        <option value="TOEFL">TOEFL</option>
+                        <option value="PTE">PTE</option>
+                        <option value="GRE">GRE</option>
+                        <option value="GMAT">GMAT</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Score</label>
+                    <input type="text" id="test-score" placeholder="e.g., 7.5 or 100" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Test Date</label>
+                    <input type="date" id="test-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Expiry Date</label>
+                    <input type="date" id="test-expiry" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <button class="btn" style="width: 100%;" onclick="saveTestScore()"><i class="fas fa-save"></i> Save Score</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-money-bill-wave"></i> Add Payment</h3>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Payment Type</label>
+                    <select id="payment-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="Application Fee">Application Fee</option>
+                        <option value="Visa Fee">Visa Fee</option>
+                        <option value="Service Fee">Service Fee</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Amount</label>
+                    <input type="number" id="payment-amount" placeholder="0.00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Payment Date</label>
+                    <input type="date" id="payment-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Status</label>
+                    <select id="payment-status" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="paid">Paid</option>
+                        <option value="pending">Pending</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Notes</label>
+                    <textarea id="payment-notes" rows="3" placeholder="Additional notes..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="savePayment()"><i class="fas fa-save"></i> Save Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TASK MODAL -->
+    <div id="task-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-tasks"></i> Add Task</h3>
+                <button class="modal-close" onclick="closeTaskModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Task Title</label>
+                    <input type="text" id="task-title" placeholder="Enter task title" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Description</label>
+                    <textarea id="task-description" rows="3" placeholder="Task description..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Due Date</label>
+                    <input type="date" id="task-due-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Priority</label>
+                    <select id="task-priority" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="saveTask()"><i class="fas fa-save"></i> Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTE MODAL -->
+    <div id="note-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-sticky-note"></i> Add Note</h3>
+                <button class="modal-close" onclick="closeNoteModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Note</label>
+                    <textarea id="note-content" rows="5" placeholder="Enter your note..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Tags (comma separated)</label>
+                    <input type="text" id="note-tags" placeholder="e.g., urgent, follow-up, important" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <button class="btn" style="width: 100%;" onclick="saveNote()"><i class="fas fa-save"></i> Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPOINTMENT MODAL -->
+    <div id="appointment-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-check"></i> Schedule Appointment</h3>
+                <button class="modal-close" onclick="closeAppointmentModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Date</label>
+                    <input type="date" id="appointment-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Time</label>
+                    <input type="time" id="appointment-time" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Duration (minutes)</label>
+                    <input type="number" id="appointment-duration" value="30" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Meeting Type</label>
+                    <select id="appointment-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="in-person">In Person</option>
+                        <option value="video">Video Call</option>
+                        <option value="phone">Phone Call</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Notes</label>
+                    <textarea id="appointment-notes" rows="3" placeholder="Meeting agenda or notes..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="saveAppointment()"><i class="fas fa-save"></i> Schedule Appointment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAT MODAL -->
+    <div id="chat-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 700px; height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header" style="background: var(--primary); color: white;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; color: white;">Chat with Your Counselor</h3>
+                        <span style="font-size: 0.8rem; color: rgba(255,255,255,0.9);">
+                            <i class="fas fa-circle" style="font-size: 0.5rem; color: var(--success);"></i> Online
+                        </span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeChatModal()" style="color: white;">&times;</button>
+            </div>
+            <div id="stu-chat-box-modal" class="chat-body" style="flex: 1; padding: 20px; overflow-y: auto; background: #f8f9fa;">
+                <div class="message msg-in">
+                    <strong>System:</strong> Chat history will appear here. Start a conversation with your counselor!
+                </div>
+            </div>
+            <div class="chat-footer" style="background: white; padding: 15px; border-top: 1px solid #eee;">
+                <input type="text" id="stu-chat-input-modal" placeholder="Type your message..." style="flex: 1; margin: 0; border: 1px solid #ddd; background: #f0f2f5; border-radius: 20px; padding: 10px 15px;" onkeypress="if(event.key === 'Enter') sendMessageFromModal('student')">
+                <button class="btn" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center; background: var(--primary); margin-left: 10px;" onclick="sendMessageFromModal('student')" title="Send message">
+                    <i class="fas fa-paper-plane" style="color: white;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATUS TRACKER MODAL -->
+    <div id="status-tracker-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-route"></i> Application Status Tracker</h3>
+                <button class="modal-close" onclick="closeStatusTrackerModal()">&times;</button>
+            </div>
+            <div style="padding: 30px;">
+                <div id="status-tracker-modal-content" class="status-tracker">
+                    <div class="status-step completed">
+                        <div class="status-circle">1</div>
+                        <div class="status-label">Application<br>Submitted</div>
+                    </div>
+                    <div class="status-step active">
+                        <div class="status-circle">2</div>
+                        <div class="status-label">Under<br>Review</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-circle">3</div>
+                        <div class="status-label">Offer<br>Received</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-circle">4</div>
+                        <div class="status-label">Visa<br>Processing</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-circle">5</div>
+                        <div class="status-label">Visa<br>Approved</div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h4 style="margin-top: 0; color: var(--primary);"><i class="fas fa-info-circle"></i> Current Status</h4>
+                    <p id="status-tracker-details" style="margin: 0; color: #666;">Your application is currently under review. We'll update you as soon as there are any changes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCUMENT CHECKLIST MODAL -->
+    <div id="document-checklist-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-square"></i> Document Checklist</h3>
+                <button class="modal-close" onclick="closeDocumentChecklistModal()">&times;</button>
+            </div>
+            <div style="padding: 30px;">
+                <div style="margin-bottom: 25px;">
+                    <div class="checklist-progress">
+                        <div class="checklist-progress-bar" id="checklist-progress-bar-modal" style="width: 0%;"></div>
+                    </div>
+                    <p style="text-align: right; margin-top: 10px; font-size: 0.9rem; color: #666;">
+                        <span id="checklist-completed-modal">0</span> of <span id="checklist-total-modal">8</span> documents completed
+                        <span style="margin-left: 15px; font-weight: 600; color: var(--primary);" id="checklist-percentage-modal">0%</span>
+                    </p>
+                </div>
+                <div id="document-checklist-modal-content" style="margin-top: 20px;">
+                    <!-- Populated by JS -->
+                </div>
+                <div style="margin-top: 25px; padding: 15px; background: #e3f2fd; border-radius: 6px;">
+                    <p style="margin: 0; font-size: 0.85rem; color: #0d47a1;">
+                        <i class="fas fa-info-circle"></i> <strong>Note:</strong> Documents marked with <span style="color: var(--danger);">*</span> are required. Upload them from the Application Form page.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEST SCORES MODAL (Enhanced) -->
+    <div id="test-scores-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <h3><i class="fas fa-certificate"></i> Test Scores</h3>
+                <div>
+                    <button class="btn btn-sm" onclick="openTestScoreModal()" style="margin-right: 10px;"><i class="fas fa-plus"></i> Add Score</button>
+                    <button class="modal-close" onclick="closeTestScoresModal()">&times;</button>
+                </div>
+            </div>
+            <div style="padding: 20px; flex: 1; overflow-y: auto;">
+                <div id="test-scores-list-modal">
+                    <p style="color: #999; text-align: center; padding: 40px;">No test scores added yet. Click "Add Score" to get started.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENTS MODAL (Enhanced) -->
+    <div id="payments-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <h3><i class="fas fa-money-bill-wave"></i> Payment Tracking</h3>
+                <div>
+                    <button class="btn btn-sm" onclick="openPaymentModal()" style="margin-right: 10px;"><i class="fas fa-plus"></i> Add Payment</button>
+                    <button class="modal-close" onclick="closePaymentsModal()">&times;</button>
+                </div>
+            </div>
+            <div style="padding: 20px; flex: 1; overflow-y: auto;">
+                <div id="payments-list-modal">
+                    <p style="color: #999; text-align: center; padding: 40px;">No payments recorded yet. Click "Add Payment" to get started.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -3681,55 +4605,34 @@
 
         // --- COUNSELOR LOGIC ---
         window.renderStudentList = async function(filter = 'active') {
-            // Update active menu item based on filter
-            document.querySelectorAll('.dash-menu-item').forEach(item => {
-                const itemText = item.textContent || '';
-                if(filter === 'active' && itemText.includes('Active Students')) {
-                    item.classList.add('active');
-                } else if(filter === 'inactive' && itemText.includes('Inactive Students')) {
-                    item.classList.add('active');
-                } else if(filter === 'archived' && itemText.includes('Archives')) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
+            // Show dashboard view, hide student detail view
+            const dashboardView = document.getElementById('coun-dashboard-view');
+            const interactionView = document.getElementById('coun-interaction');
+            if(dashboardView) dashboardView.style.display = 'block';
+            if(interactionView) interactionView.style.display = 'none';
+            
+            // Update filter buttons
+            const btnActive = document.getElementById('btn-filter-active');
+            const btnInactive = document.getElementById('btn-filter-inactive');
+            const btnAvailable = document.getElementById('btn-filter-available');
+            if(btnActive) btnActive.classList.toggle('btn-primary', filter === 'active');
+            if(btnInactive) btnInactive.classList.toggle('btn-primary', filter === 'inactive');
+            if(btnAvailable) btnAvailable.classList.toggle('btn-primary', filter === 'available');
             
             const list = document.getElementById('coun-student-list');
             const header = document.getElementById('coun-list-header');
-            const actions = document.getElementById('coun-list-actions');
             
             if(!list) {
                 console.error('Counselor student list element not found');
                 return;
             }
             
-            // Reset header and actions for normal view
-            if(header) header.innerText = 'Students';
-            if(actions) actions.innerHTML = `<button class="btn btn-sm btn-success" onclick="addStudent()"><i class="fas fa-plus"></i> Add</button>`;
-            
-            // Update empty state message for active/inactive/archived view
-            const emptyStateEl = document.getElementById('coun-empty-state');
-            if(emptyStateEl) {
-                if(filter === 'active') {
-                    emptyStateEl.innerHTML = `
-                        <i class="fas fa-comments" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
-                        <h3>Select a Student</h3>
-                        <p>Click on a student to view details, docs, and chat.</p>
-                    `;
-                } else if(filter === 'inactive') {
-                    emptyStateEl.innerHTML = `
-                        <i class="fas fa-user-slash" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
-                        <h3>Select an Inactive Student</h3>
-                        <p>Click on a student to view details and reactivate them.</p>
-                    `;
-                } else {
-                    emptyStateEl.innerHTML = `
-                        <i class="fas fa-archive" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
-                        <h3>No Archived Students</h3>
-                        <p>Archived students will appear here.</p>
-                    `;
-                }
+            // Update header
+            if(header) {
+                if(filter === 'active') header.innerText = 'Active Students';
+                else if(filter === 'inactive') header.innerText = 'Inactive Students';
+                else if(filter === 'archived') header.innerText = 'Archived Students';
+                else header.innerText = 'My Students';
             }
             
             list.innerHTML = "<div style='padding:20px; color:#999; text-align:center;'><i class='fas fa-spinner fa-spin'></i> Loading students from database...</div>";
@@ -3938,7 +4841,64 @@
             
             // Update workspace stats
             updateWorkspaceStats(allStudents, currentCounselorId);
+            
+            // Update dashboard stats
+            updateCounselorDashboardStats(allStudents, currentCounselorId);
         };
+        
+        // Update counselor dashboard statistics
+        async function updateCounselorDashboardStats(allStudents, counselorId) {
+            const activeStudents = allStudents.filter(s => 
+                s.counselorId === counselorId && s.status !== 'archived' && s.isActive !== false
+            );
+            
+            // Update active students count
+            const activeEl = document.getElementById('coun-stat-active');
+            if(activeEl) activeEl.textContent = activeStudents.length;
+            
+            // Count pending tasks across all active students
+            let pendingTasks = 0;
+            let upcomingAppointments = 0;
+            
+            if(db && activeStudents.length > 0) {
+                try {
+                    // Get all tasks for counselor's students
+                    const tasksSnapshot = await getDocs(collection(db, "tasks"));
+                    tasksSnapshot.forEach(doc => {
+                        const taskData = doc.data();
+                        if(taskData.studentId && activeStudents.find(s => String(s.id) === String(taskData.studentId)) && !taskData.completed) {
+                            pendingTasks++;
+                        }
+                    });
+                    
+                    // Get upcoming appointments (next 7 days)
+                    const appointmentsSnapshot = await getDocs(collection(db, "appointments"));
+                    const today = new Date();
+                    const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+                    
+                    appointmentsSnapshot.forEach(doc => {
+                        const aptData = doc.data();
+                        if(aptData.studentId && activeStudents.find(s => String(s.id) === String(aptData.studentId))) {
+                            const aptDate = new Date(aptData.date);
+                            if(aptDate >= today && aptDate <= nextWeek && aptData.status === 'scheduled') {
+                                upcomingAppointments++;
+                            }
+                        }
+                    });
+                } catch(e) {
+                    console.error('Error loading dashboard stats:', e);
+                }
+            }
+            
+            // Update stats
+            const tasksEl = document.getElementById('coun-stat-tasks');
+            const appointmentsEl = document.getElementById('coun-stat-appointments');
+            const alertsEl = document.getElementById('coun-stat-alerts');
+            
+            if(tasksEl) tasksEl.textContent = pendingTasks;
+            if(appointmentsEl) appointmentsEl.textContent = upcomingAppointments;
+            if(alertsEl) alertsEl.textContent = 0; // Can be enhanced with actual alerts
+        }
         
         // Update workspace statistics
         function updateWorkspaceStats(allStudents, counselorId) {
@@ -3986,14 +4946,19 @@
 
         // Render all available students with checkboxes for selection
         window.renderAvailableStudents = async function() {
-            // Update active menu item
-            document.querySelectorAll('.dash-menu-item').forEach(item => {
-                if(item.textContent.includes('Available Students')) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
+            // Show dashboard view, hide student detail view
+            const dashboardView = document.getElementById('coun-dashboard-view');
+            const interactionView = document.getElementById('coun-interaction');
+            if(dashboardView) dashboardView.style.display = 'block';
+            if(interactionView) interactionView.style.display = 'none';
+            
+            // Update filter buttons
+            const btnActive = document.getElementById('btn-filter-active');
+            const btnInactive = document.getElementById('btn-filter-inactive');
+            const btnAvailable = document.getElementById('btn-filter-available');
+            if(btnActive) btnActive.classList.remove('btn-primary');
+            if(btnInactive) btnInactive.classList.remove('btn-primary');
+            if(btnAvailable) btnAvailable.classList.add('btn-primary');
             
             const list = document.getElementById('coun-student-list');
             const header = document.getElementById('coun-list-header');
@@ -4397,9 +5362,14 @@
                 }
             });
 
-            // Update UI right panel
-            document.getElementById('coun-empty-state').style.display = 'none';
-            document.getElementById('coun-interaction').style.display = 'block';
+            // Update UI - hide dashboard, show student detail view
+            const dashboardView = document.getElementById('coun-dashboard-view');
+            const interactionView = document.getElementById('coun-interaction');
+            const tabsContainer = document.getElementById('coun-tabs-container');
+            
+            if(dashboardView) dashboardView.style.display = 'none';
+            if(interactionView) interactionView.style.display = 'block';
+            if(tabsContainer) tabsContainer.style.display = 'none'; // Hide tabs by default, show when clicking specific actions
             
             // Header Information
             const fullName = s.name || `${s.fname || ''} ${s.lname || ''}`.trim() || 'Unknown Student';
@@ -4576,9 +5546,61 @@
             // Chat Tab - Load chat history
             loadCounselorChat(id);
             
-            // Reset to Profile tab
-            switchCounselorTab('profile');
+            // Update student-specific dashboard stats
+            updateStudentDashboardStats(id);
+            
+            // Reset to Profile tab (but don't show tabs container yet - already hidden above)
         };
+        
+        // Update student-specific dashboard stats
+        async function updateStudentDashboardStats(studentId) {
+            if(!db || !studentId) return;
+            
+            try {
+                // Count documents
+                const studentDoc = await getDoc(doc(db, "users", studentId));
+                let docsCount = 0;
+                if(studentDoc.exists()) {
+                    const userData = studentDoc.data();
+                    docsCount = userData.docs && Array.isArray(userData.docs) ? userData.docs.length : 0;
+                }
+                
+                // Count tasks
+                const tasksQuery = query(collection(db, "tasks"), where("studentId", "==", String(studentId)));
+                const tasksSnapshot = await getDocs(tasksQuery);
+                const tasksCount = tasksSnapshot.size;
+                const pendingTasksCount = tasksSnapshot.docs.filter(doc => !doc.data().completed).length;
+                
+                // Count appointments
+                const appointmentsQuery = query(collection(db, "appointments"), where("studentId", "==", String(studentId)));
+                const appointmentsSnapshot = await getDocs(appointmentsQuery);
+                const appointmentsCount = appointmentsSnapshot.size;
+                
+                // Update dashboard stats
+                const docsCountDash = document.getElementById('cp-docs-count-dash');
+                const tasksCountDash = document.getElementById('cp-tasks-count-dash');
+                const appointmentsCountDash = document.getElementById('cp-appointments-count-dash');
+                
+                if(docsCountDash) docsCountDash.textContent = docsCount;
+                if(tasksCountDash) tasksCountDash.textContent = pendingTasksCount;
+                if(appointmentsCountDash) appointmentsCountDash.textContent = appointmentsCount;
+                
+                // Also update tab badges
+                const docsCountTab = document.getElementById('cp-docs-count');
+                const tasksCountTab = document.getElementById('cp-tasks-count');
+                
+                if(docsCountTab) {
+                    docsCountTab.textContent = docsCount;
+                    docsCountTab.style.display = docsCount > 0 ? 'inline-block' : 'none';
+                }
+                if(tasksCountTab) {
+                    tasksCountTab.textContent = pendingTasksCount;
+                    tasksCountTab.style.display = pendingTasksCount > 0 ? 'inline-block' : 'none';
+                }
+            } catch(e) {
+                console.error('Error updating student dashboard stats:', e);
+            }
+        }
         
         // Download document for counselor
         window.downloadCounselorDocument = async function(fileName, docType, downloadURL, fileId) {
@@ -4686,11 +5708,24 @@
         };
 
         window.switchCounselorTab = function(tabName) {
+            // Show tabs container
+            const tabsContainer = document.getElementById('coun-tabs-container');
+            if(tabsContainer) {
+                tabsContainer.style.display = 'block';
+            }
+            
             // Update Tab UI
             document.querySelectorAll('.coun-tab').forEach(t => t.classList.remove('active'));
             const tabs = document.querySelectorAll('.coun-tab');
             tabs.forEach(tab => {
-                if(tab.innerHTML.includes(tabName === 'profile' ? 'Profile' : tabName === 'docs' ? 'Documents' : 'Chat')) {
+                const tabText = tab.innerHTML.toLowerCase();
+                if((tabName === 'profile' && tabText.includes('profile')) ||
+                   (tabName === 'docs' && tabText.includes('documents')) ||
+                   (tabName === 'tasks' && tabText.includes('tasks')) ||
+                   (tabName === 'notes' && tabText.includes('notes')) ||
+                   (tabName === 'timeline' && tabText.includes('timeline')) ||
+                   (tabName === 'appointments' && tabText.includes('appointments')) ||
+                   (tabName === 'chat' && tabText.includes('chat'))) {
                     tab.classList.add('active');
                 }
             });
@@ -4701,10 +5736,29 @@
             if(targetTab) {
                 targetTab.style.display = 'block';
                 
-                // Load chat when switching to chat tab
+                // Load data for specific tabs
                 if(tabName === 'chat' && currentStudentId) {
                     loadCounselorChat(currentStudentId);
+                } else if(tabName === 'tasks' && currentStudentId) {
+                    loadTasks();
+                } else if(tabName === 'notes' && currentStudentId) {
+                    loadNotes();
+                } else if(tabName === 'timeline' && currentStudentId) {
+                    loadStudentTimeline();
+                } else if(tabName === 'appointments' && currentStudentId) {
+                    loadAppointments();
                 }
+            }
+        };
+        
+        // Clear student selection and return to dashboard
+        window.clearStudentSelection = function() {
+            currentStudentId = null;
+            document.getElementById('coun-interaction').style.display = 'none';
+            document.getElementById('coun-dashboard-view').style.display = 'block';
+            // Reload student list
+            if(typeof renderStudentList === 'function') {
+                renderStudentList('active');
             }
         };
 
@@ -6849,6 +7903,19 @@
                                 
                                 // Update local state
                                 currentApplication.docs = currentDocs;
+                                
+                                // Refresh checklist immediately after saving
+                                setTimeout(() => {
+                                    if(typeof loadDocumentChecklist === 'function') {
+                                        loadDocumentChecklist();
+                                    }
+                                    if(typeof loadDocumentChecklistModal === 'function') {
+                                        loadDocumentChecklistModal();
+                                    }
+                                    if(typeof updateDashboardStats === 'function') {
+                                        updateDashboardStats();
+                                    }
+                                }, 500);
                             } catch (metaError) {
                                 console.error('❌ Error saving metadata:', metaError);
                                 console.error('Error details:', {
@@ -6964,6 +8031,17 @@
                     indicator.style.opacity = '0';
                     indicator.style.transition = 'opacity 0.3s';
                     setTimeout(() => indicator.remove(), 300);
+                }
+                
+                // Refresh checklist and dashboard stats after upload completes
+                if(typeof loadDocumentChecklist === 'function') {
+                    loadDocumentChecklist();
+                }
+                if(typeof loadDocumentChecklistModal === 'function') {
+                    loadDocumentChecklistModal();
+                }
+                if(typeof updateDashboardStats === 'function') {
+                    updateDashboardStats();
                 }
             }, 1000);
             
@@ -7870,6 +8948,2000 @@
                         console.error('Auth state error:', e);
                         window.router('student'); 
                     }
+                }
+            });
+        }
+
+        // ========== NEW FEATURES FUNCTIONS ==========
+
+        // --- NOTIFICATION CENTER ---
+        window.toggleNotificationPanel = function() {
+            const panel = document.getElementById('notification-panel');
+            panel.classList.toggle('active');
+            loadNotifications();
+        };
+
+        window.loadNotifications = async function() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            try {
+                const userId = auth.currentUser.uid;
+                const notificationsQuery = query(
+                    collection(db, "notifications"),
+                    where("userId", "==", userId),
+                    orderBy("createdAt", "desc"),
+                    limit(50)
+                );
+                
+                const snapshot = await getDocs(notificationsQuery);
+                const notifications = [];
+                snapshot.forEach(doc => {
+                    notifications.push({ id: doc.id, ...doc.data() });
+                });
+                
+                renderNotifications(notifications);
+                updateNotificationBadge(notifications.filter(n => !n.read).length);
+            } catch(e) {
+                console.error('Error loading notifications:', e);
+            }
+        };
+
+        function renderNotifications(notifications) {
+            const list = document.getElementById('notification-list');
+            if(notifications.length === 0) {
+                list.innerHTML = '<div style="padding: 40px; text-align: center; color: #999;"><i class="fas fa-bell-slash" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.3;"></i><p>No notifications</p></div>';
+                return;
+            }
+            
+            list.innerHTML = notifications.map(notif => {
+                const time = notif.createdAt ? new Date(notif.createdAt).toLocaleString() : '';
+                return `
+                    <div class="notification-item ${!notif.read ? 'unread' : ''}" onclick="markNotificationRead('${notif.id}')" style="position: relative;">
+                        <div style="font-weight: 600; margin-bottom: 5px;">${notif.title || 'Notification'}</div>
+                        <div style="color: #666; font-size: 0.9rem;">${notif.message || ''}</div>
+                        <div class="notification-time">${time}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateNotificationBadge(count) {
+            const badge = document.getElementById('notification-count');
+            if(count > 0) {
+                badge.textContent = count > 99 ? '99+' : count;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        window.markNotificationRead = async function(notifId) {
+            if(!db) return;
+            try {
+                await updateDoc(doc(db, "notifications", notifId), { read: true, readAt: new Date().toISOString() });
+                loadNotifications();
+            } catch(e) {
+                console.error('Error marking notification read:', e);
+            }
+        };
+
+        window.markAllNotificationsRead = async function() {
+            if(!auth || !auth.currentUser || !db) return;
+            try {
+                const userId = auth.currentUser.uid;
+                const notificationsQuery = query(
+                    collection(db, "notifications"),
+                    where("userId", "==", userId),
+                    where("read", "==", false)
+                );
+                const snapshot = await getDocs(notificationsQuery);
+                const batch = writeBatch(db);
+                snapshot.forEach(doc => {
+                    batch.update(doc.ref, { read: true, readAt: new Date().toISOString() });
+                });
+                await batch.commit();
+                loadNotifications();
+            } catch(e) {
+                console.error('Error marking all notifications read:', e);
+            }
+        };
+
+        // Create notification helper
+        async function createNotification(userId, title, message, type = 'info') {
+            if(!db) return;
+            try {
+                await addDoc(collection(db, "notifications"), {
+                    userId: userId,
+                    title: title,
+                    message: message,
+                    type: type,
+                    read: false,
+                    createdAt: new Date().toISOString()
+                });
+            } catch(e) {
+                console.error('Error creating notification:', e);
+            }
+        }
+
+        // --- TEST SCORE MANAGEMENT ---
+        window.openTestScoreModal = function() {
+            document.getElementById('test-score-modal').classList.add('active');
+        };
+
+        window.closeTestScoreModal = function() {
+            document.getElementById('test-score-modal').classList.remove('active');
+            document.getElementById('test-type').value = 'IELTS';
+            document.getElementById('test-score').value = '';
+            document.getElementById('test-date').value = '';
+            document.getElementById('test-expiry').value = '';
+        };
+
+        window.saveTestScore = async function() {
+            const testType = document.getElementById('test-type').value;
+            const score = document.getElementById('test-score').value;
+            const testDate = document.getElementById('test-date').value;
+            const expiryDate = document.getElementById('test-expiry').value;
+            
+            if(!testType || !score || !testDate) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if(!auth || !auth.currentUser || !db) {
+                alert('Please login to save test scores');
+                return;
+            }
+            
+            try {
+                const testScoreData = {
+                    testType: testType,
+                    score: score,
+                    testDate: testDate,
+                    expiryDate: expiryDate || null,
+                    createdAt: new Date().toISOString()
+                };
+                
+                const userRef = doc(db, "users", auth.currentUser.uid);
+                const userDoc = await getDoc(userRef);
+                const userData = userDoc.exists() ? userDoc.data() : {};
+                const testScores = userData.testScores || [];
+                testScores.push(testScoreData);
+                
+                await updateDoc(userRef, { testScores: testScores });
+                closeTestScoreModal();
+                loadTestScores();
+                loadTestScoresModal();
+                updateDashboardStats();
+                // Reopen the view modal
+                setTimeout(() => {
+                    openTestScoresModal();
+                }, 100);
+                alert('Test score saved successfully!');
+            } catch(e) {
+                console.error('Error saving test score:', e);
+                alert('Error saving test score. Please try again.');
+            }
+        };
+
+        window.loadTestScores = async function() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            try {
+                const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const testScores = userData.testScores || [];
+                
+                const list = document.getElementById('test-scores-list');
+                if(testScores.length === 0) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No test scores added yet</p>';
+                    return;
+                }
+                
+                list.innerHTML = testScores.map((score, index) => {
+                    const expiryDate = score.expiryDate ? new Date(score.expiryDate) : null;
+                    const today = new Date();
+                    let expiryClass = 'valid';
+                    let expiryText = 'Valid';
+                    
+                    if(expiryDate) {
+                        const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                        if(daysUntilExpiry < 0) {
+                            expiryClass = 'expired';
+                            expiryText = 'Expired';
+                        } else if(daysUntilExpiry < 30) {
+                            expiryClass = 'expiring';
+                            expiryText = `Expires in ${daysUntilExpiry} days`;
+                        } else {
+                            expiryText = `Expires ${expiryDate.toLocaleDateString()}`;
+                        }
+                    }
+                    
+                    return `
+                        <div class="test-score-card">
+                            <div class="test-score-header">
+                                <div>
+                                    <strong>${score.testType}</strong>
+                                    <div style="font-size: 1.2rem; color: var(--primary); margin-top: 5px;">Score: ${score.score}</div>
+                                </div>
+                                <span class="score-expiry ${expiryClass}">${expiryText}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666; margin-top: 10px;">
+                                Test Date: ${new Date(score.testDate).toLocaleDateString()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch(e) {
+                console.error('Error loading test scores:', e);
+            }
+        };
+
+        // --- PAYMENT TRACKING ---
+        window.openPaymentModal = function() {
+            document.getElementById('payment-modal').classList.add('active');
+        };
+
+        window.closePaymentModal = function() {
+            document.getElementById('payment-modal').classList.remove('active');
+            document.getElementById('payment-type').value = 'Application Fee';
+            document.getElementById('payment-amount').value = '';
+            document.getElementById('payment-date').value = '';
+            document.getElementById('payment-status').value = 'paid';
+            document.getElementById('payment-notes').value = '';
+        };
+
+        window.savePayment = async function() {
+            const paymentType = document.getElementById('payment-type').value;
+            const amount = document.getElementById('payment-amount').value;
+            const paymentDate = document.getElementById('payment-date').value;
+            const status = document.getElementById('payment-status').value;
+            const notes = document.getElementById('payment-notes').value;
+            
+            if(!paymentType || !amount || !paymentDate) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if(!auth || !auth.currentUser || !db) {
+                alert('Please login to save payments');
+                return;
+            }
+            
+            try {
+                const paymentData = {
+                    type: paymentType,
+                    amount: parseFloat(amount),
+                    date: paymentDate,
+                    status: status,
+                    notes: notes || '',
+                    createdAt: new Date().toISOString()
+                };
+                
+                const userRef = doc(db, "users", auth.currentUser.uid);
+                const userDoc = await getDoc(userRef);
+                const userData = userDoc.exists() ? userDoc.data() : {};
+                const payments = userData.payments || [];
+                payments.push(paymentData);
+                
+                await updateDoc(userRef, { payments: payments });
+                closePaymentModal();
+                loadPayments();
+                loadPaymentsModal();
+                updateDashboardStats();
+                // Reopen the view modal
+                setTimeout(() => {
+                    openPaymentsModal();
+                }, 100);
+                alert('Payment saved successfully!');
+            } catch(e) {
+                console.error('Error saving payment:', e);
+                alert('Error saving payment. Please try again.');
+            }
+        };
+
+        window.loadPayments = async function() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            try {
+                const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const payments = userData.payments || [];
+                
+                const list = document.getElementById('payments-list');
+                if(payments.length === 0) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No payments recorded yet</p>';
+                    return;
+                }
+                
+                const totalPaid = payments.filter(p => p.status === 'paid').reduce((sum, p) => sum + (p.amount || 0), 0);
+                const totalPending = payments.filter(p => p.status === 'pending').reduce((sum, p) => sum + (p.amount || 0), 0);
+                
+                list.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="background: #d1e7dd; padding: 15px; border-radius: 6px;">
+                            <div style="font-size: 0.85rem; color: #0f5132; margin-bottom: 5px;">Total Paid</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #0f5132;">$${totalPaid.toFixed(2)}</div>
+                        </div>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 6px;">
+                            <div style="font-size: 0.85rem; color: #856404; margin-bottom: 5px;">Total Pending</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #856404;">$${totalPending.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    ${payments.map(payment => `
+                        <div class="payment-card">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                <div>
+                                    <strong>${payment.type}</strong>
+                                    <div class="payment-amount">$${payment.amount?.toFixed(2) || '0.00'}</div>
+                                </div>
+                                <span class="payment-status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666;">
+                                Date: ${new Date(payment.date).toLocaleDateString()}
+                                ${payment.notes ? `<div style="margin-top: 5px;">${payment.notes}</div>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+            } catch(e) {
+                console.error('Error loading payments:', e);
+            }
+        };
+
+        // --- DOCUMENT CHECKLIST ---
+        window.loadDocumentChecklist = async function() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            try {
+                const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const docs = userData.docs || [];
+                
+                const checklist = [
+                    { id: 'passport', label: 'Passport (Front & Back)', required: true, types: ['Passport'] },
+                    { id: 'transcript', label: 'Academic Transcripts', required: true, types: ['Transcript'] },
+                    { id: 'ielts', label: 'IELTS/PTE Score Card', required: true, types: ['IELTS/PTE'] },
+                    { id: 'financial', label: 'Financial Documents', required: true, types: ['Financial'] },
+                    { id: 'sop', label: 'Statement of Purpose', required: false, types: ['SOP'] },
+                    { id: 'recommendation', label: 'Recommendation Letters', required: false, types: ['Recommendation'] },
+                    { id: 'cv', label: 'CV/Resume', required: false, types: ['CV', 'Resume'] },
+                    { id: 'other', label: 'Other Documents', required: false, types: ['Other'] }
+                ];
+                
+                const completed = checklist.filter(item => {
+                    return docs.some(doc => {
+                        // Check if document type matches any of the mapped types for this checklist item
+                        return item.types.some(type => doc.type === type || doc.type?.toLowerCase() === type.toLowerCase());
+                    });
+                }).length;
+                
+                const total = checklist.length;
+                const percentage = Math.round((completed / total) * 100);
+                
+                document.getElementById('checklist-progress-bar').style.width = percentage + '%';
+                document.getElementById('checklist-completed').textContent = completed;
+                document.getElementById('checklist-total').textContent = total;
+                
+                const checklistDiv = document.getElementById('document-checklist');
+                checklistDiv.innerHTML = checklist.map(item => {
+                    const isCompleted = docs.some(doc => {
+                        // Check if document type matches any of the mapped types for this checklist item
+                        return item.types.some(type => doc.type === type || doc.type?.toLowerCase() === type.toLowerCase());
+                    });
+                    return `
+                        <div class="checklist-item ${isCompleted ? 'completed' : ''}">
+                            <input type="checkbox" class="checklist-checkbox" ${isCompleted ? 'checked' : ''} disabled>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 500;">${item.label} ${item.required ? '<span style="color: var(--danger);">*</span>' : ''}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch(e) {
+                console.error('Error loading checklist:', e);
+            }
+        };
+
+        // --- TASK MANAGEMENT (Counselor) ---
+        window.openTaskModal = function() {
+            if(!currentStudentId) {
+                alert('Please select a student first');
+                return;
+            }
+            document.getElementById('task-modal').classList.add('active');
+        };
+
+        window.closeTaskModal = function() {
+            document.getElementById('task-modal').classList.remove('active');
+            document.getElementById('task-title').value = '';
+            document.getElementById('task-description').value = '';
+            document.getElementById('task-due-date').value = '';
+            document.getElementById('task-priority').value = 'medium';
+        };
+
+        window.saveTask = async function() {
+            if(!currentStudentId || !db) {
+                alert('No student selected or database not available');
+                console.error('Cannot save task: currentStudentId =', currentStudentId, 'db =', db);
+                return;
+            }
+            
+            console.log('saveTask called with currentStudentId:', currentStudentId);
+            
+            const title = document.getElementById('task-title').value;
+            const description = document.getElementById('task-description').value;
+            const dueDate = document.getElementById('task-due-date').value;
+            const priority = document.getElementById('task-priority').value;
+            
+            if(!title || !dueDate) {
+                alert('Please fill in title and due date');
+                return;
+            }
+            
+            try {
+                const taskData = {
+                    studentId: String(currentStudentId), // Ensure it's a string
+                    title: title,
+                    description: description || '',
+                    dueDate: dueDate,
+                    priority: priority,
+                    completed: false,
+                    createdAt: new Date().toISOString(),
+                    createdBy: auth.currentUser.uid
+                };
+                
+                console.log('Saving task with data:', taskData);
+                const taskRef = await addDoc(collection(db, "tasks"), taskData);
+                console.log('Task saved successfully with ID:', taskRef.id);
+                console.log('Task studentId:', taskData.studentId, 'Type:', typeof taskData.studentId);
+                
+                // Clear form
+                document.getElementById('task-title').value = '';
+                document.getElementById('task-description').value = '';
+                document.getElementById('task-due-date').value = '';
+                document.getElementById('task-priority').value = 'medium';
+                
+                closeTaskModal();
+                
+                // Switch to tasks tab if not already there
+                const tasksTab = document.querySelector('.coun-tab[onclick*="tasks"]');
+                const tasksContent = document.getElementById('tab-tasks');
+                if(tasksTab && tasksContent) {
+                    // Switch to tasks tab
+                    switchCounselorTab('tasks');
+                }
+                
+                // Reload tasks (real-time listener will pick it up automatically, but ensure it's loaded)
+                // Give it a moment for the tab to become visible
+                setTimeout(() => {
+                    loadTasks();
+                    console.log('Tasks reloaded after creation');
+                }, 500);
+                
+                alert('Task created successfully!');
+            } catch(e) {
+                console.error('Error saving task:', e);
+                let errorMsg = 'Error saving task. ';
+                if(e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Please check Firestore security rules.';
+                } else {
+                    errorMsg += e.message || 'Unknown error';
+                }
+                alert(errorMsg);
+            }
+        };
+
+        // Store task listener to unsubscribe when needed
+        let taskUnsubscriber = null;
+        
+        // Helper function to render tasks
+        function renderTasksList(tasks, listElement) {
+            if(!listElement) return;
+            
+            if(tasks.length === 0) {
+                listElement.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No tasks created yet</p>';
+                
+                // Update task count
+                const countEl = document.getElementById('cp-tasks-count');
+                if(countEl) {
+                    countEl.textContent = '';
+                    countEl.style.display = 'none';
+                }
+                return;
+            }
+            
+            listElement.innerHTML = tasks.map(task => {
+                const dueDate = new Date(task.dueDate);
+                const today = new Date();
+                const isOverdue = !task.completed && dueDate < today;
+                const dueDateText = dueDate.toLocaleDateString();
+                const safeId = String(task.id).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                
+                return `
+                    <div class="task-card priority-${task.priority} ${task.completed ? 'completed' : ''}">
+                        <div class="task-header">
+                            <div>
+                                <strong>${task.title}</strong>
+                                <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">${task.description || ''}</div>
+                            </div>
+                            <div>
+                                <button onclick="toggleTaskComplete('${safeId}', ${!task.completed})" style="background: none; border: none; cursor: pointer; color: ${task.completed ? 'var(--success)' : '#999'};">
+                                    <i class="fas fa-${task.completed ? 'check-circle' : 'circle'}"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="task-due-date ${isOverdue ? 'overdue' : ''}">
+                            <i class="fas fa-calendar"></i> Due: ${dueDateText} ${isOverdue ? '(Overdue)' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Update task count
+            const pendingCount = tasks.filter(t => !t.completed).length;
+            const countEl = document.getElementById('cp-tasks-count');
+            if(countEl) {
+                countEl.textContent = pendingCount;
+                countEl.style.display = pendingCount > 0 ? 'inline-block' : 'none';
+            }
+        }
+        
+        window.loadTasks = async function() {
+            if(!currentStudentId || !db) {
+                const list = document.getElementById('tasks-list');
+                if(list) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No student selected</p>';
+                }
+                return;
+            }
+            
+            const list = document.getElementById('tasks-list');
+            if(!list) {
+                console.error('Tasks list element not found');
+                return;
+            }
+            
+            // Unsubscribe from previous listener
+            if(taskUnsubscriber) {
+                taskUnsubscriber();
+                taskUnsubscriber = null;
+            }
+            
+            list.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;"><i class="fas fa-spinner fa-spin"></i> Loading tasks...</div>';
+            
+            try {
+                // Ensure studentId is a string for consistent querying
+                const studentIdStr = String(currentStudentId);
+                console.log('Loading tasks for studentId:', studentIdStr, 'Type:', typeof studentIdStr);
+                
+                // First, try a one-time query to get tasks immediately
+                let tasksQuery;
+                let useOrderBy = true;
+                
+                try {
+                    tasksQuery = query(
+                        collection(db, "tasks"),
+                        where("studentId", "==", studentIdStr),
+                        orderBy("createdAt", "desc")
+                    );
+                } catch(queryError) {
+                    // If orderBy fails, use simple query without orderBy
+                    console.log('OrderBy not available, using simple query');
+                    useOrderBy = false;
+                    tasksQuery = query(
+                        collection(db, "tasks"),
+                        where("studentId", "==", studentIdStr)
+                    );
+                }
+                
+                // Do a one-time fetch first for immediate display
+                let fetchSucceeded = false;
+                try {
+                    console.log('Fetching tasks for studentId:', studentIdStr);
+                    const snapshot = await getDocs(tasksQuery);
+                    console.log('Tasks query returned', snapshot.size, 'documents');
+                    const tasks = [];
+                    snapshot.forEach(doc => {
+                        const taskData = doc.data();
+                        console.log('Task found:', doc.id, taskData);
+                        tasks.push({ id: doc.id, ...taskData });
+                    });
+                    
+                    // Sort by createdAt in memory if we used fallback query
+                    if(!useOrderBy) {
+                        tasks.sort((a, b) => {
+                            const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                            const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                            return timeB - timeA; // Descending order
+                        });
+                    }
+                    
+                    console.log('Rendering', tasks.length, 'tasks');
+                    renderTasksList(tasks, list);
+                    fetchSucceeded = true;
+                } catch(fetchError) {
+                    console.error('Error fetching tasks:', fetchError);
+                    console.error('Error details:', {
+                        code: fetchError.code,
+                        message: fetchError.message,
+                        studentId: studentIdStr
+                    });
+                    
+                    // If orderBy query failed, try without orderBy
+                    if(useOrderBy && (fetchError.code === 'failed-precondition' || fetchError.code === 'permission-denied')) {
+                        console.log('Retrying with simple query (no orderBy)');
+                        try {
+                            const simpleQuery = query(
+                                collection(db, "tasks"),
+                                where("studentId", "==", studentIdStr)
+                            );
+                            const simpleSnapshot = await getDocs(simpleQuery);
+                            const tasks = [];
+                            simpleSnapshot.forEach(doc => {
+                                tasks.push({ id: doc.id, ...doc.data() });
+                            });
+                            tasks.sort((a, b) => {
+                                const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                                const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                                return timeB - timeA;
+                            });
+                            renderTasksList(tasks, list);
+                            tasksQuery = simpleQuery; // Use simple query for listener too
+                            useOrderBy = false;
+                            fetchSucceeded = true;
+                        } catch(simpleError) {
+                            console.error('Simple query also failed:', simpleError);
+                            let errorMsg = 'Error loading tasks. ';
+                            if(simpleError.code === 'permission-denied') {
+                                errorMsg += 'Permission denied. Please check Firestore security rules.';
+                            } else {
+                                errorMsg += simpleError.message || 'Unknown error';
+                            }
+                            list.innerHTML = `
+                                <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p>${errorMsg}</p>
+                                    <button class="btn btn-sm" onclick="loadTasks()" style="margin-top: 10px;">Retry</button>
+                                </div>
+                            `;
+                            return; // Don't set up listener if fetch failed
+                        }
+                    } else {
+                        // Show error and return
+                        let errorMsg = 'Error loading tasks. ';
+                        if(fetchError.code === 'permission-denied') {
+                            errorMsg += 'Permission denied. Please check Firestore security rules.';
+                        } else if(fetchError.code === 'failed-precondition') {
+                            errorMsg += 'Firestore index required. Please create a composite index.';
+                        } else {
+                            errorMsg += fetchError.message || 'Unknown error';
+                        }
+                        list.innerHTML = `
+                            <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>${errorMsg}</p>
+                                <button class="btn btn-sm" onclick="loadTasks()" style="margin-top: 10px;">Retry</button>
+                            </div>
+                        `;
+                        return; // Don't set up listener if fetch failed
+                    }
+                }
+                
+                // Only set up listener if fetch succeeded
+                if(!fetchSucceeded) return;
+                
+                // Now set up real-time listener for live updates
+                console.log('Setting up real-time listener for tasks');
+                taskUnsubscriber = onSnapshot(tasksQuery, (snapshot) => {
+                    console.log('Tasks listener triggered, received', snapshot.size, 'tasks');
+                    const tasks = [];
+                    snapshot.forEach(doc => {
+                        const taskData = doc.data();
+                        console.log('Listener task:', doc.id, taskData);
+                        tasks.push({ id: doc.id, ...taskData });
+                    });
+                    
+                    // Sort by createdAt in memory if we used fallback query
+                    if(!useOrderBy) {
+                        tasks.sort((a, b) => {
+                            const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                            const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                            return timeB - timeA; // Descending order
+                        });
+                    }
+                    
+                    console.log('Rendering', tasks.length, 'tasks from listener');
+                    renderTasksList(tasks, list);
+                }, (error) => {
+                    console.error('Tasks listener error:', error);
+                    console.error('Error in tasks listener:', error);
+                    // Don't show error if it's just an index issue and we already have data
+                    if(error.code === 'failed-precondition' && list.innerHTML && !list.innerHTML.includes('Error')) {
+                        console.log('Listener failed but we have cached data');
+                        return;
+                    }
+                    
+                    let errorMsg = 'Error loading tasks. ';
+                    if(error.code === 'failed-precondition') {
+                        errorMsg += 'Firestore index required. Please create a composite index for tasks collection.';
+                    } else if(error.code === 'permission-denied') {
+                        errorMsg += 'Permission denied. Please check Firestore security rules.';
+                    } else {
+                        errorMsg += error.message || 'Unknown error';
+                    }
+                    
+                    list.innerHTML = `
+                        <div style="padding: 20px; color: var(--danger); text-align: center;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>${errorMsg}</p>
+                            <button class="btn btn-sm" onclick="loadTasks()" style="margin-top: 10px;">Retry</button>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error('Error setting up tasks:', e);
+                list.innerHTML = `
+                    <div style="padding: 20px; color: var(--danger); text-align: center;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error loading tasks: ${e.message || 'Unknown error'}</p>
+                        <button class="btn btn-sm" onclick="loadTasks()" style="margin-top: 10px;">Retry</button>
+                    </div>
+                `;
+            }
+        };
+
+        window.toggleTaskComplete = async function(taskId, completed) {
+            if(!db) return;
+            try {
+                await updateDoc(doc(db, "tasks", taskId), {
+                    completed: completed,
+                    completedAt: completed ? new Date().toISOString() : null
+                });
+                loadTasks();
+            } catch(e) {
+                console.error('Error updating task:', e);
+            }
+        };
+
+        // --- NOTES MANAGEMENT (Counselor) ---
+        window.openNoteModal = function() {
+            if(!currentStudentId) {
+                alert('Please select a student first');
+                return;
+            }
+            document.getElementById('note-modal').classList.add('active');
+        };
+
+        window.closeNoteModal = function() {
+            document.getElementById('note-modal').classList.remove('active');
+            document.getElementById('note-content').value = '';
+            document.getElementById('note-tags').value = '';
+        };
+
+        window.saveNote = async function() {
+            if(!currentStudentId || !db) {
+                alert('No student selected or database not available');
+                console.error('Cannot save note: currentStudentId =', currentStudentId, 'db =', db);
+                return;
+            }
+            
+            console.log('saveNote called with currentStudentId:', currentStudentId);
+            
+            const content = document.getElementById('note-content').value;
+            const tagsInput = document.getElementById('note-tags').value;
+            
+            if(!content) {
+                alert('Please enter note content');
+                return;
+            }
+            
+            try {
+                const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()).filter(t => t) : [];
+                
+                const noteData = {
+                    studentId: String(currentStudentId), // Ensure it's a string
+                    content: content,
+                    tags: tags,
+                    createdAt: new Date().toISOString(),
+                    createdBy: auth.currentUser.uid
+                };
+                
+                console.log('Saving note with data:', noteData);
+                const noteRef = await addDoc(collection(db, "notes"), noteData);
+                console.log('Note saved successfully with ID:', noteRef.id);
+                console.log('Note studentId:', noteData.studentId, 'Type:', typeof noteData.studentId);
+                
+                // Clear form
+                document.getElementById('note-content').value = '';
+                document.getElementById('note-tags').value = '';
+                
+                closeNoteModal();
+                
+                // Switch to notes tab if not already there
+                const notesTab = document.querySelector('.coun-tab[onclick*="notes"]');
+                const notesContent = document.getElementById('tab-notes');
+                if(notesTab && notesContent) {
+                    // Switch to notes tab
+                    switchCounselorTab('notes');
+                }
+                
+                // Reload notes (real-time listener will pick it up automatically, but ensure it's loaded)
+                // Give it a moment for the tab to become visible
+                setTimeout(() => {
+                    loadNotes();
+                    console.log('Notes reloaded after creation');
+                }, 500);
+                
+                alert('Note saved successfully!');
+            } catch(e) {
+                console.error('Error saving note:', e);
+                let errorMsg = 'Error saving note. ';
+                if(e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Please check Firestore security rules.';
+                } else {
+                    errorMsg += e.message || 'Unknown error';
+                }
+                alert(errorMsg);
+            }
+        };
+
+        // Store notes listener to unsubscribe when needed
+        let notesUnsubscriber = null;
+        
+        // Helper function to render notes
+        function renderNotesList(notes, listElement) {
+            if(!listElement) return;
+            
+            if(notes.length === 0) {
+                listElement.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No notes added yet</p>';
+                return;
+            }
+            
+            listElement.innerHTML = notes.map(note => {
+                const date = new Date(note.createdAt).toLocaleString();
+                const tagsHtml = note.tags && note.tags.length > 0 ? 
+                    `<div class="note-tags">${note.tags.map(tag => `<span class="note-tag">${tag}</span>`).join('')}</div>` : '';
+                
+                return `
+                    <div class="note-item">
+                        <div class="note-header">
+                            <div class="note-date">${date}</div>
+                        </div>
+                        <div>${note.content}</div>
+                        ${tagsHtml}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        window.loadNotes = async function() {
+            if(!currentStudentId || !db) {
+                const list = document.getElementById('notes-list');
+                if(list) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No student selected</p>';
+                }
+                return;
+            }
+            
+            const list = document.getElementById('notes-list');
+            if(!list) {
+                console.error('Notes list element not found');
+                return;
+            }
+            
+            // Unsubscribe from previous listener
+            if(notesUnsubscriber) {
+                notesUnsubscriber();
+                notesUnsubscriber = null;
+            }
+            
+            list.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;"><i class="fas fa-spinner fa-spin"></i> Loading notes...</div>';
+            
+            try {
+                // Ensure studentId is a string for consistent querying
+                const studentIdStr = String(currentStudentId);
+                console.log('Loading notes for studentId:', studentIdStr);
+                
+                // First, try a one-time query to get notes immediately
+                let notesQuery;
+                let useOrderBy = true;
+                
+                try {
+                    notesQuery = query(
+                        collection(db, "notes"),
+                        where("studentId", "==", studentIdStr),
+                        orderBy("createdAt", "desc")
+                    );
+                } catch(queryError) {
+                    // If orderBy fails, use simple query without orderBy
+                    console.log('OrderBy not available for notes, using simple query');
+                    useOrderBy = false;
+                    notesQuery = query(
+                        collection(db, "notes"),
+                        where("studentId", "==", studentIdStr)
+                    );
+                }
+                
+                // Do a one-time fetch first for immediate display
+                let fetchSucceeded = false;
+                try {
+                    console.log('Fetching notes for studentId:', studentIdStr);
+                    const snapshot = await getDocs(notesQuery);
+                    console.log('Notes query returned', snapshot.size, 'documents');
+                    const notes = [];
+                    snapshot.forEach(doc => {
+                        const noteData = doc.data();
+                        console.log('Note found:', doc.id, noteData);
+                        notes.push({ id: doc.id, ...noteData });
+                    });
+                    
+                    // Sort by createdAt in memory if we used fallback query
+                    if(!useOrderBy) {
+                        notes.sort((a, b) => {
+                            const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                            const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                            return timeB - timeA; // Descending order
+                        });
+                    }
+                    
+                    console.log('Rendering', notes.length, 'notes');
+                    renderNotesList(notes, list);
+                    fetchSucceeded = true;
+                } catch(fetchError) {
+                    console.error('Error fetching notes:', fetchError);
+                    console.error('Error details:', {
+                        code: fetchError.code,
+                        message: fetchError.message,
+                        studentId: studentIdStr
+                    });
+                    
+                    // If orderBy query failed, try without orderBy
+                    if(useOrderBy && (fetchError.code === 'failed-precondition' || fetchError.code === 'permission-denied')) {
+                        console.log('Retrying with simple query (no orderBy)');
+                        try {
+                            const simpleQuery = query(
+                                collection(db, "notes"),
+                                where("studentId", "==", studentIdStr)
+                            );
+                            const simpleSnapshot = await getDocs(simpleQuery);
+                            const notes = [];
+                            simpleSnapshot.forEach(doc => {
+                                notes.push({ id: doc.id, ...doc.data() });
+                            });
+                            notes.sort((a, b) => {
+                                const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                                const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                                return timeB - timeA;
+                            });
+                            renderNotesList(notes, list);
+                            notesQuery = simpleQuery; // Use simple query for listener too
+                            useOrderBy = false;
+                            fetchSucceeded = true;
+                        } catch(simpleError) {
+                            console.error('Simple query also failed:', simpleError);
+                            let errorMsg = 'Error loading notes. ';
+                            if(simpleError.code === 'permission-denied') {
+                                errorMsg += 'Permission denied. Please check Firestore security rules.';
+                            } else {
+                                errorMsg += simpleError.message || 'Unknown error';
+                            }
+                            list.innerHTML = `
+                                <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p>${errorMsg}</p>
+                                    <button class="btn btn-sm" onclick="loadNotes()" style="margin-top: 10px;">Retry</button>
+                                </div>
+                            `;
+                            return; // Don't set up listener if fetch failed
+                        }
+                    } else {
+                        // Show error and return
+                        let errorMsg = 'Error loading notes. ';
+                        if(fetchError.code === 'permission-denied') {
+                            errorMsg += 'Permission denied. Please check Firestore security rules.';
+                        } else if(fetchError.code === 'failed-precondition') {
+                            errorMsg += 'Firestore index required. Please create a composite index.';
+                        } else {
+                            errorMsg += fetchError.message || 'Unknown error';
+                        }
+                        list.innerHTML = `
+                            <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>${errorMsg}</p>
+                                <button class="btn btn-sm" onclick="loadNotes()" style="margin-top: 10px;">Retry</button>
+                            </div>
+                        `;
+                        return; // Don't set up listener if fetch failed
+                    }
+                }
+                
+                // Only set up listener if fetch succeeded
+                if(!fetchSucceeded) return;
+                
+                // Now set up real-time listener for live updates
+                console.log('Setting up real-time listener for notes');
+                notesUnsubscriber = onSnapshot(notesQuery, (snapshot) => {
+                    console.log('Notes listener triggered, received', snapshot.size, 'notes');
+                    const notes = [];
+                    snapshot.forEach(doc => {
+                        const noteData = doc.data();
+                        console.log('Listener note:', doc.id, noteData);
+                        notes.push({ id: doc.id, ...noteData });
+                    });
+                    
+                    // Sort by createdAt in memory if we used fallback query
+                    if(!useOrderBy) {
+                        notes.sort((a, b) => {
+                            const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                            const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                            return timeB - timeA; // Descending order
+                        });
+                    }
+                    
+                    console.log('Rendering', notes.length, 'notes from listener');
+                    renderNotesList(notes, list);
+                }, (error) => {
+                    console.error('Notes listener error:', error);
+                    // Don't show error if it's just an index issue and we already have data
+                    if(error.code === 'failed-precondition' && list.innerHTML && !list.innerHTML.includes('Error')) {
+                        console.log('Listener failed but we have cached data');
+                        return;
+                    }
+                    
+                    let errorMsg = 'Error loading notes. ';
+                    if(error.code === 'failed-precondition') {
+                        errorMsg += 'Firestore index required. Please create a composite index for notes collection.';
+                    } else if(error.code === 'permission-denied') {
+                        errorMsg += 'Permission denied. Please check Firestore security rules.';
+                    } else {
+                        errorMsg += error.message || 'Unknown error';
+                    }
+                    
+                    list.innerHTML = `
+                        <div style="padding: 20px; color: var(--danger); text-align: center;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>${errorMsg}</p>
+                            <button class="btn btn-sm" onclick="loadNotes()" style="margin-top: 10px;">Retry</button>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error('Error setting up notes:', e);
+                list.innerHTML = `
+                    <div style="padding: 20px; color: var(--danger); text-align: center;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error loading notes: ${e.message || 'Unknown error'}</p>
+                        <button class="btn btn-sm" onclick="loadNotes()" style="margin-top: 10px;">Retry</button>
+                    </div>
+                `;
+            }
+        };
+
+        // --- APPOINTMENT MANAGEMENT ---
+        window.openAppointmentModal = function() {
+            if(!currentStudentId) {
+                alert('Please select a student first');
+                return;
+            }
+            document.getElementById('appointment-modal').classList.add('active');
+        };
+
+        window.closeAppointmentModal = function() {
+            document.getElementById('appointment-modal').classList.remove('active');
+            document.getElementById('appointment-date').value = '';
+            document.getElementById('appointment-time').value = '';
+            document.getElementById('appointment-duration').value = '30';
+            document.getElementById('appointment-type').value = 'in-person';
+            document.getElementById('appointment-notes').value = '';
+        };
+
+        window.saveAppointment = async function() {
+            if(!currentStudentId || !db) {
+                alert('No student selected or database not available');
+                console.error('Cannot save appointment: currentStudentId =', currentStudentId, 'db =', db);
+                return;
+            }
+            
+            console.log('saveAppointment called with currentStudentId:', currentStudentId);
+            
+            const date = document.getElementById('appointment-date').value;
+            const time = document.getElementById('appointment-time').value;
+            const duration = document.getElementById('appointment-duration').value;
+            const type = document.getElementById('appointment-type').value;
+            const notes = document.getElementById('appointment-notes').value;
+            
+            if(!date || !time) {
+                alert('Please fill in date and time');
+                return;
+            }
+            
+            try {
+                const appointmentData = {
+                    studentId: String(currentStudentId), // Ensure it's a string
+                    date: date,
+                    time: time,
+                    duration: parseInt(duration) || 30,
+                    type: type,
+                    notes: notes || '',
+                    status: 'scheduled',
+                    createdAt: new Date().toISOString(),
+                    createdBy: auth.currentUser.uid
+                };
+                
+                console.log('Saving appointment with data:', appointmentData);
+                const appointmentRef = await addDoc(collection(db, "appointments"), appointmentData);
+                console.log('Appointment saved successfully with ID:', appointmentRef.id);
+                console.log('Appointment studentId:', appointmentData.studentId, 'Type:', typeof appointmentData.studentId);
+                
+                // Clear form
+                document.getElementById('appointment-date').value = '';
+                document.getElementById('appointment-time').value = '';
+                document.getElementById('appointment-duration').value = '30';
+                document.getElementById('appointment-type').value = 'consultation';
+                document.getElementById('appointment-notes').value = '';
+                
+                closeAppointmentModal();
+                
+                // Switch to appointments tab if not already there
+                const appointmentsTab = document.querySelector('.coun-tab[onclick*="appointments"]');
+                const appointmentsContent = document.getElementById('tab-appointments');
+                if(appointmentsTab && appointmentsContent) {
+                    // Switch to appointments tab
+                    switchCounselorTab('appointments');
+                }
+                
+                // Reload appointments (real-time listener will pick it up automatically, but ensure it's loaded)
+                // Give it a moment for the tab to become visible
+                setTimeout(() => {
+                    loadAppointments();
+                    console.log('Appointments reloaded after creation');
+                }, 500);
+                
+                alert('Appointment scheduled successfully!');
+            } catch(e) {
+                console.error('Error saving appointment:', e);
+                let errorMsg = 'Error saving appointment. ';
+                if(e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Please check Firestore security rules.';
+                } else {
+                    errorMsg += e.message || 'Unknown error';
+                }
+                alert(errorMsg);
+            }
+        };
+
+        // Store appointments listener to unsubscribe when needed
+        let appointmentsUnsubscriber = null;
+        
+        // Helper function to render appointments
+        function renderAppointmentsList(appointments, listElement) {
+            if(!listElement) return;
+            
+            if(appointments.length === 0) {
+                listElement.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No appointments scheduled</p>';
+                return;
+            }
+            
+            listElement.innerHTML = appointments.map(apt => {
+                const date = new Date(apt.date).toLocaleDateString();
+                return `
+                    <div class="appointment-card">
+                        <div class="appointment-time">
+                            <i class="fas fa-calendar"></i> ${date} at ${apt.time}
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <strong>${apt.type.charAt(0).toUpperCase() + apt.type.slice(1)}</strong>
+                            <div style="font-size: 0.85rem; color: #666; margin-top: 5px;">Duration: ${apt.duration} minutes</div>
+                            ${apt.notes ? `<div style="font-size: 0.85rem; color: #666; margin-top: 5px;">${apt.notes}</div>` : ''}
+                        </div>
+                        <span class="appointment-status ${apt.status}">${apt.status.charAt(0).toUpperCase() + apt.status.slice(1)}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        window.loadAppointments = async function() {
+            if(!currentStudentId || !db) {
+                const list = document.getElementById('appointments-list');
+                if(list) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No student selected</p>';
+                }
+                return;
+            }
+            
+            const list = document.getElementById('appointments-list');
+            if(!list) {
+                console.error('Appointments list element not found');
+                return;
+            }
+            
+            // Unsubscribe from previous listener
+            if(appointmentsUnsubscriber) {
+                appointmentsUnsubscriber();
+                appointmentsUnsubscriber = null;
+            }
+            
+            list.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;"><i class="fas fa-spinner fa-spin"></i> Loading appointments...</div>';
+            
+            try {
+                // Ensure studentId is a string for consistent querying
+                const studentIdStr = String(currentStudentId);
+                console.log('Loading appointments for studentId:', studentIdStr);
+                
+                // First, try a one-time query to get appointments immediately
+                let appointmentsQuery;
+                let useOrderBy = true;
+                
+                try {
+                    appointmentsQuery = query(
+                        collection(db, "appointments"),
+                        where("studentId", "==", studentIdStr),
+                        orderBy("date", "desc")
+                    );
+                } catch(queryError) {
+                    // If orderBy fails, use simple query without orderBy
+                    console.log('OrderBy not available for appointments, using simple query');
+                    useOrderBy = false;
+                    appointmentsQuery = query(
+                        collection(db, "appointments"),
+                        where("studentId", "==", studentIdStr)
+                    );
+                }
+                
+                // Do a one-time fetch first for immediate display
+                let fetchSucceeded = false;
+                try {
+                    console.log('Fetching appointments for studentId:', studentIdStr);
+                    const snapshot = await getDocs(appointmentsQuery);
+                    console.log('Appointments query returned', snapshot.size, 'documents');
+                    const appointments = [];
+                    snapshot.forEach(doc => {
+                        const aptData = doc.data();
+                        console.log('Appointment found:', doc.id, aptData);
+                        appointments.push({ id: doc.id, ...aptData });
+                    });
+                    
+                    // Sort by date in memory if we used fallback query
+                    if(!useOrderBy) {
+                        appointments.sort((a, b) => {
+                            const timeA = a.date ? new Date(a.date).getTime() : 0;
+                            const timeB = b.date ? new Date(b.date).getTime() : 0;
+                            return timeB - timeA; // Descending order
+                        });
+                    }
+                    
+                    console.log('Rendering', appointments.length, 'appointments');
+                    renderAppointmentsList(appointments, list);
+                    fetchSucceeded = true;
+                } catch(fetchError) {
+                    console.error('Error fetching appointments:', fetchError);
+                    console.error('Error details:', {
+                        code: fetchError.code,
+                        message: fetchError.message,
+                        studentId: studentIdStr
+                    });
+                    
+                    // If orderBy query failed, try without orderBy
+                    if(useOrderBy && (fetchError.code === 'failed-precondition' || fetchError.code === 'permission-denied')) {
+                        console.log('Retrying with simple query (no orderBy)');
+                        try {
+                            const simpleQuery = query(
+                                collection(db, "appointments"),
+                                where("studentId", "==", studentIdStr)
+                            );
+                            const simpleSnapshot = await getDocs(simpleQuery);
+                            const appointments = [];
+                            simpleSnapshot.forEach(doc => {
+                                appointments.push({ id: doc.id, ...doc.data() });
+                            });
+                            appointments.sort((a, b) => {
+                                const timeA = a.date ? new Date(a.date).getTime() : 0;
+                                const timeB = b.date ? new Date(b.date).getTime() : 0;
+                                return timeB - timeA;
+                            });
+                            renderAppointmentsList(appointments, list);
+                            appointmentsQuery = simpleQuery; // Use simple query for listener too
+                            useOrderBy = false;
+                            fetchSucceeded = true;
+                        } catch(simpleError) {
+                            console.error('Simple query also failed:', simpleError);
+                            let errorMsg = 'Error loading appointments. ';
+                            if(simpleError.code === 'permission-denied') {
+                                errorMsg += 'Permission denied. Please check Firestore security rules.';
+                            } else {
+                                errorMsg += simpleError.message || 'Unknown error';
+                            }
+                            list.innerHTML = `
+                                <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p>${errorMsg}</p>
+                                    <button class="btn btn-sm" onclick="loadAppointments()" style="margin-top: 10px;">Retry</button>
+                                </div>
+                            `;
+                            return; // Don't set up listener if fetch failed
+                        }
+                    } else {
+                        // Show error and return
+                        let errorMsg = 'Error loading appointments. ';
+                        if(fetchError.code === 'permission-denied') {
+                            errorMsg += 'Permission denied. Please check Firestore security rules.';
+                        } else if(fetchError.code === 'failed-precondition') {
+                            errorMsg += 'Firestore index required. Please create a composite index.';
+                        } else {
+                            errorMsg += fetchError.message || 'Unknown error';
+                        }
+                        list.innerHTML = `
+                            <div style="padding: 20px; color: var(--danger); text-align: center;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>${errorMsg}</p>
+                                <button class="btn btn-sm" onclick="loadAppointments()" style="margin-top: 10px;">Retry</button>
+                            </div>
+                        `;
+                        return; // Don't set up listener if fetch failed
+                    }
+                }
+                
+                // Only set up listener if fetch succeeded
+                if(!fetchSucceeded) return;
+                
+                // Now set up real-time listener for live updates
+                console.log('Setting up real-time listener for appointments');
+                appointmentsUnsubscriber = onSnapshot(appointmentsQuery, (snapshot) => {
+                    console.log('Appointments listener triggered, received', snapshot.size, 'appointments');
+                    const appointments = [];
+                    snapshot.forEach(doc => {
+                        const aptData = doc.data();
+                        console.log('Listener appointment:', doc.id, aptData);
+                        appointments.push({ id: doc.id, ...aptData });
+                    });
+                    
+                    // Sort by date in memory if we used fallback query
+                    if(!useOrderBy) {
+                        appointments.sort((a, b) => {
+                            const timeA = a.date ? new Date(a.date).getTime() : 0;
+                            const timeB = b.date ? new Date(b.date).getTime() : 0;
+                            return timeB - timeA;
+                        });
+                    }
+                    
+                    console.log('Rendering', appointments.length, 'appointments from listener');
+                    renderAppointmentsList(appointments, list);
+                }, (error) => {
+                    console.error('Appointments listener error:', error);
+                    // Don't show error if it's just an index issue and we already have data
+                    if(error.code === 'failed-precondition' && list.innerHTML && !list.innerHTML.includes('Error')) {
+                        console.log('Listener failed but we have cached data');
+                        return;
+                    }
+                    
+                    let errorMsg = 'Error loading appointments. ';
+                    if(error.code === 'failed-precondition') {
+                        errorMsg += 'Firestore index required. Please create a composite index for appointments collection.';
+                    } else if(error.code === 'permission-denied') {
+                        errorMsg += 'Permission denied. Please check Firestore security rules.';
+                    } else {
+                        errorMsg += error.message || 'Unknown error';
+                    }
+                    
+                    list.innerHTML = `
+                        <div style="padding: 20px; color: var(--danger); text-align: center;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>${errorMsg}</p>
+                            <button class="btn btn-sm" onclick="loadAppointments()" style="margin-top: 10px;">Retry</button>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error('Error setting up appointments:', e);
+                list.innerHTML = `
+                    <div style="padding: 20px; color: var(--danger); text-align: center;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error loading appointments: ${e.message || 'Unknown error'}</p>
+                        <button class="btn btn-sm" onclick="loadAppointments()" style="margin-top: 10px;">Retry</button>
+                    </div>
+                `;
+            }
+        };
+
+        // --- STUDENT TIMELINE ---
+        window.loadStudentTimeline = async function() {
+            if(!currentStudentId || !db) return;
+            
+            try {
+                const studentDoc = await getDoc(doc(db, "users", currentStudentId));
+                if(!studentDoc.exists()) return;
+                
+                const studentData = studentDoc.data();
+                const timeline = [];
+                
+                // Add milestones
+                if(studentData.milestone) {
+                    timeline.push({
+                        date: studentData.updatedAt || new Date().toISOString(),
+                        title: studentData.milestone,
+                        type: 'milestone'
+                    });
+                }
+                
+                // Add application submission
+                if(studentData.status === 'Submitted') {
+                    timeline.push({
+                        date: studentData.updatedAt || new Date().toISOString(),
+                        title: 'Application Submitted',
+                        type: 'submission'
+                    });
+                }
+                
+                // Sort by date
+                timeline.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                const timelineDiv = document.getElementById('student-timeline');
+                if(timeline.length === 0) {
+                    timelineDiv.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">Timeline will appear here</p>';
+                    return;
+                }
+                
+                timelineDiv.innerHTML = timeline.map((item, index) => {
+                    const date = new Date(item.date).toLocaleDateString();
+                    const isActive = index === 0;
+                    const isCompleted = index > 0;
+                    
+                    return `
+                        <div class="timeline-item ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div style="font-weight: 600; margin-bottom: 5px;">${item.title}</div>
+                                <div style="font-size: 0.85rem; color: #666;">${date}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch(e) {
+                console.error('Error loading timeline:', e);
+            }
+        };
+
+
+        // Load data when student dashboard loads
+        if(auth) {
+            onAuthStateChanged(auth, (user) => {
+                if(user && window.currentRole === 'student') {
+                    setTimeout(() => {
+                        loadTestScores();
+                        loadPayments();
+                        loadDocumentChecklist();
+                        loadNotifications();
+                    }, 1000);
+                }
+            });
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if(e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notification-panel');
+            const bell = document.querySelector('.notification-bell');
+            if(panel && !panel.contains(e.target) && !bell.contains(e.target)) {
+                panel.classList.remove('active');
+            }
+        });
+
+        // ========== STUDENT DASHBOARD MODAL FUNCTIONS ==========
+
+        // --- CHAT MODAL ---
+        window.openChatModal = function() {
+            const modal = document.getElementById('chat-modal');
+            modal.classList.add('active');
+            // Load chat when modal opens
+            setTimeout(() => {
+                loadStudentChatModal();
+            }, 100);
+        };
+
+        window.closeChatModal = function() {
+            document.getElementById('chat-modal').classList.remove('active');
+        };
+
+        function loadStudentChatModal() {
+            const chatBox = document.getElementById('stu-chat-box-modal');
+            if(!chatBox || !auth || !auth.currentUser) return;
+            
+            chatBox.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;"><i class="fas fa-spinner fa-spin"></i> Loading messages...</div>';
+            
+            if(auth && auth.currentUser && !isDemoMode && db) {
+                try {
+                    const studentId = auth.currentUser.uid;
+                    
+                    getDoc(doc(db, "users", studentId)).then(userDoc => {
+                        if(!userDoc.exists()) {
+                            chatBox.innerHTML = `
+                                <div class="message msg-in">
+                                    <strong>System:</strong> No counselor assigned yet. Please contact support.
+                                </div>
+                            `;
+                            return;
+                        }
+                        
+                        const userData = userDoc.data();
+                        const counselorId = userData.counselorId;
+                        
+                        if(!counselorId) {
+                            chatBox.innerHTML = `
+                                <div class="message msg-in">
+                                    <strong>System:</strong> No counselor assigned yet. A counselor will be assigned to you soon!
+                                </div>
+                            `;
+                            return;
+                        }
+                        
+                        const messagesQuery = query(
+                            collection(db, "messages"),
+                            where("studentId", "==", studentId)
+                        );
+                        
+                        const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
+                            chatBox.innerHTML = '';
+                            
+                            let messages = [];
+                            snapshot.forEach(doc => {
+                                const msg = doc.data();
+                                if(!msg.counselorId || msg.counselorId === counselorId) {
+                                    messages.push({ id: doc.id, ...msg });
+                                }
+                            });
+                            
+                            messages.sort((a, b) => {
+                                const timeA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
+                                const timeB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
+                                return timeA - timeB;
+                            });
+                            
+                            if(messages.length === 0) {
+                                chatBox.innerHTML = `
+                                    <div class="message msg-in">
+                                        <strong>System:</strong> No previous messages. Start a conversation with your counselor!
+                                    </div>
+                                `;
+                            } else {
+                                messages.forEach(msg => {
+                                    const msgDiv = document.createElement('div');
+                                    const isStudent = msg.sender === 'student' || msg.senderId === studentId;
+                                    msgDiv.className = isStudent ? 'message msg-out' : 'message msg-in';
+                                    const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '';
+                                    msgDiv.innerHTML = `
+                                        <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.85rem; opacity: 0.9;">${isStudent ? 'You' : 'Your Counselor'}</div>
+                                        <div style="margin-bottom: 4px;">${msg.text || ''}</div>
+                                        <div style="font-size: 0.75rem; opacity: 0.7; ${isStudent ? 'text-align: right;' : ''}">${time}</div>
+                                    `;
+                                    chatBox.appendChild(msgDiv);
+                                });
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                            }
+                        }, (error) => {
+                            console.error("Error loading chat:", error);
+                            chatBox.innerHTML = `
+                                <div class="message msg-in">
+                                    <strong>System:</strong> Error loading messages. Please try again.
+                                </div>
+                            `;
+                        });
+                    }).catch(e => {
+                        console.error("Error getting student data:", e);
+                        chatBox.innerHTML = `
+                            <div class="message msg-in">
+                                <strong>System:</strong> Error loading chat. Please try again.
+                            </div>
+                        `;
+                    });
+                } catch(e) {
+                    console.error("Error setting up chat:", e);
+                    chatBox.innerHTML = `
+                        <div class="message msg-in">
+                            <strong>System:</strong> Error setting up chat. Please refresh the page.
+                        </div>
+                    `;
+                }
+            } else {
+                chatBox.innerHTML = `
+                    <div class="message msg-in">
+                        <strong>System:</strong> Start a conversation! Chat messages will be saved when authenticated.
+                    </div>
+                `;
+            }
+        }
+
+        window.sendMessageFromModal = async function(role) {
+            const input = document.getElementById('stu-chat-input-modal');
+            const messageText = input.value.trim();
+            if(!messageText) return;
+            
+            const chatBox = document.getElementById('stu-chat-box-modal');
+            
+            // Add message to UI immediately
+            const div = document.createElement('div');
+            div.className = 'message msg-out';
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            div.innerHTML = `
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.85rem; opacity: 0.9;">You</div>
+                <div style="margin-bottom: 4px;">${messageText}</div>
+                <div style="font-size: 0.75rem; opacity: 0.7; text-align: right;">${timestamp}</div>
+            `;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Save to Firebase
+            if(auth && auth.currentUser && !isDemoMode && db) {
+                try {
+                    const studentId = auth.currentUser.uid;
+                    const userDoc = await getDoc(doc(db, "users", studentId));
+                    if(!userDoc.exists()) {
+                        alert("Your profile is not set up. Please complete your application first.");
+                        div.remove();
+                        input.value = messageText;
+                        return;
+                    }
+                    
+                    const userData = userDoc.data();
+                    const counselorId = userData.counselorId || null;
+                    
+                    if(!counselorId) {
+                        showInfo("You don't have a counselor assigned yet. A counselor will be assigned to you soon!");
+                        div.remove();
+                        input.value = messageText;
+                        return;
+                    }
+                    
+                    const messageData = {
+                        text: messageText,
+                        sender: 'student',
+                        senderId: studentId,
+                        studentId: studentId,
+                        counselorId: counselorId,
+                        timestamp: new Date().toISOString(),
+                        read: false
+                    };
+                    
+                    await addDoc(collection(db, "messages"), messageData);
+                    input.value = '';
+                } catch(e) {
+                    console.error("Error saving message:", e);
+                    alert("Failed to send message. Please try again.");
+                    div.remove();
+                    input.value = messageText;
+                }
+            } else {
+                input.value = '';
+            }
+        };
+
+        // --- STATUS TRACKER MODAL ---
+        window.openStatusTrackerModal = function() {
+            const modal = document.getElementById('status-tracker-modal');
+            modal.classList.add('active');
+            loadStatusTracker();
+        };
+
+        window.closeStatusTrackerModal = function() {
+            document.getElementById('status-tracker-modal').classList.remove('active');
+        };
+
+        function loadStatusTracker() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            getDoc(doc(db, "users", auth.currentUser.uid)).then(userDoc => {
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const status = userData.status || 'Draft';
+                const milestone = userData.milestone || null;
+                
+                // Update status steps based on current status
+                const steps = document.querySelectorAll('#status-tracker-modal-content .status-step');
+                steps.forEach((step, index) => {
+                    step.classList.remove('active', 'completed');
+                    if(index === 0 && status === 'Submitted') {
+                        step.classList.add('completed');
+                    } else if(index === 1 && status === 'Submitted') {
+                        step.classList.add('active');
+                    } else if(index === 2 && milestone && milestone.includes('Offer')) {
+                        step.classList.add('completed');
+                        if(milestone.includes('Approved')) {
+                            steps[3].classList.add('active');
+                        }
+                    } else if(index === 4 && milestone === 'Visa Approved') {
+                        step.classList.add('completed');
+                    }
+                });
+                
+                // Update details
+                let details = "Your application is currently under review. We'll update you as soon as there are any changes.";
+                if(milestone) {
+                    details = `Current milestone: ${milestone}. Your counselor is working on your application.`;
+                }
+                document.getElementById('status-tracker-details').textContent = details;
+            }).catch(e => console.error('Error loading status:', e));
+        }
+
+        // --- DOCUMENT CHECKLIST MODAL ---
+        window.openDocumentChecklistModal = function() {
+            const modal = document.getElementById('document-checklist-modal');
+            modal.classList.add('active');
+            loadDocumentChecklistModal();
+        };
+
+        window.closeDocumentChecklistModal = function() {
+            document.getElementById('document-checklist-modal').classList.remove('active');
+        };
+
+        function loadDocumentChecklistModal() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            getDoc(doc(db, "users", auth.currentUser.uid)).then(userDoc => {
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const docs = userData.docs || [];
+                
+                // Map document types as stored in database to checklist IDs
+                const typeMapping = {
+                    'Passport': 'passport',
+                    'Transcript': 'transcript',
+                    'IELTS/PTE': 'ielts',
+                    'Financial': 'financial',
+                    'SOP': 'sop',
+                    'Other': 'other',
+                    'Recommendation': 'recommendation',
+                    'CV': 'cv',
+                    'Resume': 'cv'
+                };
+                
+                const checklist = [
+                    { id: 'passport', label: 'Passport (Front & Back)', required: true, types: ['Passport'] },
+                    { id: 'transcript', label: 'Academic Transcripts', required: true, types: ['Transcript'] },
+                    { id: 'ielts', label: 'IELTS/PTE Score Card', required: true, types: ['IELTS/PTE'] },
+                    { id: 'financial', label: 'Financial Documents', required: true, types: ['Financial'] },
+                    { id: 'sop', label: 'Statement of Purpose', required: false, types: ['SOP'] },
+                    { id: 'recommendation', label: 'Recommendation Letters', required: false, types: ['Recommendation'] },
+                    { id: 'cv', label: 'CV/Resume', required: false, types: ['CV', 'Resume'] },
+                    { id: 'other', label: 'Other Documents', required: false, types: ['Other'] }
+                ];
+                
+                const completed = checklist.filter(item => {
+                    return docs.some(doc => {
+                        // Check if document type matches any of the mapped types for this checklist item
+                        return item.types.some(type => doc.type === type || doc.type?.toLowerCase() === type.toLowerCase());
+                    });
+                }).length;
+                
+                const total = checklist.length;
+                const percentage = Math.round((completed / total) * 100);
+                
+                document.getElementById('checklist-progress-bar-modal').style.width = percentage + '%';
+                document.getElementById('checklist-completed-modal').textContent = completed;
+                document.getElementById('checklist-total-modal').textContent = total;
+                document.getElementById('checklist-percentage-modal').textContent = percentage + '%';
+                
+                const checklistDiv = document.getElementById('document-checklist-modal-content');
+                checklistDiv.innerHTML = checklist.map(item => {
+                    const isCompleted = docs.some(doc => {
+                        // Check if document type matches any of the mapped types for this checklist item
+                        return item.types.some(type => doc.type === type || doc.type?.toLowerCase() === type.toLowerCase());
+                    });
+                    return `
+                        <div class="checklist-item ${isCompleted ? 'completed' : ''}">
+                            <input type="checkbox" class="checklist-checkbox" ${isCompleted ? 'checked' : ''} disabled>
+                            <div style="flex: 1;">
+                                <div style="font-weight: 500;">${item.label} ${item.required ? '<span style="color: var(--danger);">*</span>' : ''}</div>
+                                ${isCompleted ? '<div style="font-size: 0.8rem; color: var(--success); margin-top: 3px;"><i class="fas fa-check"></i> Uploaded</div>' : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }).catch(e => console.error('Error loading checklist:', e));
+        }
+
+        // --- TEST SCORES MODAL ---
+        window.openTestScoresModal = function() {
+            const modal = document.getElementById('test-scores-modal');
+            modal.classList.add('active');
+            loadTestScoresModal();
+        };
+
+        window.closeTestScoresModal = function() {
+            document.getElementById('test-scores-modal').classList.remove('active');
+        };
+
+        function loadTestScoresModal() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            getDoc(doc(db, "users", auth.currentUser.uid)).then(userDoc => {
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const testScores = userData.testScores || [];
+                
+                const list = document.getElementById('test-scores-list-modal');
+                if(testScores.length === 0) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 40px;">No test scores added yet. Click "Add Score" to get started.</p>';
+                    return;
+                }
+                
+                list.innerHTML = testScores.map((score, index) => {
+                    const expiryDate = score.expiryDate ? new Date(score.expiryDate) : null;
+                    const today = new Date();
+                    let expiryClass = 'valid';
+                    let expiryText = 'Valid';
+                    
+                    if(expiryDate) {
+                        const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                        if(daysUntilExpiry < 0) {
+                            expiryClass = 'expired';
+                            expiryText = 'Expired';
+                        } else if(daysUntilExpiry < 30) {
+                            expiryClass = 'expiring';
+                            expiryText = `Expires in ${daysUntilExpiry} days`;
+                        } else {
+                            expiryText = `Expires ${expiryDate.toLocaleDateString()}`;
+                        }
+                    }
+                    
+                    return `
+                        <div class="test-score-card">
+                            <div class="test-score-header">
+                                <div>
+                                    <strong>${score.testType}</strong>
+                                    <div style="font-size: 1.2rem; color: var(--primary); margin-top: 5px;">Score: ${score.score}</div>
+                                </div>
+                                <span class="score-expiry ${expiryClass}">${expiryText}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666; margin-top: 10px;">
+                                Test Date: ${new Date(score.testDate).toLocaleDateString()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }).catch(e => console.error('Error loading test scores:', e));
+        }
+
+        // Update openTestScoreModal to close test scores modal first
+        const originalOpenTestScore = window.openTestScoreModal;
+        window.openTestScoreModal = function() {
+            closeTestScoresModal();
+            if(originalOpenTestScore) originalOpenTestScore();
+        };
+
+        // --- PAYMENTS MODAL ---
+        window.openPaymentsModal = function() {
+            const modal = document.getElementById('payments-modal');
+            modal.classList.add('active');
+            loadPaymentsModal();
+        };
+
+        window.closePaymentsModal = function() {
+            document.getElementById('payments-modal').classList.remove('active');
+        };
+
+        function loadPaymentsModal() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            getDoc(doc(db, "users", auth.currentUser.uid)).then(userDoc => {
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                const payments = userData.payments || [];
+                
+                const list = document.getElementById('payments-list-modal');
+                if(payments.length === 0) {
+                    list.innerHTML = '<p style="color: #999; text-align: center; padding: 40px;">No payments recorded yet. Click "Add Payment" to get started.</p>';
+                    return;
+                }
+                
+                const totalPaid = payments.filter(p => p.status === 'paid').reduce((sum, p) => sum + (p.amount || 0), 0);
+                const totalPending = payments.filter(p => p.status === 'pending').reduce((sum, p) => sum + (p.amount || 0), 0);
+                
+                list.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="background: #d1e7dd; padding: 15px; border-radius: 6px;">
+                            <div style="font-size: 0.85rem; color: #0f5132; margin-bottom: 5px;">Total Paid</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #0f5132;">$${totalPaid.toFixed(2)}</div>
+                        </div>
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 6px;">
+                            <div style="font-size: 0.85rem; color: #856404; margin-bottom: 5px;">Total Pending</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #856404;">$${totalPending.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    ${payments.map(payment => `
+                        <div class="payment-card">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                <div>
+                                    <strong>${payment.type}</strong>
+                                    <div class="payment-amount">$${payment.amount?.toFixed(2) || '0.00'}</div>
+                                </div>
+                                <span class="payment-status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666;">
+                                Date: ${new Date(payment.date).toLocaleDateString()}
+                                ${payment.notes ? `<div style="margin-top: 5px;">${payment.notes}</div>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+            }).catch(e => console.error('Error loading payments:', e));
+        }
+
+        // Update openPaymentModal to close payments modal first
+        const originalOpenPayment = window.openPaymentModal;
+        window.openPaymentModal = function() {
+            closePaymentsModal();
+            if(originalOpenPayment) originalOpenPayment();
+        };
+
+        // Update dashboard stats
+        function updateDashboardStats() {
+            if(!auth || !auth.currentUser || !db) return;
+            
+            getDoc(doc(db, "users", auth.currentUser.uid)).then(userDoc => {
+                if(!userDoc.exists()) return;
+                
+                const userData = userDoc.data();
+                
+                // Update checklist count
+                const docs = userData.docs || [];
+                const checklistTypes = [
+                    { id: 'passport', types: ['Passport'] },
+                    { id: 'transcript', types: ['Transcript'] },
+                    { id: 'ielts', types: ['IELTS/PTE'] },
+                    { id: 'financial', types: ['Financial'] },
+                    { id: 'sop', types: ['SOP'] },
+                    { id: 'recommendation', types: ['Recommendation'] },
+                    { id: 'cv', types: ['CV', 'Resume'] },
+                    { id: 'other', types: ['Other'] }
+                ];
+                const completed = checklistTypes.filter(item => {
+                    return docs.some(doc => {
+                        return item.types.some(type => doc.type === type || doc.type?.toLowerCase() === type.toLowerCase());
+                    });
+                }).length;
+                const checklistEl = document.getElementById('dash-checklist-count');
+                if(checklistEl) checklistEl.textContent = `${completed}/8`;
+                
+                // Update payment status
+                const payments = userData.payments || [];
+                const totalPaid = payments.filter(p => p.status === 'paid').reduce((sum, p) => sum + (p.amount || 0), 0);
+                const paymentEl = document.getElementById('dash-payment-status');
+                if(paymentEl) paymentEl.textContent = `$${totalPaid.toFixed(0)}`;
+                
+                // Update welcome email
+                const emailEl = document.getElementById('student-welcome-email');
+                if(emailEl && userData.email) emailEl.textContent = userData.email;
+                
+                // Show status badge if submitted
+                const statusBadge = document.getElementById('dash-status-badge');
+                if(statusBadge && userData.status === 'Submitted') {
+                    statusBadge.style.display = 'inline-block';
+                }
+            }).catch(e => console.error('Error updating stats:', e));
+        }
+
+        // Load stats when dashboard loads
+        if(auth) {
+            onAuthStateChanged(auth, (user) => {
+                if(user && window.currentRole === 'student') {
+                    setTimeout(() => {
+                        updateDashboardStats();
+                    }, 1000);
                 }
             });
         }
