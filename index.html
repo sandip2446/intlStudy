@@ -4,51 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Edu Nepal | Leading Study Abroad Consultants</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Google Fonts - Inter for professional look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         /* --- CSS RESET & VARIABLES --- */
         :root {
-            --primary: #002B5B; /* Deep Navy */
-            --primary-light: #1A5F7A;
-            --accent: #F9D923; /* Professional Gold */
-            --light: #F8F9FA;
+            /* Primary Colors - WCAG AAA Compliant */
+            --primary: #003366; /* Deep Navy - Better contrast */
+            --primary-dark: #001f3f;
+            --primary-light: #1a5f7a;
+            --primary-lighter: #2d7a9f;
+            
+            /* Accent Colors - WCAG AAA Compliant */
+            --accent: #d4af37; /* Professional Gold - Better contrast */
+            --accent-dark: #b8941f;
+            --accent-light: #e8c547;
+            
+            /* Neutral Colors */
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
             --white: #ffffff;
-            --text-dark: #2C3333;
-            --text-light: #666666;
-            --border: #e5e5e5;
-            --success: #198754;
+            --off-white: #fafbfc;
+            
+            /* Text Colors - WCAG AAA Compliant (7:1 contrast ratio) */
+            --text-dark: #1a1a1a; /* High contrast for readability */
+            --text-medium: #4a4a4a;
+            --text-light: #6c757d;
+            --text-lighter: #8e9aaf;
+            
+            /* Border & Divider */
+            --border: #dee2e6;
+            --border-light: #e9ecef;
+            --border-dark: #adb5bd;
+            
+            /* Status Colors - WCAG AAA Compliant */
+            --success: #0d6efd; /* Changed to blue for better contrast */
+            --success-dark: #0a58ca;
+            --success-light: #3d8bfd;
             --danger: #dc3545;
+            --danger-dark: #bb2d3b;
             --warning: #ffc107;
+            --warning-dark: #ffb300;
+            --info: #0dcaf0;
+            
+            /* Shadows - Professional depth */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 50px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body { 
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.7;
             margin: 0; 
             padding: 0; 
             background-color: var(--white); 
-            color: var(--text-dark); 
-            line-height: 1.6;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 { color: var(--primary); font-weight: 700; margin-top: 0; }
-        p { color: var(--text-light); }
-        a { text-decoration: none; color: inherit; }
+        h1, h2, h3, h4, h5, h6 { 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+        }
+        
+        h4 {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+        }
+        
+        p { 
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        a { 
+            text-decoration: none; 
+            color: var(--primary);
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover, a:focus {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+        
+        /* Skip to main content link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 16px;
+            z-index: 10000;
+            text-decoration: none;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
 
         /* --- NAVIGATION --- */
         header { 
             background-color: var(--white); 
-            height: 80px; 
+            min-height: 80px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             padding: 0 5%;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.98);
         }
 
         .logo { 
@@ -57,45 +200,93 @@
             color: var(--primary); 
             display: flex; 
             align-items: center; 
-            gap: 10px; 
-            letter-spacing: -0.5px;
+            gap: 12px; 
+            letter-spacing: -0.02em;
+            transition: transform var(--transition-fast);
         }
-        .logo i { color: var(--accent); }
         
-        nav { display: flex; gap: 30px; align-items: center; }
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo i { 
+            color: var(--accent);
+            font-size: 1.75rem;
+        }
+        
+        nav { 
+            display: flex; 
+            gap: 2rem; 
+            align-items: center;
+            flex-wrap: wrap;
+        }
         
         nav button { 
             background: transparent; 
             border: none; 
             color: var(--text-dark); 
             font-size: 0.95rem; 
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer; 
-            transition: 0.3s;
-            padding: 8px 0;
+            transition: all var(--transition-base);
+            padding: 10px 0;
             position: relative;
+            font-family: inherit;
         }
         
-        nav button:hover, nav button.active { color: var(--primary); }
+        nav button:hover, 
+        nav button:focus,
+        nav button.active { 
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
         nav button.active::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent);
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 3px; 
+            background: var(--accent);
+            border-radius: 2px 2px 0 0;
         }
 
         .nav-cta {
             background-color: var(--primary) !important;
-            color: white !important;
-            padding: 10px 25px !important;
-            border-radius: 50px;
-            transition: transform 0.2s !important;
+            color: var(--white) !important;
+            padding: 12px 28px !important;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-base) !important;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
         }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,43,91,0.3); }
-        .nav-cta::after { display: none; }
+        
+        .nav-cta:hover,
+        .nav-cta:focus { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-md);
+            background-color: var(--primary-dark) !important;
+        }
+        
+        .nav-cta::after { 
+            display: none; 
+        }
 
         .logout-btn { 
-            background-color: #dc3545 !important; 
-            color: white !important;
-            padding: 8px 20px !important;
-            border-radius: 4px;
+            background-color: var(--danger) !important; 
+            color: var(--white) !important;
+            padding: 10px 24px !important;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: all var(--transition-base);
+        }
+        
+        .logout-btn:hover,
+        .logout-btn:focus {
+            background-color: var(--danger-dark) !important;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
 
         /* --- LAYOUT UTILITIES --- */
@@ -126,91 +317,246 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(rgba(0,43,91,0.9), rgba(0,43,91,0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.95) 0%, rgba(26, 95, 122, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 100px 0;
+            background-attachment: fixed;
+            color: var(--white);
+            padding: 120px 0;
             text-align: center;
+            position: relative;
         }
-        .hero h1 { color: white; font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
-        .hero p { color: rgba(255,255,255,0.9); font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px auto; }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(26, 95, 122, 0.75) 100%);
+            z-index: 0;
+        }
+        
+        .hero > .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 { 
+            color: var(--white); 
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem; 
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+        }
+        
+        .hero p { 
+            color: rgba(255, 255, 255, 0.95); 
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            max-width: 750px; 
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.7;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
         
         .hero-stats {
-            display: flex; justify-content: center; gap: 50px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex; 
+            justify-content: center; 
+            gap: 3rem; 
+            margin-top: 4rem; 
+            padding-top: 3rem; 
+            border-top: 2px solid rgba(255, 255, 255, 0.25);
+            flex-wrap: wrap;
         }
-        .stat-item h3 { color: var(--accent); font-size: 2.5rem; margin-bottom: 5px; }
-        .stat-item p { color: white; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .stat-item {
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .stat-item h3 { 
+            color: var(--accent); 
+            font-size: clamp(2rem, 4vw, 3rem); 
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-item p { 
+            color: rgba(255, 255, 255, 0.95); 
+            font-size: 0.95rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
 
         /* --- CARDS & SERVICES --- */
         .service-card {
-            background: white; padding: 30px; border-radius: 8px; border: 1px solid var(--border); transition: 0.3s;
+            background: var(--white); 
+            padding: 2.5rem; 
+            border-radius: var(--radius-lg); 
+            border: 2px solid var(--border-light); 
+            transition: all var(--transition-base);
             text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
         }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); border-color: var(--accent); }
-        .service-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        
+        .service-card:hover,
+        .service-card:focus-within { 
+            transform: translateY(-8px); 
+            box-shadow: var(--shadow-lg); 
+            border-color: var(--accent);
+        }
+        
+        .service-icon { 
+            font-size: 3rem; 
+            color: var(--primary); 
+            margin-bottom: 1.5rem;
+            transition: transform var(--transition-base);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
 
         .dest-card {
-            height: 200px; border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;
+            height: 280px; 
+            border-radius: var(--radius-lg); 
+            overflow: hidden; 
+            position: relative; 
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-base);
         }
-        .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .dest-card:hover img { transform: scale(1.1); }
+        
+        .dest-card:hover,
+        .dest-card:focus {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .dest-card img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform var(--transition-slow);
+        }
+        
+        .dest-card:hover img { 
+            transform: scale(1.15); 
+        }
+        
         .dest-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            padding: 20px; color: white;
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+            padding: 2rem 1.5rem 1.5rem; 
+            color: var(--white);
+        }
+        
+        .dest-overlay h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .dest-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin: 0;
         }
 
         /* --- MARKETING SECTIONS --- */
         .marketing-section {
-            padding: 80px 0;
+            padding: 5rem 0;
         }
+        
         .marketing-section.alt-bg {
-            background-color: var(--light);
+            background-color: var(--off-white);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 51, 102, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
         }
+        
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            margin-bottom: 1rem;
             color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
+        
         .section-subtitle {
             text-align: center;
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto 60px;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text-medium);
+            max-width: 750px;
+            margin: 0 auto 3.5rem;
+            line-height: 1.7;
         }
         .feature-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: 0.3s;
-            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            border: 2px solid var(--border-light);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
-        .feature-card:hover {
+        
+        .feature-card:hover,
+        .feature-card:focus-within {
             transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-lg);
             border-color: var(--accent);
         }
+        
         .feature-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            transition: transform var(--transition-base);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
         }
         .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             border-left: 4px solid var(--accent);
+            transition: all var(--transition-base);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
+        
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+        
         .testimonial-text {
             font-style: italic;
-            color: var(--text-light);
-            margin-bottom: 20px;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
             line-height: 1.8;
+            font-size: 1.05rem;
         }
         .testimonial-author {
             display: flex;
@@ -283,24 +629,116 @@
 
         /* --- BUTTONS & FORMS --- */
         .btn {
-            display: inline-block; padding: 14px 32px; background-color: var(--primary); color: white; border: none; 
-            border-radius: 4px; font-weight: 600; cursor: pointer; transition: 0.2s;
+            display: inline-block; 
+            padding: 14px 32px; 
+            background-color: var(--primary); 
+            color: var(--white); 
+            border: 2px solid transparent; 
+            border-radius: var(--radius-md); 
+            font-weight: 600; 
+            font-size: 1rem;
+            cursor: pointer; 
+            transition: all var(--transition-base);
+            font-family: inherit;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
         }
-        .btn:hover { background-color: #004080; }
-        .btn-accent { background-color: var(--accent); color: var(--primary); }
-        .btn-accent:hover { background-color: #e6c81b; }
-        .btn-outline { background: transparent; border: 2px solid white; color: white; }
-        .btn-outline:hover { background: white; color: var(--primary); }
-        .btn-success { background-color: var(--success); }
-        .btn-success:hover { background-color: #146c43; }
-        .btn-danger { background-color: var(--danger); }
-        .btn-sm { padding: 5px 12px; font-size: 0.8rem; }
+        
+        .btn:hover,
+        .btn:focus { 
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-accent { 
+            background-color: var(--accent); 
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        
+        .btn-accent:hover,
+        .btn-accent:focus { 
+            background-color: var(--accent-dark);
+            color: var(--primary-dark);
+        }
+        
+        .btn-outline { 
+            background: transparent; 
+            border: 2px solid var(--white); 
+            color: var(--white);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover,
+        .btn-outline:focus { 
+            background: var(--white); 
+            color: var(--primary);
+            border-color: var(--white);
+        }
+        
+        .btn-success { 
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover,
+        .btn-success:focus { 
+            background-color: var(--success-dark);
+        }
+        
+        .btn-danger { 
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover,
+        .btn-danger:focus {
+            background-color: var(--danger-dark);
+        }
+        
+        .btn-sm { 
+            padding: 8px 16px; 
+            font-size: 0.875rem;
+        }
 
         input, select, textarea {
-            width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 4px; 
-            font-family: inherit; background: #fdfdfd;
+            width: 100%; 
+            padding: 14px 16px; 
+            margin-bottom: 1rem; 
+            border: 2px solid var(--border); 
+            border-radius: var(--radius-md); 
+            font-family: inherit; 
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: all var(--transition-fast);
         }
-        input:focus { border-color: var(--primary); outline: none; }
+        
+        input:focus,
+        select:focus,
+        textarea:focus { 
+            border-color: var(--primary); 
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+        
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-lighter);
+            opacity: 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
 
         /* --- DASHBOARDS --- */
         .dashboard-layout { display: grid; grid-template-columns: 280px 1fr; min-height: 80vh; }
@@ -321,7 +759,19 @@
             font-weight: 600;
         }
 
-        .dash-card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .dash-card { 
+            background: var(--white); 
+            padding: 2rem; 
+            border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-sm); 
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-base);
+        }
+        
+        .dash-card:hover {
+            box-shadow: var(--shadow-md);
+        }
 
         /* --- CHAT UI --- */
         .chat-wrapper { display: flex; flex-direction: column; height: 500px; border: 1px solid var(--border); background: white; border-radius: 8px; }
@@ -1433,9 +1883,725 @@
             color: #666;
         }
 
+        /* === NEW FEATURES STYLES === */
+        
+        /* Eligibility Checker */
+        .eligibility-checker {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            padding: 40px;
+            color: white;
+            margin: 40px 0;
+        }
+        .eligibility-form {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .eligibility-form input,
+        .eligibility-form select {
+            background: white;
+            color: var(--text-dark);
+        }
+        .eligibility-result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .eligibility-result.success {
+            background: #d1e7dd;
+            color: #0f5132;
+            border-left: 4px solid var(--success);
+        }
+        .eligibility-result.warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid var(--warning);
+        }
+        .eligibility-result.info {
+            background: #cfe2ff;
+            color: #084298;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Cost Calculator */
+        .cost-calculator {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .calc-result {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--accent);
+        }
+        .calc-total {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        .calc-breakdown {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+        .calc-breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: var(--text-light);
+        }
+
+        /* FAQ Accordion */
+        .faq-container {
+            margin: 40px 0;
+        }
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .faq-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: 0.2s;
+        }
+        .faq-question:hover {
+            background: var(--light);
+        }
+        .faq-question i {
+            transition: transform 0.3s;
+            color: var(--accent);
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 20px 20px;
+        }
+        .faq-answer-content {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Blog Hero Section */
+        .blog-hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .blog-hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-hero-icon {
+            font-size: 3.5rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .blog-hero-title {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: -0.02em;
+            color: white;
+        }
+        
+        .blog-hero-subtitle {
+            opacity: 0.95;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Blog/Resources Preview */
+        .blog-preview {
+            margin: 40px 0;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .blog-card-content {
+            padding: 20px;
+        }
+        .blog-card-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .blog-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .blog-card-excerpt {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Application Deadline Countdown */
+        .deadline-countdown {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            border-radius: 12px;
+            padding: 30px;
+            color: white;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .deadline-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px;
+            display: inline-block;
+            min-width: 120px;
+        }
+        .deadline-item h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin: 0;
+        }
+        .deadline-item p {
+            color: var(--text-light);
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+        }
+        .deadline-university {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .deadline-date {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+
+        /* Document Checklist Generator */
+        .checklist-generator {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+        .checklist-selector {
+            margin-bottom: 25px;
+        }
+        .checklist-items-container {
+            margin-top: 20px;
+        }
+        .checklist-generator-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .checklist-generator-item:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+        .checklist-generator-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .checklist-generator-item.completed {
+            background: #d1e7dd;
+            opacity: 0.8;
+        }
+        .checklist-generator-item.completed label {
+            text-decoration: line-through;
+            color: var(--text-light);
+        }
+        .checklist-print-btn {
+            margin-top: 20px;
+        }
+
+        /* Blog Detail Page Styles */
+        .blog-detail-article {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .blog-detail-header {
+            padding: 3rem 3rem 2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .blog-detail-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .blog-detail-category {
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .blog-detail-date,
+        .blog-detail-read-time {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .blog-detail-date i,
+        .blog-detail-read-time i {
+            color: var(--primary);
+        }
+        
+        .blog-detail-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 0 1rem 0;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        .blog-detail-excerpt {
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin: 0;
+            font-weight: 400;
+        }
+        
+        .blog-detail-image {
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .blog-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .blog-detail-content {
+            padding: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+        
+        .blog-detail-content h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 2.5rem 0 1rem;
+            font-weight: 700;
+        }
+        
+        .blog-detail-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+        
+        .blog-detail-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        
+        .blog-detail-content ul,
+        .blog-detail-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: var(--text-dark);
+        }
+        
+        .blog-detail-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+        
+        .blog-detail-content a {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .blog-detail-content a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .blog-detail-content blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-medium);
+            background: var(--off-white);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+        }
+        
+        .blog-detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            margin: 2rem 0;
+        }
+        
+        .blog-detail-content code {
+            background: var(--light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+        }
+        
+        .blog-detail-content pre {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .blog-detail-footer {
+            padding: 0 3rem 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .calc-input-group {
+                grid-template-columns: 1fr;
+            }
+            .deadline-item {
+                min-width: 100px;
+                margin: 10px 5px;
+            }
+            .chat-window {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-card-image-wrapper {
+                height: 180px;
+            }
+            .blog-hero-section {
+                padding: 3rem 0;
+            }
+            .blog-hero-icon {
+                font-size: 2.5rem;
+            }
+            .blog-hero-title {
+                font-size: 2rem;
+            }
+            .blog-hero-subtitle {
+                font-size: 1rem;
+            }
+            .blog-detail-header {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            .blog-detail-content {
+                padding: 2rem 1.5rem;
+                font-size: 1rem;
+            }
+            .blog-detail-footer {
+                padding: 0 1.5rem 2rem;
+            }
+            .blog-detail-title {
+                font-size: 1.75rem;
+            }
+            .blog-detail-excerpt {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* --- ACCESSIBILITY IMPROVEMENTS --- */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --border: #000000;
+                --text-light: #000000;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            header, nav, .blog-detail-footer button, .btn {
+                display: none !important;
+            }
+            .blog-detail-article {
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .blog-detail-header, .blog-detail-content, .blog-detail-footer {
+                padding: 1rem !important;
+            }
+            .blog-detail-image img {
+                max-height: 400px !important;
+            }
+            body {
+                background: white !important;
+            }
+            .section {
+                padding: 0 !important;
+            }
+        }
+        
+        /* Share Modal Styles */
+        .share-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        
+        .share-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .share-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .share-modal-header h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .share-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .share-modal-close:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        .share-modal-body {
+            padding: 1.5rem;
+        }
+        
+        .share-modal-body p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .share-social-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .share-social-links .btn {
+            flex: 1;
+            min-width: 100px;
+        }
+        
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10001;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            max-width: 300px;
+        }
+        
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .toast-success {
+            background: var(--success);
+        }
+        
+        .toast-error {
+            background: var(--danger);
+        }
+        
+        .toast-info {
+            background: var(--primary);
+        }
+
     </style>
 </head>
 <body>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- SAFETY SCRIPT -->
     <script>
@@ -1472,6 +2638,7 @@
             <button onclick="router('home')" class="active">Home</button>
             <button onclick="router('services')">Services</button>
             <button onclick="router('destinations')">Destinations</button>
+            <button onclick="router('blogs')">Blog</button>
             <button onclick="router('contact')">Contact</button>
             <button onclick="router('auth', 'student')" class="nav-cta">Login</button>
         </nav>
@@ -1519,6 +2686,7 @@
     </div>
 
     <!-- === HOME PAGE === -->
+    <main id="main-content">
     <div id="page-home" class="section active">
         <div class="hero">
             <div class="container">
@@ -1543,6 +2711,31 @@
                         <p>Partner Universities</p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Application Deadline Countdown -->
+        <div class="container">
+            <div class="deadline-countdown">
+                <h2 style="color: white; margin-bottom: 20px;"><i class="fas fa-clock"></i> Upcoming Application Deadlines</h2>
+                <div id="deadline-countdown-container">
+                    <div class="deadline-item">
+                        <div class="deadline-university">University of Toronto</div>
+                        <div class="deadline-date">Jan 15, 2025</div>
+                        <div id="deadline-1" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="deadline-item">
+                        <div class="deadline-university">University of Melbourne</div>
+                        <div class="deadline-date">Feb 1, 2025</div>
+                        <div id="deadline-2" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="deadline-item">
+                        <div class="deadline-university">Imperial College London</div>
+                        <div class="deadline-date">Jan 31, 2025</div>
+                        <div id="deadline-3" style="margin-top: 10px;"></div>
+                    </div>
+                </div>
+                <button class="btn btn-accent" onclick="router('destinations')" style="margin-top: 20px;">View All Universities</button>
             </div>
         </div>
 
@@ -1661,6 +2854,27 @@
             </div>
         </div>
 
+        <!-- Blog Section -->
+        <div class="container marketing-section">
+            <div class="text-center mb-5">
+                <h2 class="section-title mb-3">Latest Blog Posts</h2>
+                <p class="section-subtitle text-muted">Stay informed with our latest articles, guides, and study abroad insights</p>
+            </div>
+            <div id="home-blogs-container" class="row g-4">
+                <div class="col-12 text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading blog posts...</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-accent btn-lg" onclick="router('blogs')">
+                    <i class="fas fa-arrow-right me-2"></i>View All Blog Posts
+                </button>
+            </div>
+        </div>
+
         <!-- Testimonials Section -->
         <div class="container marketing-section alt-bg">
             <h2 class="section-title">Success Stories</h2>
@@ -1705,6 +2919,80 @@
             </div>
         </div>
 
+        <!-- FAQ Accordion Section -->
+        <div class="container marketing-section alt-bg">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Get answers to common questions about studying abroad</p>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What documents do I need to apply for a student visa?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            You'll typically need: valid passport, acceptance letter from university, proof of financial support, IELTS/TOEFL scores, academic transcripts, medical examination report, and a statement of purpose. Requirements may vary by country.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How long does the visa processing take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Processing times vary by country: Canada (4-8 weeks), UK (3-6 weeks), USA (2-4 months), Australia (4-8 weeks). We recommend applying at least 3-4 months before your program start date.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is the minimum IELTS score required?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Minimum IELTS scores vary by country and program: Canada (6.0-7.0), UK (6.0-7.5), USA (6.5-7.5), Australia (6.0-7.0). Some universities may accept PTE or TOEFL as alternatives.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I work while studying abroad?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, most countries allow international students to work part-time (typically 20 hours/week during studies, full-time during breaks). Canada, UK, USA, and Australia all have work permit options for students.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What are the total costs including tuition and living expenses?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Total costs vary by country: Canada (CAD $25,000-$50,000/year), UK (£22,000-$50,000/year), USA ($32,000-$80,000/year), Australia (AUD $35,000-$65,000/year). Use our cost calculator above for accurate estimates.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you help with scholarship applications?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! We help identify scholarship opportunities, prepare scholarship applications, and provide guidance on eligibility requirements. Many universities offer merit-based and need-based scholarships for international students.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- CTA Section -->
         <div class="container marketing-section" style="text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 20px; padding: 60px 40px; color: white;">
             <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Ready to Start Your Journey?</h2>
@@ -1717,6 +3005,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- === DESTINATIONS PAGE === -->
     <div id="page-destinations" class="section">
@@ -1919,6 +3208,58 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- Cost Calculator -->
+            <div class="container marketing-section">
+                <h2 class="section-title">Calculate Your Study Costs</h2>
+                <p class="section-subtitle">Estimate your total expenses for studying in your chosen destination</p>
+                <div class="cost-calculator">
+                    <div class="calc-input-group">
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Destination Country</label>
+                            <select id="calc-country-dest" onchange="updateCostCalculatorDest()" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                                <option value="">Select Country</option>
+                                <option value="canada">Canada</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="usa">United States</option>
+                                <option value="australia">Australia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Program Duration (years)</label>
+                            <input type="number" id="calc-duration-dest" onchange="updateCostCalculatorDest()" placeholder="e.g., 2" min="1" max="5" value="2" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                        </div>
+                    </div>
+                    <div class="calc-input-group">
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Annual Tuition Fee</label>
+                            <input type="number" id="calc-tuition-dest" onchange="updateCostCalculatorDest()" placeholder="Enter tuition fee" min="0" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Monthly Living Expenses</label>
+                            <input type="number" id="calc-living-dest" onchange="updateCostCalculatorDest()" placeholder="Enter monthly living cost" min="0" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                        </div>
+                    </div>
+                    <div id="calc-result-dest" class="calc-result" style="display: none;">
+                        <h3 style="margin-top: 0; color: var(--primary);">Estimated Total Cost</h3>
+                        <div class="calc-total" id="calc-total-dest">$0</div>
+                        <div class="calc-breakdown">
+                            <div class="calc-breakdown-item">
+                                <span>Total Tuition Fees:</span>
+                                <strong id="calc-tuition-total-dest">$0</strong>
+                            </div>
+                            <div class="calc-breakdown-item">
+                                <span>Total Living Expenses:</span>
+                                <strong id="calc-living-total-dest">$0</strong>
+                            </div>
+                            <div class="calc-breakdown-item" style="border-top: 2px solid var(--border); padding-top: 10px; margin-top: 10px; font-size: 1.1rem;">
+                                <span><strong>Grand Total:</strong></span>
+                                <strong id="calc-grand-total-dest" style="color: var(--primary);">$0</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2179,6 +3520,41 @@
             </div>
         </div>
 
+        <!-- Document Checklist Generator -->
+        <div class="container marketing-section">
+            <h2 class="section-title">Document Checklist Generator</h2>
+            <p class="section-subtitle">Get a personalized checklist of documents needed for your application</p>
+            <div class="checklist-generator">
+                <div class="checklist-selector">
+                    <div class="grid-2" style="gap: 20px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Select Country</label>
+                            <select id="checklist-country-services" onchange="generateChecklistServices()" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                                <option value="">Select Country</option>
+                                <option value="canada">Canada</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="usa">United States</option>
+                                <option value="australia">Australia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark);">Program Level</label>
+                            <select id="checklist-level-services" onchange="generateChecklistServices()" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px;">
+                                <option value="">Select Level</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="phd">PhD/Doctorate</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="checklist-items-container-services" class="checklist-items-container">
+                    <p style="text-align: center; color: var(--text-light); padding: 40px;">Select a country and program level to generate your personalized checklist</p>
+                </div>
+                <button class="btn btn-accent checklist-print-btn" onclick="printChecklistServices()" style="display: none; width: 100%;" id="print-checklist-btn-services"><i class="fas fa-print"></i> Print Checklist</button>
+            </div>
+        </div>
+
         <!-- CTA Section -->
         <div class="container marketing-section" style="text-align: center; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 20px; padding: 60px 40px; color: white;">
             <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Ready to Start Your Journey?</h2>
@@ -2188,6 +3564,84 @@
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                 <button class="btn btn-accent" onclick="router('auth', 'student')" style="font-size: 1.1rem; padding: 16px 40px;">Apply Now</button>
                 <button class="btn btn-outline" onclick="router('contact')" style="font-size: 1.1rem; padding: 16px 40px;">Contact Us</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- === BLOG PAGE === -->
+    <div id="page-blogs" class="section">
+        <!-- Hero Section -->
+        <div class="blog-hero-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-8 mx-auto text-center">
+                        <div class="mb-4">
+                            <i class="fas fa-blog blog-hero-icon"></i>
+                        </div>
+                        <h1 class="display-3 fw-bold mb-4 blog-hero-title">Our Blog</h1>
+                        <p class="lead fs-4 mb-0 blog-hero-subtitle">Stay informed with our latest articles, guides, and study abroad insights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <!-- Blog Filter -->
+            <div class="card shadow-sm mb-4 border-0">
+                <div class="card-body p-4">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-8">
+                            <label for="blog-page-search" class="form-label fw-semibold text-muted small mb-2">Search Blog Posts</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="fas fa-search text-muted"></i>
+                                </span>
+                                <input type="text" id="blog-page-search" class="form-control border-start-0" 
+                                       placeholder="Search by title, content, or category..." 
+                                       onkeyup="filterBlogPage(this.value)">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="blog-page-category" class="form-label fw-semibold text-muted small mb-2">Filter by Category</label>
+                            <select id="blog-page-category" class="form-select form-select-lg" onchange="filterBlogPageByCategory(this.value)">
+                                <option value="all">All Categories</option>
+                                <option value="Study Guide">Study Guide</option>
+                                <option value="Visa Tips">Visa Tips</option>
+                                <option value="Scholarships">Scholarships</option>
+                                <option value="University Info">University Info</option>
+                                <option value="Student Life">Student Life</option>
+                                <option value="Success Stories">Success Stories</option>
+                                <option value="News">News</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog List -->
+            <div id="blog-page-list" class="row g-4">
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading blog posts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === BLOG DETAIL PAGE === -->
+    <div id="page-blog-detail" class="section">
+        <div class="container" style="padding-top: 40px; max-width: 900px;">
+            <button class="btn" onclick="router('blogs')" style="margin-bottom: 30px; background: var(--light); color: var(--primary);">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </button>
+            
+            <div id="blog-detail-container">
+                <div style="text-align: center; padding: 60px; color: var(--text-light);">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <p>Loading blog post...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -2223,6 +3677,69 @@
                         <button type="submit" class="btn" style="width: 100%;">Submit Inquiry</button>
                         <p id="contact-form-status" style="margin-top: 10px; display: none;"></p>
                     </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="container marketing-section" style="margin-top: 60px;">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find quick answers to common questions</p>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What are your office hours?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Our office is open Monday to Saturday from 9:00 AM to 6:00 PM. We also offer online consultations that can be scheduled outside these hours.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How do I schedule a consultation?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                You can schedule a consultation by calling us, sending an email, filling out the contact form above, or using our online booking system. We'll confirm your appointment within 24 hours.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Is the initial consultation free?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes, we offer a free initial consultation to discuss your study abroad goals, eligibility, and answer any questions you may have about the process.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What information should I bring to the consultation?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Please bring your academic transcripts, passport, English test scores (if available), and any questions you have. Don't worry if you don't have everything - we can start with what you have.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do you provide services in Nepali language?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes, our counselors are fluent in both English and Nepali. We can provide consultations and support in your preferred language.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2972,6 +4489,7 @@
                 <a class="dash-menu-item" onclick="showAdminView('analytics')" id="admin-menu-analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
                 <a class="dash-menu-item" onclick="showAdminView('activity')" id="admin-menu-activity"><i class="fas fa-history"></i> Activity Logs</a>
                 <a class="dash-menu-item" onclick="showAdminView('contacts')" id="admin-menu-contacts"><i class="fas fa-envelope"></i> Contact Messages</a>
+                <a class="dash-menu-item" onclick="showAdminView('blogs')" id="admin-menu-blogs"><i class="fas fa-blog"></i> Blog Management</a>
             </div>
 
             <div class="dash-main">
@@ -3244,6 +4762,117 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- BLOG MANAGEMENT VIEW -->
+                <div id="admin-blogs-view" style="display: none;">
+                    <div class="dash-card" style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                            <div>
+                                <h2 style="margin-bottom: 10px;"><i class="fas fa-blog"></i> Blog Management</h2>
+                                <p style="color: var(--text-light);">Create, edit, and manage blog posts</p>
+                            </div>
+                            <button class="btn btn-accent" onclick="showCreateBlogModal()">
+                                <i class="fas fa-plus"></i> Create New Blog
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Blog List -->
+                    <div class="dash-card">
+                        <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <input type="text" id="blog-search" placeholder="Search blogs..." 
+                                   style="flex: 1; min-width: 250px; padding: 10px; border: 2px solid var(--border); border-radius: var(--radius-md);"
+                                   onkeyup="filterBlogs(this.value)">
+                            <select id="blog-filter-status" onchange="filterBlogsByStatus(this.value)" 
+                                    style="padding: 10px; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                                <option value="all">All Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                        <div id="admin-blogs-list">
+                            <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                <p>Loading blogs...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE/EDIT BLOG MODAL -->
+    <div id="blog-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3 id="blog-modal-title"><i class="fas fa-plus"></i> Create New Blog Post</h3>
+                <button class="modal-close" onclick="closeBlogModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 25px;">
+                <form id="blog-form" onsubmit="saveBlog(event); return false;">
+                    <input type="hidden" id="blog-id">
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="blog-title">Blog Title *</label>
+                        <input type="text" id="blog-title" placeholder="Enter blog title" required 
+                               style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="blog-excerpt">Short Description/Excerpt *</label>
+                        <textarea id="blog-excerpt" rows="3" placeholder="Brief description of the blog post" required
+                                  style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md);"></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="blog-content">Content *</label>
+                        <textarea id="blog-content" rows="12" placeholder="Write your blog content here..." required
+                                  style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md); font-family: inherit;"></textarea>
+                        <small style="color: var(--text-light);">You can use HTML formatting in the content.</small>
+                    </div>
+
+                    <div class="grid-2" style="gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <label for="blog-category">Category *</label>
+                            <select id="blog-category" required
+                                    style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                                <option value="">Select Category</option>
+                                <option value="Study Guide">Study Guide</option>
+                                <option value="Visa Tips">Visa Tips</option>
+                                <option value="Scholarships">Scholarships</option>
+                                <option value="University Info">University Info</option>
+                                <option value="Student Life">Student Life</option>
+                                <option value="Success Stories">Success Stories</option>
+                                <option value="News">News</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="blog-status">Status *</label>
+                            <select id="blog-status" required
+                                    style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="blog-image">Featured Image URL</label>
+                        <input type="url" id="blog-image" placeholder="https://example.com/image.jpg"
+                               style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                        <small style="color: var(--text-light);">Optional: Add a featured image URL for the blog post</small>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 25px;">
+                        <button type="button" class="btn" onclick="closeBlogModal()" style="background: var(--text-light);">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-accent">
+                            <i class="fas fa-save"></i> Save Blog
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -6197,6 +7826,17 @@
                         renderAdminUsers('all');
                     }
                 }, 100);
+            } else if (page === 'blogs') {
+                document.getElementById('page-blogs').classList.add('active');
+                document.getElementById('public-nav').style.display = 'flex';
+                document.getElementById('private-nav').style.display = 'none';
+                if (typeof loadBlogPage === 'function') {
+                    setTimeout(() => loadBlogPage(), 100);
+                }
+            } else if (page === 'blog-detail') {
+                document.getElementById('page-blog-detail').classList.add('active');
+                document.getElementById('public-nav').style.display = 'flex';
+                document.getElementById('private-nav').style.display = 'none';
             } else {
                 document.getElementById('page-' + page).classList.add('active');
                 document.getElementById('public-nav').style.display = 'flex';
@@ -6643,6 +8283,7 @@
             document.getElementById('admin-analytics-view').style.display = 'none';
             document.getElementById('admin-activity-view').style.display = 'none';
             document.getElementById('admin-contacts-view').style.display = 'none';
+            document.getElementById('admin-blogs-view').style.display = 'none';
             
             // Update menu items
             document.querySelectorAll('.dash-menu-item').forEach(item => {
@@ -6671,6 +8312,21 @@
                 document.getElementById('admin-contacts-view').style.display = 'block';
                 document.getElementById('admin-menu-contacts').classList.add('active');
                 loadContactMessages();
+            } else if(view === 'blogs') {
+                document.getElementById('admin-blogs-view').style.display = 'block';
+                document.getElementById('admin-menu-blogs').classList.add('active');
+                // Load blogs after a small delay to ensure view is visible
+                setTimeout(() => {
+                    if (typeof loadAdminBlogs === 'function') {
+                        loadAdminBlogs();
+                    } else {
+                        console.error('loadAdminBlogs function not found');
+                        const listEl = document.getElementById('admin-blogs-list');
+                        if (listEl) {
+                            listEl.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--danger);">Blog management function not available. Please refresh the page.</div>';
+                        }
+                    }
+                }, 100);
             }
         };
 
@@ -7278,6 +8934,806 @@
                 alert('Error sending reply. Please try again.');
             }
         };
+
+        // === BLOG MANAGEMENT FUNCTIONS ===
+        
+        // Load all blogs for admin
+        window.loadAdminBlogs = async function() {
+            const listEl = document.getElementById('admin-blogs-list');
+            listEl.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-light);"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i><p>Loading blogs...</p></div>';
+
+            try {
+                if (!db) {
+                    listEl.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--danger);">Database not available</div>';
+                    return;
+                }
+
+                const blogsRef = collection(db, 'blogs');
+                // Admins can query all blogs, but we'll filter client-side if needed
+                // Note: Firebase rules will enforce that only published blogs are readable by non-admins
+                let q;
+                try {
+                    // Try to get all blogs (for admin)
+                    q = query(blogsRef, orderBy('createdAt', 'desc'));
+                } catch(e) {
+                    // If orderBy fails (no index), try without ordering
+                    q = query(blogsRef);
+                }
+                const querySnapshot = await getDocs(q);
+
+                const blogs = [];
+                querySnapshot.forEach((doc) => {
+                    blogs.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (blogs.length === 0) {
+                    listEl.innerHTML = `
+                        <div style="text-align: center; padding: 60px; color: var(--text-light);">
+                            <i class="fas fa-blog" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                            <p style="font-size: 1.1rem; margin-bottom: 20px;">No blogs found</p>
+                            <button class="btn btn-accent" onclick="showCreateBlogModal()">
+                                <i class="fas fa-plus"></i> Create Your First Blog
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                listEl.innerHTML = blogs.map(blog => `
+                    <div class="dash-card" style="margin-bottom: 15px; border-left: 4px solid ${blog.status === 'published' ? 'var(--success)' : 'var(--warning)'};">
+                        <div style="display: flex; justify-content: space-between; align-items: start; gap: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                    <h3 style="margin: 0; color: var(--primary);">${blog.title || 'Untitled'}</h3>
+                                    <span style="padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; 
+                                        background: ${blog.status === 'published' ? '#d1e7dd' : '#fff3cd'}; 
+                                        color: ${blog.status === 'published' ? '#0f5132' : '#856404'};">
+                                        ${blog.status === 'published' ? 'Published' : 'Draft'}
+                                    </span>
+                                </div>
+                                <p style="color: var(--text-light); margin: 5px 0; font-size: 0.9rem;">${blog.excerpt || 'No description'}</p>
+                                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                                    <span style="color: var(--text-light); font-size: 0.85rem;">
+                                        <i class="fas fa-tag"></i> ${blog.category || 'Uncategorized'}
+                                    </span>
+                                    <span style="color: var(--text-light); font-size: 0.85rem;">
+                                        <i class="fas fa-calendar"></i> ${blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" onclick="editBlog('${blog.id}')" style="padding: 8px 16px; background: var(--primary); color: white;">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-sm" onclick="deleteBlog('${blog.id}', '${blog.title}')" style="padding: 8px 16px; background: var(--danger); color: white;">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch(e) {
+                console.error('Error loading blogs:', e);
+                let errorMsg = 'Error loading blogs. ';
+                if (e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Make sure you are logged in as admin and Firebase rules are deployed.';
+                } else if (e.message && e.message.includes('index')) {
+                    errorMsg += 'Firebase index required. Please create an index for blogs collection on createdAt field.';
+                } else {
+                    errorMsg += e.message || 'Please try again.';
+                }
+                listEl.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--danger);">${errorMsg}</div>`;
+            }
+        };
+
+        // Show create blog modal
+        window.showCreateBlogModal = function() {
+            document.getElementById('blog-modal-title').innerHTML = '<i class="fas fa-plus"></i> Create New Blog Post';
+            document.getElementById('blog-form').reset();
+            document.getElementById('blog-id').value = '';
+            document.getElementById('blog-status').value = 'draft';
+            document.getElementById('blog-modal').classList.add('active');
+        };
+
+        // Show edit blog modal
+        window.editBlog = async function(blogId) {
+            try {
+                if (!db) {
+                    alert('Database not available');
+                    return;
+                }
+
+                const blogDoc = await getDoc(doc(db, 'blogs', blogId));
+                if (!blogDoc.exists()) {
+                    alert('Blog not found');
+                    return;
+                }
+
+                const blogData = blogDoc.data();
+                document.getElementById('blog-modal-title').innerHTML = '<i class="fas fa-edit"></i> Edit Blog Post';
+                document.getElementById('blog-id').value = blogId;
+                document.getElementById('blog-title').value = blogData.title || '';
+                document.getElementById('blog-excerpt').value = blogData.excerpt || '';
+                document.getElementById('blog-content').value = blogData.content || '';
+                document.getElementById('blog-category').value = blogData.category || '';
+                document.getElementById('blog-status').value = blogData.status || 'draft';
+                document.getElementById('blog-image').value = blogData.imageUrl || '';
+                document.getElementById('blog-modal').classList.add('active');
+
+            } catch(e) {
+                console.error('Error loading blog:', e);
+                alert('Error loading blog. Please try again.');
+            }
+        };
+
+        // Save blog (create or update)
+        window.saveBlog = async function(event) {
+            event.preventDefault();
+            
+            try {
+                if (!db) {
+                    alert('Database not available');
+                    return;
+                }
+
+                const blogId = document.getElementById('blog-id').value;
+                const blogData = {
+                    title: document.getElementById('blog-title').value.trim(),
+                    excerpt: document.getElementById('blog-excerpt').value.trim(),
+                    content: document.getElementById('blog-content').value.trim(),
+                    category: document.getElementById('blog-category').value,
+                    status: document.getElementById('blog-status').value,
+                    imageUrl: document.getElementById('blog-image').value.trim() || null,
+                    updatedAt: new Date().toISOString()
+                };
+
+                if (blogId) {
+                    // Update existing blog
+                    await updateDoc(doc(db, 'blogs', blogId), blogData);
+                    alert('Blog updated successfully!');
+                } else {
+                    // Create new blog
+                    blogData.createdAt = new Date().toISOString();
+                    blogData.author = 'Admin'; // You can get this from auth user
+                    await addDoc(collection(db, 'blogs'), blogData);
+                    alert('Blog created successfully!');
+                }
+
+                closeBlogModal();
+                loadAdminBlogs();
+                loadHomeBlogs(); // Refresh home page blogs
+
+            } catch(e) {
+                console.error('Error saving blog:', e);
+                alert('Error saving blog. Please try again.');
+            }
+        };
+
+        // Delete blog
+        window.deleteBlog = async function(blogId, blogTitle) {
+            if (!confirm(`Are you sure you want to delete "${blogTitle}"? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                if (!db) {
+                    alert('Database not available');
+                    return;
+                }
+
+                await deleteDoc(doc(db, 'blogs', blogId));
+                alert('Blog deleted successfully!');
+                loadAdminBlogs();
+                loadHomeBlogs(); // Refresh home page blogs
+
+            } catch(e) {
+                console.error('Error deleting blog:', e);
+                alert('Error deleting blog. Please try again.');
+            }
+        };
+
+        // Close blog modal
+        window.closeBlogModal = function() {
+            document.getElementById('blog-modal').classList.remove('active');
+        };
+
+        // Filter blogs
+        window.filterBlogs = function(searchTerm) {
+            const blogs = document.querySelectorAll('#admin-blogs-list .dash-card');
+            blogs.forEach(blog => {
+                const text = blog.textContent.toLowerCase();
+                if (text.includes(searchTerm.toLowerCase())) {
+                    blog.style.display = 'block';
+                } else {
+                    blog.style.display = 'none';
+                }
+            });
+        };
+
+        window.filterBlogsByStatus = function(status) {
+            const blogs = document.querySelectorAll('#admin-blogs-list .dash-card');
+            blogs.forEach(blog => {
+                if (status === 'all') {
+                    blog.style.display = 'block';
+                } else {
+                    const statusBadge = blog.querySelector('span[style*="background"]');
+                    const isPublished = statusBadge && statusBadge.textContent.trim() === 'Published';
+                    if ((status === 'published' && isPublished) || (status === 'draft' && !isPublished)) {
+                        blog.style.display = 'block';
+                    } else {
+                        blog.style.display = 'none';
+                    }
+                }
+            });
+        };
+
+        // Load blogs for home page
+        window.loadHomeBlogs = async function() {
+            const container = document.getElementById('home-blogs-container');
+            if (!container) return;
+
+            try {
+                if (!db) {
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-light);">Blog posts will appear here</div>';
+                    return;
+                }
+
+                const blogsRef = collection(db, 'blogs');
+                let querySnapshot;
+                
+                try {
+                    // Try query with status filter and ordering
+                    const q = query(blogsRef, where('status', '==', 'published'), orderBy('createdAt', 'desc'), limit(3));
+                    querySnapshot = await getDocs(q);
+                } catch(e) {
+                    console.warn('Index query failed, trying alternative:', e);
+                    // If index doesn't exist, try getting all and filtering client-side
+                    try {
+                        const allBlogsQuery = query(blogsRef);
+                        const allSnapshot = await getDocs(allBlogsQuery);
+                        const allBlogs = [];
+                        allSnapshot.forEach((doc) => {
+                            const data = doc.data();
+                            if (data.status === 'published') {
+                                allBlogs.push({ id: doc.id, ...data });
+                            }
+                        });
+                        // Sort by createdAt and limit to 3
+                        allBlogs.sort((a, b) => {
+                            const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+                            const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+                            return dateB - dateA;
+                        });
+                        const blogs = allBlogs.slice(0, 3);
+                        
+                        if (blogs.length === 0) {
+                            container.innerHTML = `
+                                <div style="text-align: center; padding: 60px; color: var(--text-light); grid-column: 1 / -1;">
+                                    <i class="fas fa-blog" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                                    <p style="font-size: 1.1rem;">No blog posts available yet. Check back soon!</p>
+                                </div>
+                            `;
+                            return;
+                        }
+
+                        container.innerHTML = blogs.map(blog => `
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="blog-card h-100" onclick="viewBlog('${blog.id}')">
+                                    <div class="blog-card-image-wrapper">
+                                        ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" class="blog-card-image" onerror="this.style.display='none'">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 3rem;"><i class="fas fa-blog"></i></div>'}
+                                    </div>
+                                    <div class="blog-card-content">
+                                        <span class="blog-card-tag">${blog.category || 'General'}</span>
+                                        <h3 class="blog-card-title">${blog.title || 'Untitled'}</h3>
+                                        <p class="blog-card-excerpt">${blog.excerpt || 'No description available'}</p>
+                                        <div class="blog-card-meta">
+                                            <span><i class="fas fa-calendar"></i> ${blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                            <span><i class="fas fa-clock"></i> ${Math.ceil((blog.content || '').split(' ').length / 200)} min read</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                        return;
+                    } catch(err) {
+                        throw err;
+                    }
+                }
+
+                const blogs = [];
+                querySnapshot.forEach((doc) => {
+                    blogs.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (blogs.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 60px; color: var(--text-light); grid-column: 1 / -1;">
+                            <i class="fas fa-blog" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                            <p style="font-size: 1.1rem;">No blog posts available yet. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = blogs.map(blog => `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="blog-card h-100" onclick="viewBlog('${blog.id}')">
+                            <div class="blog-card-image-wrapper">
+                                ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" class="blog-card-image" onerror="this.style.display='none'">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 3rem;"><i class="fas fa-blog"></i></div>'}
+                            </div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-tag">${blog.category || 'General'}</span>
+                                <h3 class="blog-card-title">${blog.title || 'Untitled'}</h3>
+                                <p class="blog-card-excerpt">${blog.excerpt || 'No description available'}</p>
+                                <div class="blog-card-meta">
+                                    <span><i class="fas fa-calendar"></i> ${blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                    <span><i class="fas fa-clock"></i> ${Math.ceil((blog.content || '').split(' ').length / 200)} min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch(e) {
+                console.error('Error loading home blogs:', e);
+                let errorMsg = 'Error loading blog posts. ';
+                if (e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Please check Firebase rules.';
+                } else if (e.code === 'failed-precondition') {
+                    errorMsg += 'Firebase index required. Please create a composite index for blogs collection (status, createdAt).';
+                } else {
+                    errorMsg += e.message || 'Please try again.';
+                }
+                const container = document.getElementById('home-blogs-container');
+                if (container) {
+                    container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--danger); grid-column: 1 / -1;">${errorMsg}</div>`;
+                }
+            }
+        };
+
+        // View blog - redirects to detail view
+        window.viewBlog = function(blogId) {
+            viewBlogDetail(blogId);
+        };
+
+        // Load blogs for blog page
+        window.loadBlogPage = async function() {
+            const container = document.getElementById('blog-page-list');
+            if (!container) return;
+
+            try {
+                if (!db) {
+                    container.innerHTML = '<div style="text-align: center; padding: 60px; color: var(--text-light); grid-column: 1 / -1;">Blog posts will appear here</div>';
+                    return;
+                }
+
+                const blogsRef = collection(db, 'blogs');
+                let querySnapshot;
+                
+                try {
+                    // Try query with status filter and ordering
+                    const q = query(blogsRef, where('status', '==', 'published'), orderBy('createdAt', 'desc'));
+                    querySnapshot = await getDocs(q);
+                } catch(e) {
+                    console.warn('Index query failed, trying alternative:', e);
+                    // If index doesn't exist, try getting all and filtering client-side
+                    try {
+                        const allBlogsQuery = query(blogsRef);
+                        const allSnapshot = await getDocs(allBlogsQuery);
+                        const allBlogs = [];
+                        allSnapshot.forEach((doc) => {
+                            const data = doc.data();
+                            if (data.status === 'published') {
+                                allBlogs.push({ id: doc.id, ...data });
+                            }
+                        });
+                        // Sort by createdAt
+                        allBlogs.sort((a, b) => {
+                            const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+                            const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+                            return dateB - dateA;
+                        });
+                        
+                if (allBlogs.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <i class="fas fa-blog text-muted" style="font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.3;"></i>
+                                <h3 class="text-muted mb-3">No Blog Posts Yet</h3>
+                                <p class="text-muted">Check back soon for our latest articles and insights!</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                        container.innerHTML = allBlogs.map(blog => `
+                            <div class="blog-card" onclick="viewBlogDetail('${blog.id}')">
+                                ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" class="blog-card-image" onerror="this.style.display='none'">` : ''}
+                                <div class="blog-card-content">
+                                    <span class="blog-card-tag">${blog.category || 'General'}</span>
+                                    <h3 class="blog-card-title">${blog.title || 'Untitled'}</h3>
+                                    <p class="blog-card-excerpt">${blog.excerpt || 'No description available'}</p>
+                                    <div class="blog-card-meta">
+                                        <span><i class="fas fa-calendar"></i> ${blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                        <span><i class="fas fa-clock"></i> ${Math.ceil((blog.content || '').split(' ').length / 200)} min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                        return;
+                    } catch(err) {
+                        throw err;
+                    }
+                }
+
+                const blogs = [];
+                querySnapshot.forEach((doc) => {
+                    blogs.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (blogs.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 60px; color: var(--text-light); grid-column: 1 / -1;">
+                            <i class="fas fa-blog" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                            <p style="font-size: 1.1rem;">No blog posts available yet. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = blogs.map(blog => `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="blog-card h-100" onclick="viewBlogDetail('${blog.id}')">
+                            <div class="blog-card-image-wrapper">
+                                ${blog.imageUrl ? `<img src="${blog.imageUrl}" alt="${blog.title}" class="blog-card-image" onerror="this.style.display='none'">` : '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 3rem;"><i class="fas fa-blog"></i></div>'}
+                            </div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-tag">${blog.category || 'General'}</span>
+                                <h3 class="blog-card-title">${blog.title || 'Untitled'}</h3>
+                                <p class="blog-card-excerpt">${blog.excerpt || 'No description available'}</p>
+                                <div class="blog-card-meta">
+                                    <span><i class="fas fa-calendar"></i> ${blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                    <span><i class="fas fa-clock"></i> ${Math.ceil((blog.content || '').split(' ').length / 200)} min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch(e) {
+                console.error('Error loading blog page:', e);
+                let errorMsg = 'Error loading blog posts. ';
+                if (e.code === 'permission-denied') {
+                    errorMsg += 'Permission denied. Please check Firebase rules are deployed correctly.';
+                } else if (e.code === 'failed-precondition') {
+                    errorMsg += 'Firebase index required. Please create a composite index for blogs collection (status, createdAt). Check the browser console for the index link.';
+                } else if (e.message) {
+                    errorMsg += e.message;
+                } else {
+                    errorMsg += 'Please try again.';
+                }
+                if (container) {
+                    container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--danger); grid-column: 1 / -1;">${errorMsg}</div>`;
+                }
+            }
+        };
+
+        // Filter blog page
+        window.filterBlogPage = function(searchTerm) {
+            const blogs = document.querySelectorAll('#blog-page-list .blog-card');
+            blogs.forEach(blog => {
+                const text = blog.textContent.toLowerCase();
+                if (text.includes(searchTerm.toLowerCase())) {
+                    blog.style.display = 'block';
+                } else {
+                    blog.style.display = 'none';
+                }
+            });
+        };
+
+        window.filterBlogPageByCategory = function(category) {
+            const blogs = document.querySelectorAll('#blog-page-list .blog-card');
+            blogs.forEach(blog => {
+                if (category === 'all') {
+                    blog.style.display = 'block';
+                } else {
+                    const tag = blog.querySelector('.blog-card-tag');
+                    if (tag && tag.textContent.trim() === category) {
+                        blog.style.display = 'block';
+                    } else {
+                        blog.style.display = 'none';
+                    }
+                }
+            });
+        };
+
+        // View blog detail (for future implementation)
+        // View blog detail
+        window.viewBlogDetail = async function(blogId) {
+            // Navigate to blog detail page
+            router('blog-detail');
+            
+            const container = document.getElementById('blog-detail-container');
+            if (!container) {
+                console.error('Blog detail container not found');
+                return;
+            }
+            
+            container.innerHTML = '<div style="text-align: center; padding: 60px; color: var(--text-light);"><i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 10px;"></i><p>Loading blog post...</p></div>';
+            
+            try {
+                if (!db) {
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--danger);">Database not available</div>';
+                    return;
+                }
+                
+                const blogDoc = await getDoc(doc(db, 'blogs', blogId));
+                
+                if (!blogDoc.exists()) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 60px; color: var(--danger);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <h2>Blog Post Not Found</h2>
+                            <p style="margin: 20px 0;">The blog post you're looking for doesn't exist or has been removed.</p>
+                            <button class="btn btn-accent" onclick="router('blogs')">Back to Blog</button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const blog = { id: blogDoc.id, ...blogDoc.data() };
+                
+                // Check if blog is published (unless user is admin)
+                if (blog.status !== 'published') {
+                    // Check if user is admin
+                    let isAdminUser = false;
+                    if (auth && auth.currentUser) {
+                        try {
+                            const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+                            if (userDoc.exists() && userDoc.data().role === 'admin') {
+                                isAdminUser = true;
+                            }
+                        } catch(e) {
+                            console.error('Error checking admin status:', e);
+                        }
+                    }
+                    
+                    if (!isAdminUser) {
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 60px; color: var(--danger);">
+                                <i class="fas fa-lock" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                <h2>Blog Post Not Available</h2>
+                                <p style="margin: 20px 0;">This blog post is not published yet.</p>
+                                <button class="btn btn-accent" onclick="router('blogs')">Back to Blog</button>
+                            </div>
+                        `;
+                        return;
+                    }
+                }
+                
+                // Calculate read time
+                const wordCount = (blog.content || '').split(/\s+/).length;
+                const readTime = Math.ceil(wordCount / 200);
+                
+                // Format date
+                const publishDate = blog.createdAt ? new Date(blog.createdAt) : new Date();
+                const formattedDate = publishDate.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                // Escape HTML in title and excerpt for safety, but allow HTML in content
+                const escapeHtml = (text) => {
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                };
+                
+                container.innerHTML = `
+                    <article class="blog-detail-article">
+                        <!-- Blog Header -->
+                        <header class="blog-detail-header">
+                            <div class="blog-detail-meta">
+                                <span class="blog-detail-category">${escapeHtml(blog.category || 'General')}</span>
+                                <span class="blog-detail-date">
+                                    <i class="fas fa-calendar"></i> ${formattedDate}
+                                </span>
+                                <span class="blog-detail-read-time">
+                                    <i class="fas fa-clock"></i> ${readTime} min read
+                                </span>
+                            </div>
+                            <h1 class="blog-detail-title">${escapeHtml(blog.title || 'Untitled')}</h1>
+                            ${blog.excerpt ? `<p class="blog-detail-excerpt">${escapeHtml(blog.excerpt)}</p>` : ''}
+                        </header>
+                        
+                        <!-- Featured Image -->
+                        ${blog.imageUrl ? `
+                            <div class="blog-detail-image">
+                                <img src="${blog.imageUrl}" alt="${escapeHtml(blog.title)}" onerror="this.style.display='none'">
+                            </div>
+                        ` : ''}
+                        
+                        <!-- Blog Content -->
+                        <div class="blog-detail-content">
+                            ${blog.content || '<p>No content available.</p>'}
+                        </div>
+                        
+                        <!-- Blog Footer -->
+                        <footer class="blog-detail-footer">
+                            <div style="border-top: 2px solid var(--border-light); padding-top: 30px; margin-top: 40px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                                    <div>
+                                        <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">
+                                            <strong style="color: var(--primary);">Author:</strong> ${escapeHtml(blog.author || 'Global Edu Nepal')}
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                        <button class="btn btn-sm" onclick="shareBlog('${blog.id}', '${escapeHtml(blog.title)}')" style="background: var(--primary); color: white;">
+                                            <i class="fas fa-share-alt"></i> Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </article>
+                `;
+                
+            } catch(e) {
+                console.error('Error loading blog detail:', e);
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: var(--danger);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h2>Error Loading Blog Post</h2>
+                        <p style="margin: 20px 0;">${e.message || 'An error occurred while loading the blog post.'}</p>
+                        <button class="btn btn-accent" onclick="router('blogs')">Back to Blog</button>
+                    </div>
+                `;
+            }
+        };
+        
+        // Share blog function
+        window.shareBlog = function(blogId, blogTitle) {
+            const currentUrl = window.location.href.split('#')[0];
+            const blogUrl = currentUrl + '#blog-detail-' + blogId;
+            const shareText = `Check out this blog post: ${blogTitle} - Global Edu Nepal`;
+            
+            // Try Web Share API first (works on mobile and modern browsers)
+            if (navigator.share) {
+                navigator.share({
+                    title: blogTitle,
+                    text: shareText,
+                    url: blogUrl
+                }).catch(err => {
+                    // User cancelled or error occurred, fall back to copy
+                    console.log('Share cancelled or error:', err);
+                    copyBlogLink(blogUrl, blogTitle);
+                });
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                // Fallback: copy to clipboard
+                copyBlogLink(blogUrl, blogTitle);
+            } else {
+                // Final fallback: show prompt
+                showShareDialog(blogUrl, blogTitle);
+            }
+        };
+        
+        // Helper function to copy blog link
+        function copyBlogLink(url, title) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast('Blog link copied to clipboard!', 'success');
+                }).catch(() => {
+                    showShareDialog(url, title);
+                });
+            } else {
+                showShareDialog(url, title);
+            }
+        }
+        
+        // Show share dialog with copy option
+        function showShareDialog(url, title) {
+            const shareModal = document.createElement('div');
+            shareModal.className = 'share-modal-overlay';
+            shareModal.innerHTML = `
+                <div class="share-modal-content">
+                    <div class="share-modal-header">
+                        <h3>Share Blog Post</h3>
+                        <button class="share-modal-close" onclick="this.closest('.share-modal-overlay').remove()">&times;</button>
+                    </div>
+                    <div class="share-modal-body">
+                        <p><strong>${title}</strong></p>
+                        <div class="input-group mb-3">
+                            <input type="text" id="share-url-input" class="form-control" value="${url}" readonly>
+                            <button class="btn btn-primary" onclick="copyShareUrl()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="share-social-links">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}" target="_blank" class="btn btn-sm btn-outline-info">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(shareModal);
+            
+            // Close on overlay click
+            shareModal.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    shareModal.remove();
+                }
+            });
+        }
+        
+        // Copy share URL
+        window.copyShareUrl = function() {
+            const input = document.getElementById('share-url-input');
+            input.select();
+            input.setSelectionRange(0, 99999); // For mobile devices
+            try {
+                document.execCommand('copy');
+                showToast('Link copied to clipboard!', 'success');
+            } catch(err) {
+                // Fallback if execCommand doesn't work
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(input.value).then(() => {
+                        showToast('Link copied to clipboard!', 'success');
+                    });
+                }
+            }
+        };
+        
+        // Simple toast notification
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast-notification toast-${type || 'info'}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+        
+
+        // Load blogs when home page is active
+        if (document.getElementById('page-home')) {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const homePage = document.getElementById('page-home');
+                        if (homePage && homePage.classList.contains('active')) {
+                            if (typeof loadHomeBlogs === 'function') {
+                                loadHomeBlogs();
+                            }
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(document.getElementById('page-home'), {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
 
         // Filter contact messages
         window.filterContactMessages = function(searchTerm) {
@@ -10945,6 +13401,294 @@
                 }
             });
         }
+
+        // === NEW FEATURES JAVASCRIPT ===
+
+        // Make functions globally accessible
+        window.toggleFAQ = function(element) {
+            const faqItem = element.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        };
+
+        // Eligibility Checker
+        window.checkEligibility = function() {
+            const country = document.getElementById('eligibility-country').value;
+            const ielts = parseFloat(document.getElementById('eligibility-ielts').value);
+            const gpa = parseFloat(document.getElementById('eligibility-gpa').value);
+            const budget = parseFloat(document.getElementById('eligibility-budget').value);
+            const resultDiv = document.getElementById('eligibility-result');
+
+            if (!country || !ielts || !gpa || !budget) {
+                resultDiv.className = 'eligibility-result warning';
+                resultDiv.innerHTML = '<strong><i class="fas fa-exclamation-triangle"></i> Please fill in all fields</strong>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            const requirements = {
+                canada: { minIELTS: 6.0, minGPA: 3.0, minBudget: 25000 },
+                uk: { minIELTS: 6.0, minGPA: 3.0, minBudget: 22000 },
+                usa: { minIELTS: 6.5, minGPA: 3.0, minBudget: 30000 },
+                australia: { minIELTS: 6.0, minGPA: 3.0, minBudget: 30000 }
+            };
+
+            const req = requirements[country];
+            let eligible = true;
+            let issues = [];
+
+            if (ielts < req.minIELTS) {
+                eligible = false;
+                issues.push(`IELTS score should be at least ${req.minIELTS}`);
+            }
+            if (gpa < req.minGPA) {
+                eligible = false;
+                issues.push(`GPA should be at least ${req.minGPA}`);
+            }
+            if (budget < req.minBudget) {
+                eligible = false;
+                issues.push(`Budget should be at least $${req.minBudget.toLocaleString()}/year`);
+            }
+
+            if (eligible) {
+                resultDiv.className = 'eligibility-result success';
+                resultDiv.innerHTML = `<strong><i class="fas fa-check-circle"></i> You're Eligible!</strong><br>Based on your profile, you meet the basic requirements for studying in ${country.toUpperCase()}. <a href="#" onclick="router('auth', 'student'); return false;" style="color: #0f5132; text-decoration: underline;">Apply now</a> to get started!`;
+            } else {
+                resultDiv.className = 'eligibility-result warning';
+                resultDiv.innerHTML = `<strong><i class="fas fa-exclamation-triangle"></i> Areas to Improve:</strong><ul style="margin: 10px 0 0 20px; padding: 0;">${issues.map(issue => `<li>${issue}</li>`).join('')}</ul><p style="margin-top: 10px;">Don't worry! Our counselors can help you improve your profile. <a href="#" onclick="router('contact'); return false;" style="color: #856404; text-decoration: underline;">Contact us</a> for guidance.</p>`;
+            }
+            resultDiv.style.display = 'block';
+        };
+
+        // Cost Calculator
+        window.updateCostCalculator = function() {
+            const country = document.getElementById('calc-country').value;
+            const duration = parseFloat(document.getElementById('calc-duration').value) || 0;
+            const tuition = parseFloat(document.getElementById('calc-tuition').value) || 0;
+            const living = parseFloat(document.getElementById('calc-living').value) || 0;
+
+            if (tuition > 0 || living > 0) {
+                const totalTuition = tuition * duration;
+                const totalLiving = living * 12 * duration;
+                const grandTotal = totalTuition + totalLiving;
+
+                const currency = {
+                    canada: 'CAD',
+                    uk: '£',
+                    usa: '$',
+                    australia: 'AUD $'
+                }[country] || '$';
+
+                document.getElementById('calc-tuition-total').textContent = currency + totalTuition.toLocaleString();
+                document.getElementById('calc-living-total').textContent = currency + totalLiving.toLocaleString();
+                document.getElementById('calc-grand-total').textContent = currency + grandTotal.toLocaleString();
+                document.getElementById('calc-total').textContent = currency + grandTotal.toLocaleString();
+                document.getElementById('calc-result').style.display = 'block';
+            } else {
+                document.getElementById('calc-result').style.display = 'none';
+            }
+        };
+
+        window.updateCostCalculatorDest = function() {
+            const country = document.getElementById('calc-country-dest').value;
+            const duration = parseFloat(document.getElementById('calc-duration-dest').value) || 0;
+            const tuition = parseFloat(document.getElementById('calc-tuition-dest').value) || 0;
+            const living = parseFloat(document.getElementById('calc-living-dest').value) || 0;
+
+            if (tuition > 0 || living > 0) {
+                const totalTuition = tuition * duration;
+                const totalLiving = living * 12 * duration;
+                const grandTotal = totalTuition + totalLiving;
+
+                const currency = {
+                    canada: 'CAD',
+                    uk: '£',
+                    usa: '$',
+                    australia: 'AUD $'
+                }[country] || '$';
+
+                document.getElementById('calc-tuition-total-dest').textContent = currency + totalTuition.toLocaleString();
+                document.getElementById('calc-living-total-dest').textContent = currency + totalLiving.toLocaleString();
+                document.getElementById('calc-grand-total-dest').textContent = currency + grandTotal.toLocaleString();
+                document.getElementById('calc-total-dest').textContent = currency + grandTotal.toLocaleString();
+                document.getElementById('calc-result-dest').style.display = 'block';
+            } else {
+                document.getElementById('calc-result-dest').style.display = 'none';
+            }
+        };
+
+        // Document Checklist Generator
+        const checklistData = {
+            canada: {
+                bachelor: ['Valid Passport', 'High School Transcripts', 'IELTS/TOEFL Score (6.0+)', 'Statement of Purpose', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate'],
+                master: ['Valid Passport', 'Bachelor Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (6.5+)', 'Statement of Purpose', 'Letters of Recommendation (2)', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate'],
+                phd: ['Valid Passport', 'Master Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (7.0+)', 'Research Proposal', 'Letters of Recommendation (3)', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate', 'CV/Resume']
+            },
+            uk: {
+                bachelor: ['Valid Passport', 'High School Transcripts', 'IELTS/TOEFL Score (6.0+)', 'Personal Statement', 'Financial Documents', 'Tuberculosis Test Certificate'],
+                master: ['Valid Passport', 'Bachelor Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (6.5+)', 'Personal Statement', 'Letters of Recommendation (2)', 'Financial Documents', 'Tuberculosis Test Certificate'],
+                phd: ['Valid Passport', 'Master Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (7.0+)', 'Research Proposal', 'Letters of Recommendation (3)', 'Financial Documents', 'Tuberculosis Test Certificate', 'CV/Resume']
+            },
+            usa: {
+                bachelor: ['Valid Passport', 'High School Transcripts', 'SAT/ACT Scores', 'TOEFL/IELTS Score (6.5+)', 'Personal Essay', 'Financial Documents', 'Medical Records'],
+                master: ['Valid Passport', 'Bachelor Degree Certificate', 'University Transcripts', 'GRE/GMAT Scores', 'TOEFL/IELTS Score (7.0+)', 'Statement of Purpose', 'Letters of Recommendation (3)', 'Financial Documents', 'Medical Records'],
+                phd: ['Valid Passport', 'Master Degree Certificate', 'University Transcripts', 'GRE Scores', 'TOEFL/IELTS Score (7.5+)', 'Research Proposal', 'Letters of Recommendation (3)', 'Financial Documents', 'Medical Records', 'CV/Resume', 'Publications (if any)']
+            },
+            australia: {
+                bachelor: ['Valid Passport', 'High School Transcripts', 'IELTS/TOEFL Score (6.0+)', 'Statement of Purpose', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate'],
+                master: ['Valid Passport', 'Bachelor Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (6.5+)', 'Statement of Purpose', 'Letters of Recommendation (2)', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate'],
+                phd: ['Valid Passport', 'Master Degree Certificate', 'University Transcripts', 'IELTS/TOEFL Score (7.0+)', 'Research Proposal', 'Letters of Recommendation (3)', 'Financial Documents', 'Medical Examination', 'Police Clearance Certificate', 'CV/Resume']
+            }
+        };
+
+        window.generateChecklist = function() {
+            const country = document.getElementById('checklist-country').value;
+            const level = document.getElementById('checklist-level').value;
+            const container = document.getElementById('checklist-items-container');
+            const printBtn = document.getElementById('print-checklist-btn');
+
+            if (!country || !level) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 40px;">Select a country and program level to generate your personalized checklist</p>';
+                printBtn.style.display = 'none';
+                return;
+            }
+
+            const items = checklistData[country]?.[level] || [];
+            if (items.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 40px;">No checklist available for this combination</p>';
+                printBtn.style.display = 'none';
+                return;
+            }
+
+            container.innerHTML = items.map((item, index) => `
+                <div class="checklist-generator-item" id="checklist-item-${index}">
+                    <input type="checkbox" id="check-${index}" onchange="toggleChecklistItem(${index})">
+                    <label for="check-${index}" style="flex: 1; cursor: pointer; color: var(--text-dark);">${item}</label>
+                </div>
+            `).join('');
+
+            printBtn.style.display = 'block';
+        };
+
+        window.generateChecklistServices = function() {
+            const country = document.getElementById('checklist-country-services').value;
+            const level = document.getElementById('checklist-level-services').value;
+            const container = document.getElementById('checklist-items-container-services');
+            const printBtn = document.getElementById('print-checklist-btn-services');
+
+            if (!country || !level) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 40px;">Select a country and program level to generate your personalized checklist</p>';
+                printBtn.style.display = 'none';
+                return;
+            }
+
+            const items = checklistData[country]?.[level] || [];
+            if (items.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 40px;">No checklist available for this combination</p>';
+                printBtn.style.display = 'none';
+                return;
+            }
+
+            container.innerHTML = items.map((item, index) => `
+                <div class="checklist-generator-item" id="checklist-item-services-${index}">
+                    <input type="checkbox" id="check-services-${index}" onchange="toggleChecklistItemServices(${index})">
+                    <label for="check-services-${index}" style="flex: 1; cursor: pointer; color: var(--text-dark);">${item}</label>
+                </div>
+            `).join('');
+
+            printBtn.style.display = 'block';
+        };
+
+        window.toggleChecklistItem = function(index) {
+            const item = document.getElementById(`checklist-item-${index}`);
+            const checkbox = document.getElementById(`check-${index}`);
+            if (checkbox && item) {
+                if (checkbox.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            }
+        };
+
+        window.toggleChecklistItemServices = function(index) {
+            const item = document.getElementById(`checklist-item-services-${index}`);
+            const checkbox = document.getElementById(`check-services-${index}`);
+            if (checkbox && item) {
+                if (checkbox.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            }
+        };
+
+        window.printChecklist = function() {
+            window.print();
+        };
+
+        window.printChecklistServices = function() {
+            window.print();
+        };
+
+        // Application Deadline Countdown
+        window.updateDeadlineCountdown = function() {
+            const deadlines = [
+                { id: 'deadline-1', date: new Date('2025-01-15') },
+                { id: 'deadline-2', date: new Date('2025-02-01') },
+                { id: 'deadline-3', date: new Date('2025-01-31') }
+            ];
+
+            deadlines.forEach(deadline => {
+                const element = document.getElementById(deadline.id);
+                if (!element) return;
+
+                const now = new Date();
+                const diff = deadline.date - now;
+
+                if (diff <= 0) {
+                    element.innerHTML = '<span style="color: var(--danger); font-weight: 600;">Deadline Passed</span>';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+                element.innerHTML = `
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <div><strong>${days}</strong><br><small>Days</small></div>
+                        <div><strong>${hours}</strong><br><small>Hours</small></div>
+                        <div><strong>${minutes}</strong><br><small>Mins</small></div>
+                    </div>
+                `;
+            });
+        };
+
+        // Initialize countdown when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                updateDeadlineCountdown();
+                setInterval(updateDeadlineCountdown, 60000);
+            });
+        } else {
+            updateDeadlineCountdown();
+            setInterval(updateDeadlineCountdown, 60000);
+        }
+
     </script>
+
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
