@@ -308,10 +308,18 @@
         .dash-main { padding: 40px; background: var(--light); }
         
         .dash-menu-item {
-            display: block; padding: 12px 15px; color: rgba(255,255,255,0.7); border-radius: 6px; margin-bottom: 5px; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; color: rgba(255,255,255,0.7); border-radius: 6px; margin-bottom: 5px; cursor: pointer;
         }
         .dash-menu-item:hover, .dash-menu-item.active { background: rgba(255,255,255,0.1); color: white; }
         .dash-menu-item i { width: 25px; }
+        .nav-badge-simple {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
 
         .dash-card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
 
@@ -357,9 +365,26 @@
         .coun-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
         .coun-tab:hover { background-color: #f9f9f9; }
         
-        .student-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-        .student-item:hover { background-color: #f0f8ff; }
-        .student-item.active { background-color: #e3f2fd; border-left: 4px solid var(--primary); }
+        .student-item { 
+            padding: 16px; 
+            border-bottom: 1px solid #e5e7eb; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: all 0.2s;
+            border-radius: 8px;
+            margin: 4px;
+        }
+        .student-item:hover { 
+            background-color: #f0f8ff; 
+            transform: translateX(2px);
+        }
+        .student-item.active { 
+            background-color: #e0e7ff; 
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
         
         .student-item-checkbox { display: flex; align-items: center; gap: 12px; flex: 1; }
         .student-item-checkbox input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
@@ -371,6 +396,505 @@
         .coun-action-btn { background: none; border: none; cursor: pointer; color: #999; padding: 5px; transition:0.2s; }
         .coun-action-btn:hover { color: var(--primary); }
         .coun-action-btn.delete:hover { color: var(--danger); }
+
+        /* --- WORKSPACE DESIGN --- */
+        .workspace-layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+        .workspace-sidebar { 
+            background: linear-gradient(180deg, #1e3a5f 0%, #2c5282 100%); 
+            color: white; 
+            padding: 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .workspace-main { 
+            padding: 0; 
+            background: #f5f7fa; 
+            overflow-y: auto;
+        }
+
+        .workspace-brand {
+            padding: 30px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        .workspace-logo {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .workspace-nav {
+            padding: 0 15px;
+        }
+        .workspace-nav-item {
+            display: block;
+            padding: 14px 15px;
+            color: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .workspace-nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .workspace-nav-item.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-weight: 600;
+        }
+        .nav-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .nav-item-main {
+            display: flex;
+            align-items: center;
+        }
+        .workspace-nav-item i {
+            width: 24px;
+            margin-right: 12px;
+        }
+        .nav-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            align-self: flex-start;
+            margin-left: 36px;
+        }
+
+        .workspace-header {
+            background: white;
+            padding: 30px 40px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .workspace-stats {
+            display: flex;
+            gap: 20px;
+        }
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            min-width: 140px;
+        }
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .stat-info {
+            flex: 1;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .workspace-content {
+            padding: 30px 40px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        .workspace-panel-left, .workspace-panel-right {
+            min-width: 0;
+        }
+
+        .workspace-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .workspace-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafbfc;
+        }
+        .workspace-card-body {
+            padding: 0;
+            max-height: calc(100vh - 300px);
+            overflow-y: auto;
+        }
+        .workspace-list {
+            padding: 8px;
+        }
+
+        .workspace-empty-state {
+            background: white;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #9ca3af;
+        }
+        .workspace-empty-state h3 {
+            margin: 0 0 10px 0;
+            color: #1a1a1a;
+            font-size: 1.3rem;
+        }
+        .workspace-empty-state p {
+            color: #6b7280;
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .empty-state-hint {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-top: 15px;
+        }
+
+        .workspace-student-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .student-header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .student-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        .student-header-info h2 {
+            color: white;
+        }
+        .student-header-info p {
+            color: rgba(255,255,255,0.9);
+        }
+        .student-header-meta {
+            text-align: right;
+        }
+        .status-badge-modern {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .badge-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+        .last-updated {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            margin: 0;
+        }
+
+        .workspace-tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            background: #fafbfc;
+            padding: 0 24px;
+        }
+        .workspace-tab {
+            padding: 16px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            position: relative;
+            top: 2px;
+        }
+        .workspace-tab:hover {
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+        .workspace-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+        .tab-badge {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .workspace-tab-content {
+            padding: 30px;
+        }
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            color: #1a1a1a;
+            margin: 0 0 12px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i {
+            color: var(--primary);
+        }
+        .section-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .profile-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .info-field {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        .info-field:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+        .info-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .info-label i {
+            margin-right: 6px;
+            color: #9ca3af;
+        }
+        .info-value {
+            margin: 0;
+            font-weight: 500;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+        .highlight-field {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-color: #bfdbfe;
+        }
+        .highlight-value {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .highlight-value-accent {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .milestone-field {
+            background: #fff7ed;
+            border-color: #fed7aa;
+        }
+        .milestone-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .milestone-select {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        .milestone-btn {
+            padding: 10px 16px;
+            border-radius: 6px;
+        }
+        .current-milestone {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .unis-list {
+            margin-top: 8px;
+        }
+        .empty-text {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .docs-list {
+            margin-top: 20px;
+        }
+        .empty-docs {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9ca3af;
+        }
+        .empty-docs i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+        .empty-docs p {
+            font-style: italic;
+        }
+
+        .workspace-chat {
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .workspace-chat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .chat-avatar {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        .chat-header-info {
+            flex: 1;
+        }
+        .chat-header-info strong {
+            display: block;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .chat-status {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+        }
+        .chat-status i {
+            font-size: 0.5rem;
+            color: #10b981;
+            margin-right: 4px;
+        }
+        .workspace-chat-body {
+            background: #f9fafb;
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        .workspace-chat-footer {
+            background: white;
+            padding: 16px 24px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .chat-input {
+            flex: 1;
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
+            border-radius: 24px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .chat-input:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+        .chat-send-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .chat-send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .workspace-btn {
+            border-radius: 6px;
+            font-weight: 500;
+        }
 
         /* --- WIZARD STEPS --- */
         .step-indicator { display: flex; justify-content: space-between; margin-bottom: 30px; position: relative; max-width: 600px; margin-left: auto; margin-right: auto; }
@@ -463,6 +987,7 @@
             font-size: 0.85rem;
             color: #666;
         }
+
     </style>
 </head>
 <body>
@@ -1583,23 +2108,33 @@
                     <h3 style="color: white;">Counselor Panel</h3>
                     <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Staff Access</p>
                 </div>
-                <a class="dash-menu-item" onclick="renderStudentList('active')"><i class="fas fa-users"></i> Active Students</a>
-                <a class="dash-menu-item" onclick="renderStudentList('inactive')"><i class="fas fa-user-slash"></i> Inactive Students</a>
-                <a class="dash-menu-item active" onclick="renderAvailableStudents()"><i class="fas fa-user-check"></i> Available Students</a>
-                <a class="dash-menu-item" onclick="renderStudentList('archived')"><i class="fas fa-archive"></i> Archives</a>
+                <a class="dash-menu-item" onclick="renderStudentList('active')">
+                    <i class="fas fa-users"></i> Active Students
+                    <span class="nav-badge-simple" id="nav-active-count"></span>
+                </a>
+                <a class="dash-menu-item" onclick="renderStudentList('inactive')">
+                    <i class="fas fa-user-slash"></i> Inactive Students
+                    <span class="nav-badge-simple" id="nav-inactive-count"></span>
+                </a>
+                <a class="dash-menu-item active" onclick="renderAvailableStudents()">
+                    <i class="fas fa-user-check"></i> Available Students
+                </a>
+                <a class="dash-menu-item" onclick="renderStudentList('archived')">
+                    <i class="fas fa-archive"></i> Archives
+                </a>
             </div>
 
             <div class="dash-main">
-                <div class="grid-2" style="grid-template-columns: 1fr 2fr;">
+                <div class="grid-2" style="grid-template-columns: 1fr 2fr; gap: 20px;">
                     <div>
-                        <div class="dash-card" style="padding: 0; overflow: hidden; height: 100%;">
+                        <div class="dash-card" style="padding: 0; overflow: hidden;">
                             <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
                                 <h3 id="coun-list-header" style="margin:0;">Students</h3>
                                 <div id="coun-list-actions">
                                     <button class="btn btn-sm btn-success" onclick="addStudent()"><i class="fas fa-plus"></i> Add</button>
                                 </div>
                             </div>
-                            <div id="coun-student-list" style="max-height: 500px; overflow-y: auto;">
+                            <div id="coun-student-list" style="max-height: 600px; overflow-y: auto; padding: 10px;">
                                 <!-- Populated by JS -->
                             </div>
                         </div>
@@ -1636,7 +2171,7 @@
                                 </div>
                             </div>
                                 
-                                <!-- Tabs -->
+                            <!-- Tabs -->
                             <div class="dash-card" style="padding: 0;">
                                 <div class="coun-tabs" style="border-bottom: 2px solid #eee;">
                                     <div class="coun-tab active" onclick="switchCounselorTab('profile')">
@@ -1807,7 +2342,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -2176,8 +2710,10 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, where, getDocs, increment, limit, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, query, where, getDocs, increment, limit, onSnapshot, orderBy, writeBatch, deleteDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
+
+        console.log('Main script loaded, Firebase imports successful');
 
         // FIREBASE CONFIG
         const firebaseConfig = {
@@ -2681,7 +3217,7 @@
                         return;
                     }
                     if(!fname.value || !lname.value || !phone.value) {
-                        alert("Please fill in First Name, Last Name and Phone Number.");
+                        showWarning("Please fill in First Name, Last Name and Phone Number.");
                         return;
                     }
                 }
@@ -2729,7 +3265,7 @@
                 }
             } catch(error) {
                 console.error('Error in goToStep:', error);
-                alert('An error occurred. Please try again.');
+                showError('An error occurred. Please try again.');
             }
         };
 
@@ -2792,15 +3328,22 @@
             let docsArray = [];
             Object.keys(uploadedFiles).forEach(docType => {
                 uploadedFiles[docType].forEach(file => {
-                    docsArray.push({
+                    // Include all file metadata fields, especially for chunked files
+                    const fileDoc = {
+                        id: file.id || `file-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                         type: docType,
                         name: file.name,
                         size: file.size,
-                        fileType: file.type,
+                        fileType: file.type || null,
                         uploadedAt: file.uploadedAt || new Date().toISOString(),
                         downloadURL: file.downloadURL || null, // Include Firebase Storage download URL
-                        storagePath: file.storagePath || null // Include storage path for reference
-                    });
+                        storagePath: file.storagePath || null, // Include storage path for reference
+                        // Chunked file fields
+                        isChunked: file.isChunked || false,
+                        chunkCount: file.chunkCount || null,
+                        chunkedFileId: file.chunkedFileId || null
+                    };
+                    docsArray.push(fileDoc);
                 });
             });
             
@@ -2922,22 +3465,41 @@
                                 uploadedFiles[docType] = [];
                             }
                             
-                            const fileId = `file-${uploadedFilesCounter++}`;
-                            uploadedFiles[docType].push({
+                            // Use the original file ID from the database, or generate a new one if missing
+                            const fileId = docItem.id || `file-${uploadedFilesCounter++}`;
+                            
+                            // Restore all file metadata including chunked file info
+                            const fileMetadata = {
                                 id: fileId,
                                 name: docItem.name,
                                 size: docItem.size || 0,
                                 type: docItem.fileType || 'application/pdf',
                                 uploadedAt: docItem.uploadedAt || new Date().toISOString(),
                                 downloadURL: docItem.downloadURL || null, // Restore Firebase Storage URL
-                                storagePath: docItem.storagePath || null
-                            });
+                                storagePath: docItem.storagePath || null,
+                                // Chunked file metadata
+                                isChunked: docItem.isChunked || false,
+                                chunkCount: docItem.chunkCount || null,
+                                chunkedFileId: docItem.chunkedFileId || null
+                            };
+                            
+                            uploadedFiles[docType].push(fileMetadata);
                             
                             // Display in the uploaded files list
                             const fileDiv = document.createElement('div');
                             fileDiv.id = fileId;
                             fileDiv.style.cssText = 'padding:10px; background:#fff; border:1px solid #eee; margin-top:5px; border-radius:4px; font-size:0.9rem; display:flex; align-items:center; justify-content:space-between;';
-                            const fileSize = docItem.size ? `(${(docItem.size / 1024).toFixed(2)} KB)` : '';
+                            
+                            // Format file size display
+                            let fileSize = '';
+                            if (docItem.size) {
+                                if (docItem.size > 1024 * 1024) {
+                                    fileSize = `(${(docItem.size / (1024 * 1024)).toFixed(2)} MB)`;
+                                } else {
+                                    fileSize = `(${(docItem.size / 1024).toFixed(2)} KB)`;
+                                }
+                            }
+                            
                             const safeFileName = docItem.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                             fileDiv.innerHTML = `
                                 <div style="display:flex; align-items:center; flex:1;">
@@ -3031,7 +3593,7 @@
                     localStorage.setItem('demoApp', JSON.stringify(currentApplication));
                 }
 
-                alert("Submitted! Your Profile is now created.");
+                showSuccess("Submitted! Your Profile is now created.");
                 window.router('student');
             }
         };
@@ -3050,7 +3612,7 @@
                 localStorage.setItem('demoApp', JSON.stringify(currentApplication));
             }
             
-            alert("Profile Updated Successfully!");
+            showSuccess("Profile Updated Successfully!");
             updateDashboardUI(); // Refresh dash widgets
         };
 
@@ -3360,20 +3922,67 @@
             const emptyStatePanel = document.getElementById('coun-empty-state');
             const interactionPanel = document.getElementById('coun-interaction');
             if(!currentStudentId) {
-                if(emptyStatePanel) {
-                    emptyStatePanel.style.display = 'block';
-                    // Update empty state message based on filter
-                    if(filter === 'active') {
-                        emptyStatePanel.innerHTML = `
+                    if(emptyStatePanel) {
+                        emptyStatePanel.style.display = 'block';
+                        // Update empty state message based on filter
+                        if(filter === 'active') {
+                            emptyStatePanel.innerHTML = `
                             <i class="fas fa-comments" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
                             <h3>Select a Student</h3>
                             <p>Click on a student from the list to view their profile, documents, and chat.</p>
                         `;
+                        }
                     }
-                }
                 if(interactionPanel) interactionPanel.style.display = 'none';
             }
+            
+            // Update workspace stats
+            updateWorkspaceStats(allStudents, currentCounselorId);
         };
+        
+        // Update workspace statistics
+        function updateWorkspaceStats(allStudents, counselorId) {
+            const activeStudents = allStudents.filter(s => 
+                s.counselorId === counselorId && s.status !== 'archived' && s.isActive !== false
+            );
+            const pendingStudents = allStudents.filter(s => 
+                s.counselorId === counselorId && s.status === 'Draft' && s.status !== 'archived'
+            );
+            const completedStudents = allStudents.filter(s => 
+                s.counselorId === counselorId && (s.milestone === 'Visa Approved' || s.status === 'archived')
+            );
+            
+            // Update stat cards
+            const activeEl = document.getElementById('workspace-stat-active');
+            const pendingEl = document.getElementById('workspace-stat-pending');
+            const completedEl = document.getElementById('workspace-stat-completed');
+            
+            if(activeEl) activeEl.textContent = activeStudents.length;
+            if(pendingEl) pendingEl.textContent = pendingStudents.length;
+            if(completedEl) completedEl.textContent = completedStudents.length;
+            
+            // Update nav badges
+            const navActiveCount = document.getElementById('nav-active-count');
+            const navInactiveCount = document.getElementById('nav-inactive-count');
+            
+            if(navActiveCount) {
+                const inactiveCount = allStudents.filter(s => 
+                    s.counselorId === counselorId && s.status !== 'archived' && s.isActive === false
+                ).length;
+                navActiveCount.textContent = activeStudents.length || '';
+                if(activeStudents.length === 0) navActiveCount.style.display = 'none';
+                else navActiveCount.style.display = 'inline-block';
+            }
+            
+            if(navInactiveCount) {
+                const inactiveCount = allStudents.filter(s => 
+                    s.counselorId === counselorId && s.status !== 'archived' && s.isActive === false
+                ).length;
+                navInactiveCount.textContent = inactiveCount || '';
+                if(inactiveCount === 0) navInactiveCount.style.display = 'none';
+                else navInactiveCount.style.display = 'inline-block';
+            }
+        }
 
         // Render all available students with checkboxes for selection
         window.renderAvailableStudents = async function() {
@@ -3539,6 +4148,10 @@
             const interactionPanel = document.getElementById('coun-interaction');
             if(emptyState) emptyState.style.display = 'block';
             if(interactionPanel) interactionPanel.style.display = 'none';
+            
+            // Update workspace stats
+            const currentCounselorId = auth && auth.currentUser ? auth.currentUser.uid : null;
+            updateWorkspaceStats(allStudents, currentCounselorId);
         };
 
         // Toggle select all students
@@ -3998,7 +4611,56 @@
                                     docItem = userData.docs.find(d => d.name === fileName && d.type === docType);
                                 }
                                 
-                                if(docItem && docItem.downloadURL) {
+                                // Check if it's a chunked file
+                                if (docItem.isChunked && docItem.chunkedFileId) {
+                                    const loadingMsg = document.createElement('div');
+                                    loadingMsg.id = 'dl-msg-counselor';
+                                    loadingMsg.style.cssText = "position:fixed; top:20px; right:20px; background:#333; color:white; padding:15px; border-radius:5px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3);";
+                                    loadingMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reassembling large file...';
+                                    document.body.appendChild(loadingMsg);
+                                    
+                                    try {
+                                        // Fetch all chunks
+                                        let fullBase64 = "";
+                                        const count = docItem.chunkCount || 100; // fallback safety
+                                        
+                                        console.log(`Downloading chunked file: ${fileName}, ${count} chunks`);
+                                        
+                                        for (let i = 0; i < count; i++) {
+                                            // Update loading message
+                                            loadingMsg.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading chunk ${i + 1}/${count}...`;
+                                            
+                                            // Fetch chunk i
+                                            const chunkRef = doc(db, `file_data/${docItem.chunkedFileId}/chunks/${i}`);
+                                            const snap = await getDoc(chunkRef);
+                                            
+                                            if (snap.exists()) {
+                                                fullBase64 += snap.data().data;
+                                            } else {
+                                                break; // No more chunks
+                                            }
+                                        }
+                                        
+                                        // Trigger Download
+                                        const a = document.createElement('a');
+                                        a.href = fullBase64;
+                                        a.download = fileName;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        document.body.removeChild(a);
+                                        
+                                        loadingMsg.innerHTML = '<i class="fas fa-check-circle"></i> Download started!';
+                                        setTimeout(() => loadingMsg.remove(), 2000);
+                                        
+                                    } catch (e) {
+                                        console.error("Download failed:", e);
+                                        loadingMsg.remove();
+                                        alert("Failed to download large file: " + e.message);
+                                    }
+                                    return;
+                                    
+                                } else if(docItem && docItem.downloadURL) {
+                                    // Standard small file (Firebase Storage URL)
                                     const a = document.createElement('a');
                                     a.href = docItem.downloadURL;
                                     a.download = fileName;
@@ -5773,10 +6435,12 @@
             else window.router('counselor');
         };
 
+        console.log('Defining handleLogin function...');
         window.handleLogin = async function() {
-            const e = document.getElementById('auth-email').value;
-            const p = document.getElementById('auth-pass').value;
-            if(!e || !p) return showAuthError("Enter credentials.");
+            try {
+                const e = document.getElementById('auth-email').value;
+                const p = document.getElementById('auth-pass').value;
+                if(!e || !p) return showAuthError("Enter credentials.");
             if(isDemoMode) return alert("In Demo Mode. Use button below.");
             
             // Hardcoded admin credentials
@@ -5834,6 +6498,10 @@
             
             if (!auth) return alert("Firebase Failed.");
             try { await signInWithEmailAndPassword(auth, e, p); } catch(err) { showAuthError(err.message); }
+            } catch(err) {
+                console.error('Error in handleLogin:', err);
+                alert('An error occurred during login. Please check the console for details.');
+            }
         };
 
         window.toggleSignupMode = function() {
@@ -5986,11 +6654,7 @@
                     continue;
                 }
                 
-                // Check file size (max 10MB)
-                if(file.size > 10 * 1024 * 1024) {
-                    alert(`File "${file.name}" is too large (max 10MB). Please compress it before uploading.`);
-                    continue;
-                }
+                // No size limit - we'll use chunking for large files
                 
                 const fileId = `file-${uploadedFilesCounter++}`;
                 existingFileNames.push(file.name.toLowerCase());
@@ -6019,7 +6683,7 @@
                 fileProgressDiv.innerHTML = `
                     <div style="display:flex; align-items:center; justify-content:space-between;">
                         <span><i class="fas fa-file" style="margin-right:8px;"></i>${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
-                        <span id="status-${fileId}" style="color:#2196f3;"><i class="fas fa-spinner fa-spin"></i> Preparing...</span>
+                        <span id="status-${fileId}" style="color:#2196f3;"><i class="fas fa-spinner fa-spin"></i> Uploading...</span>
                     </div>
                     <div style="margin-top:5px; background:#f0f0f0; border-radius:4px; height:4px; overflow:hidden;">
                         <div id="bar-${fileId}" style="background:#2196f3; height:100%; width:0%; transition:width 0.3s;"></div>
@@ -6028,49 +6692,176 @@
                 uploadingDiv.appendChild(fileProgressDiv);
                 
                 // Upload to Firebase Storage if authenticated
-                if(auth && auth.currentUser && !isDemoMode && storage) {
+                if(auth && auth.currentUser && !isDemoMode && storage && db) {
                     const uploadPromise = (async () => {
                         try {
-                            // Update status
-                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-compress"></i> Compressing...';
+                            // Use chunking for ALL files to stay within Firestore 1MB limit
+                            // Compress image if it's an image file
+                            let processedFile = file;
+                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                            document.getElementById(`bar-${fileId}`).style.width = '5%';
+                            processedFile = await compressImage(file);
+                            
+                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
                             document.getElementById(`bar-${fileId}`).style.width = '10%';
                             
-                            // Compress image if it's an image file
-                            const processedFile = await compressImage(file);
-                            document.getElementById(`bar-${fileId}`).style.width = '30%';
-                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Uploading...';
+                            // Convert to Base64
+                            const base64 = await new Promise((resolve, reject) => {
+                                const reader = new FileReader();
+                                reader.onload = (e) => resolve(e.target.result);
+                                reader.onerror = (e) => reject(new Error('Failed to read file'));
+                                reader.readAsDataURL(processedFile);
+                            });
                             
-                            // Create a unique file path: users/{userId}/documents/{docType}/{timestamp}_{filename}
-                            const timestamp = Date.now();
-                            const sanitizedFileName = processedFile.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-                            const filePath = `users/${auth.currentUser.uid}/documents/${docType}/${timestamp}_${sanitizedFileName}`;
-                            const storageRef = ref(storage, filePath);
+                            console.log(`File "${file.name}": Original size: ${(processedFile.size / 1024).toFixed(2)}KB, Base64 size: ${(base64.length / 1024).toFixed(2)}KB`);
                             
-                            // Upload file to Firebase Storage
-                            document.getElementById(`bar-${fileId}`).style.width = '50%';
-                            const snapshot = await uploadBytes(storageRef, processedFile);
-                            document.getElementById(`bar-${fileId}`).style.width = '80%';
+                            document.getElementById(`bar-${fileId}`).style.width = '15%';
                             
-                            // Get download URL
-                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-link"></i> Getting URL...';
-                            const downloadURL = await getDownloadURL(snapshot.ref);
-                            document.getElementById(`bar-${fileId}`).style.width = '100%';
+                            // Generate unique file ID for chunked storage
+                            const chunkedFileId = `doc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
                             
-                            // Update status to success
-                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-check-circle" style="color:#28a745;"></i> Complete';
-                            fileProgressDiv.style.borderColor = '#28a745';
+                            // Chunking Logic - Base64 increases size by ~33%, so we use 500KB chunks
+                            // This ensures base64 chunks stay well under 1MB Firestore limit
+                            // 500KB * 1.33 = ~665KB base64, safely under 1MB limit
+                            const CHUNK_SIZE = 500 * 1024; // 500KB base64 string length (safe for 1MB Firestore limit)
+                            const totalChunks = Math.ceil(base64.length / CHUNK_SIZE);
                             
-                            // Store file metadata with download URL
-                            uploadedFiles[docType].push({
+                            console.log(`Splitting into ${totalChunks} chunks of max ${(CHUNK_SIZE / 1024).toFixed(2)}KB each`);
+                            
+                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                            document.getElementById(`bar-${fileId}`).style.width = '20%';
+                            
+                            // Save Chunks to 'file_data' collection using batches
+                            const BATCH_SIZE = 500; // Firestore batch limit
+                            let batch = writeBatch(db);
+                            let batchCount = 0;
+                            
+                            for (let i = 0; i < totalChunks; i++) {
+                                const chunkData = base64.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+                                
+                                // Validate chunk size (should be under 1MB)
+                                const chunkSizeKB = chunkData.length / 1024;
+                                if (chunkData.length > 1024 * 1024) {
+                                    throw new Error(`Chunk ${i + 1} is too large: ${chunkSizeKB.toFixed(2)}KB. Please use a smaller file or contact support.`);
+                                }
+                                
+                                console.log(`Chunk ${i + 1}/${totalChunks}: ${chunkSizeKB.toFixed(2)}KB`);
+                                
+                                const chunkRef = doc(db, `file_data/${chunkedFileId}/chunks/${i}`);
+                                batch.set(chunkRef, { 
+                                    data: chunkData,
+                                    userId: auth.currentUser.uid, // Store userId for security rule verification
+                                    uploadedAt: new Date().toISOString()
+                                });
+                                batchCount++;
+                                
+                                // Commit batch when it reaches limit or is the last chunk
+                                if (batchCount >= BATCH_SIZE || i === totalChunks - 1) {
+                                    if (batchCount > 0) {
+                                        try {
+                                            console.log(`Committing batch with ${batchCount} chunks (chunk ${i - batchCount + 1} to ${i + 1})...`);
+                                            console.log(`Chunk path: file_data/${chunkedFileId}/chunks/${i}`);
+                                            console.log(`User ID: ${auth.currentUser.uid}`);
+                                            
+                                            await batch.commit();
+                                            console.log(`✅ Batch committed successfully (chunks ${i - batchCount + 1} to ${i + 1})`);
+                                            
+                                            // Update progress
+                                            const progress = 20 + ((i + 1) / totalChunks) * 70;
+                                            document.getElementById(`bar-${fileId}`).style.width = `${Math.min(progress, 90)}%`;
+                                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                                        } catch (batchError) {
+                                            console.error(`❌ Error committing batch at chunk ${i}:`, batchError);
+                                            console.error('Error code:', batchError.code);
+                                            console.error('Error message:', batchError.message);
+                                            console.error('Full error:', batchError);
+                                            
+                                            // More detailed error message
+                                            let errorMsg = `Failed to upload chunk ${i + 1}/${totalChunks}`;
+                                            if (batchError.code === 'permission-denied') {
+                                                errorMsg += ': Permission denied. Please check Firestore security rules for file_data collection.';
+                                            } else if (batchError.message) {
+                                                errorMsg += `: ${batchError.message}`;
+                                            }
+                                            throw new Error(errorMsg);
+                                        }
+                                    }
+                                    // Create new batch for next iteration
+                                    if (i < totalChunks - 1) {
+                                        batch = writeBatch(db);
+                                        batchCount = 0;
+                                    }
+                                }
+                            }
+                            
+                            console.log(`✅ All ${totalChunks} chunks uploaded successfully`);
+                            
+                            document.getElementById(`bar-${fileId}`).style.width = '90%';
+                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                            
+                            // Save METADATA to User Profile (Keep this small!)
+                            const fileMetadata = {
                                 id: fileId,
                                 name: file.name,
+                                type: docType,
                                 size: processedFile.size,
-                                type: processedFile.type,
                                 uploadedAt: uploadTime,
-                                blob: processedFile, // Keep blob for immediate download
-                                downloadURL: downloadURL, // Store Firebase Storage URL
-                                storagePath: filePath
-                            });
+                                isChunked: true, // Flag to tell downloader to look in file_data
+                                chunkCount: totalChunks,
+                                chunkedFileId: chunkedFileId // Store the ID used for chunks
+                            };
+                            
+                            console.log('Saving file metadata:', fileMetadata);
+                            
+                            // Update local state for UI
+                            uploadedFiles[docType].push(fileMetadata);
+                            
+                            // Save metadata to Firestore User Document
+                            try {
+                                const userRef = doc(db, "users", auth.currentUser.uid);
+                                
+                                // Get current user document to merge properly
+                                let currentDocs = [];
+                                try {
+                                    const userDoc = await getDoc(userRef);
+                                    if (userDoc.exists()) {
+                                        currentDocs = userDoc.data().docs || [];
+                                        // Also update currentApplication from database
+                                        currentApplication = { ...currentApplication, ...userDoc.data() };
+                                    }
+                                } catch (readError) {
+                                    console.warn('Could not read current user document:', readError);
+                                }
+                                
+                                // Check if file with same ID already exists and replace it, otherwise add new
+                                const existingIndex = currentDocs.findIndex(d => d.id === fileId);
+                                if (existingIndex >= 0) {
+                                    currentDocs[existingIndex] = fileMetadata;
+                                    console.log(`Replacing existing document at index ${existingIndex}`);
+                                } else {
+                                    currentDocs.push(fileMetadata);
+                                    console.log('Adding new document to array');
+                                }
+                                
+                                console.log('Updating user document with docs array:', currentDocs.length, 'documents');
+                                await setDoc(userRef, { docs: currentDocs }, { merge: true });
+                                console.log('✅ Metadata saved to user document');
+                                
+                                // Update local state
+                                currentApplication.docs = currentDocs;
+                            } catch (metaError) {
+                                console.error('❌ Error saving metadata:', metaError);
+                                console.error('Error details:', {
+                                    code: metaError.code,
+                                    message: metaError.message,
+                                    stack: metaError.stack
+                                });
+                                throw new Error(`Failed to save file metadata: ${metaError.message}`);
+                            }
+                                
+                                document.getElementById(`bar-${fileId}`).style.width = '100%';
+                                document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-check-circle" style="color:#28a745;"></i> Complete';
+                                fileProgressDiv.style.borderColor = '#28a745';
                             
                             // Remove progress indicator and add to uploaded files list
                             setTimeout(() => {
@@ -6082,6 +6873,9 @@
                                 fileDiv.style.cssText = 'padding:10px; background:#fff; border:1px solid #eee; margin-top:5px; border-radius:4px; font-size:0.9rem; display:flex; align-items:center; justify-content:space-between;';
                                 
                                 const safeFileName = file.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                                    const fileSizeDisplay = processedFile.size > 1024 * 1024 
+                                        ? `${(processedFile.size / (1024 * 1024)).toFixed(2)} MB` 
+                                        : `${(processedFile.size / 1024).toFixed(2)} KB`;
                                 fileDiv.innerHTML = `
                                     <div style="display:flex; align-items:center; flex:1;">
                                         <span class="doc-status-light doc-uploaded"></span>
@@ -6089,7 +6883,7 @@
                                         <a href="#" onclick="downloadStudentDocument('${fileId}', '${docType}', '${safeFileName}'); return false;" style="margin-left:5px; color:var(--primary); text-decoration:none; cursor:pointer; font-weight:500; border-bottom:1px dotted var(--primary);" title="Click to download ${file.name}">
                                             ${file.name}
                                         </a>
-                                        <span style="margin-left:10px; color:#999; font-size:0.85rem;">(${(processedFile.size / 1024).toFixed(2)} KB)</span>
+                                            <span style="margin-left:10px; color:#999; font-size:0.85rem;">(${fileSizeDisplay})</span>
                                     </div>
                                     <button onclick="removeUploadedFileById('${fileId}', '${docType}')" style="background:none; border:none; color:#dc3545; cursor:pointer; padding:5px; margin-left:10px;" title="Remove">
                                         <i class="fas fa-times"></i>
@@ -6098,50 +6892,22 @@
                                 list.appendChild(fileDiv);
                             }, 500);
                             
-                            return { fileId, success: true, downloadURL };
+                                return { fileId, success: true, isChunked: true };
                         } catch(error) {
-                            console.error(`Error uploading ${file.name} to Firebase Storage:`, error);
+                            console.error(`Error uploading ${file.name}:`, error);
                             
-                            // Update status to error
-                            document.getElementById(`status-${fileId}`).innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#dc3545;"></i> Failed';
+                            // Update status to error with detailed message
+                            const errorMsg = error.message || 'Unknown error occurred';
+                            document.getElementById(`status-${fileId}`).innerHTML = `<i class="fas fa-exclamation-triangle" style="color:#dc3545;"></i> Failed: ${errorMsg.substring(0, 50)}`;
                             fileProgressDiv.style.borderColor = '#dc3545';
                             
-                            // Fallback: store file locally without Storage URL
-                            uploadedFiles[docType].push({
-                                id: fileId,
-                                name: file.name,
-                                size: file.size,
-                                type: file.type,
-                                uploadedAt: uploadTime,
-                                blob: file
-                            });
+                            // Show error alert
+                            alert(`Upload failed for "${file.name}": ${errorMsg}\n\nPlease try again or contact support if the problem persists.`);
                             
-                            // Remove progress and show error
+                            // Remove progress after showing error
                             setTimeout(() => {
                                 fileProgressDiv.remove();
-                                
-                                // Display in the uploaded files list (without Storage URL)
-                                const fileDiv = document.createElement('div');
-                                fileDiv.id = fileId;
-                                fileDiv.style.cssText = 'padding:10px; background:#fff; border:1px solid #eee; margin-top:5px; border-radius:4px; font-size:0.9rem; display:flex; align-items:center; justify-content:space-between;';
-                                
-                                const safeFileName = file.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                                fileDiv.innerHTML = `
-                                    <div style="display:flex; align-items:center; flex:1;">
-                                        <span class="doc-status-light doc-uploaded"></span>
-                                        <strong style="margin-left:10px;">${docType}:</strong>
-                                        <a href="#" onclick="downloadStudentDocument('${fileId}', '${docType}', '${safeFileName}'); return false;" style="margin-left:5px; color:var(--primary); text-decoration:none; cursor:pointer; font-weight:500; border-bottom:1px dotted var(--primary);" title="Click to download ${file.name}">
-                                            ${file.name}
-                                        </a>
-                                        <span style="margin-left:10px; color:#999; font-size:0.85rem;">(${(file.size / 1024).toFixed(2)} KB)</span>
-                                        <span style="margin-left:10px; color:#ff9800; font-size:0.75rem;" title="Upload to cloud storage failed">⚠</span>
-                                    </div>
-                                    <button onclick="removeUploadedFileById('${fileId}', '${docType}')" style="background:none; border:none; color:#dc3545; cursor:pointer; padding:5px; margin-left:10px;" title="Remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                `;
-                                list.appendChild(fileDiv);
-                            }, 1000);
+                            }, 3000);
                             
                             return { fileId, success: false, error: error.message };
                         }
@@ -6207,14 +6973,40 @@
             }
             
             // Save documents to database immediately after upload
+            // Note: This is a backup save - the main save happens in the upload promise
+            // We use collectFormData to ensure all files are included
             try {
                 const formData = collectFormData();
                 if(auth && auth.currentUser && !isDemoMode && db) {
                     try {
-                        await setDoc(doc(db, "users", auth.currentUser.uid), { docs: formData.docs }, { merge: true });
-                        console.log('Documents saved to database');
+                        // Get current docs from database to merge properly
+                        const userRef = doc(db, "users", auth.currentUser.uid);
+                        let currentDocs = [];
+                        try {
+                            const userDoc = await getDoc(userRef);
+                            if (userDoc.exists()) {
+                                currentDocs = userDoc.data().docs || [];
+                            }
+                        } catch (readError) {
+                            console.warn('Could not read user document for final save:', readError);
+                        }
+                        
+                        // Merge: Use formData.docs (which includes all uploadedFiles) as source of truth
+                        // But preserve any docs that might have been added elsewhere
+                        const mergedDocs = [...formData.docs];
+                        console.log(`Final save: ${mergedDocs.length} documents to save`);
+                        
+                        await setDoc(userRef, { docs: mergedDocs }, { merge: true });
+                        console.log('✅ Documents saved to database (final save)');
+                        
+                        // Update currentApplication
+                        currentApplication.docs = mergedDocs;
                     } catch(e) {
-                        console.error("Error saving documents to database:", e);
+                        console.error("❌ Error saving documents to database:", e);
+                        console.error("Error details:", {
+                            code: e.code,
+                            message: e.message
+                        });
                     }
                 } else if(isDemoMode) {
                     // Update currentApplication with docs
@@ -6223,7 +7015,7 @@
                     console.log('Documents saved to localStorage (demo mode)');
                 }
             } catch(error) {
-                console.error('Error saving documents:', error);
+                console.error('❌ Error saving documents:', error);
             }
             
             // Clear the file input after upload
@@ -6238,25 +7030,157 @@
         // Download document function
         window.downloadStudentDocument = async function(fileId, docType, fileName) {
             try {
-                // Try to get file from uploadedFiles data structure (for recently uploaded files)
+                // 1. Find metadata
+                let fileData = null;
+                
+                // Search local state first
                 if(uploadedFiles[docType]) {
-                    const fileData = uploadedFiles[docType].find(f => f.id === fileId);
-                    if(fileData) {
-                        // If we have a Firebase Storage download URL, use it (preferred)
-                        if(fileData.downloadURL) {
-                            const a = document.createElement('a');
-                            a.href = fileData.downloadURL;
-                            a.download = fileName;
-                            a.target = '_blank';
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            return;
+                    fileData = uploadedFiles[docType].find(f => f.id === fileId);
+                }
+                
+                // Fallback to loaded application data - try by ID first, then by name and type
+                if (!fileData && currentApplication && currentApplication.docs) {
+                    fileData = currentApplication.docs.find(d => d.id === fileId);
+                    // If not found by ID, try by name and type (in case ID doesn't match)
+                    if (!fileData) {
+                        fileData = currentApplication.docs.find(d => d.name === fileName && d.type === docType);
+                    }
+                }
+                
+                // If still not found, check database
+                if (!fileData && auth && auth.currentUser && !isDemoMode && db) {
+                    try {
+                        const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                        if(userDoc.exists()) {
+                            const userData = userDoc.data();
+                            if(userData.docs && Array.isArray(userData.docs)) {
+                                fileData = userData.docs.find(d => d.id === fileId);
+                                if(!fileData) {
+                                    fileData = userData.docs.find(d => d.name === fileName && d.type === docType);
+                                }
+                                
+                                // Update currentApplication with fresh data from database
+                                if(fileData) {
+                                    currentApplication = { ...currentApplication, ...userData };
+                                }
+                            }
+                        }
+                    } catch(e) {
+                        console.error("Error fetching file from database:", e);
+                    }
+                }
+                
+                // If fileData exists but is missing critical fields, try to get complete data
+                if (fileData && fileData.isChunked && !fileData.chunkedFileId && db && auth && auth.currentUser) {
+                    console.log('File data missing chunkedFileId, fetching from database...');
+                    try {
+                        const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                        if(userDoc.exists()) {
+                            const userData = userDoc.data();
+                            if(userData.docs && Array.isArray(userData.docs)) {
+                                const completeFileData = userData.docs.find(d => d.id === fileId || (d.name === fileName && d.type === docType));
+                                if(completeFileData) {
+                                    fileData = completeFileData; // Use complete data
+                                    console.log('Found complete file data:', completeFileData);
+                                }
+                            }
+                        }
+                    } catch(e) {
+                        console.error("Error fetching complete file data:", e);
+                    }
+                }
+                
+                if (!fileData) {
+                    alert(`File "${fileName}" not found.`);
+                    return;
+                }
+                
+                console.log('File data for download:', {
+                    id: fileData.id,
+                    name: fileData.name,
+                    isChunked: fileData.isChunked,
+                    chunkedFileId: fileData.chunkedFileId,
+                    chunkCount: fileData.chunkCount,
+                    downloadURL: fileData.downloadURL,
+                    hasBlob: !!fileData.blob
+                });
+                
+                // 2. Check if it's a "Chunked" file (Large file)
+                if (fileData.isChunked && fileData.chunkedFileId) {
+                    const loadingMsg = document.createElement('div');
+                    loadingMsg.id = 'dl-msg';
+                    loadingMsg.style.cssText = "position:fixed; top:20px; right:20px; background:#333; color:white; padding:15px; border-radius:5px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3);";
+                    loadingMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reassembling large file...';
+                    document.body.appendChild(loadingMsg);
+                    
+                    try {
+                        // Fetch all chunks
+                        let fullBase64 = "";
+                        const count = fileData.chunkCount || 100; // fallback safety
+                        
+                        for (let i = 0; i < count; i++) {
+                            // Update loading message
+                            loadingMsg.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading chunk ${i + 1}/${count}...`;
+                            
+                            // Fetch chunk i
+                            const chunkRef = doc(db, `file_data/${fileData.chunkedFileId}/chunks/${i}`);
+                            const snap = await getDoc(chunkRef);
+                            
+                            if (snap.exists()) {
+                                fullBase64 += snap.data().data;
+                            } else {
+                                break; // No more chunks
+                            }
                         }
                         
-                        // If we have the file blob (for recently uploaded files not yet in Storage)
-                        if(fileData.blob instanceof File) {
-                            const url = URL.createObjectURL(fileData.blob);
+                        // Trigger Download
+                        const a = document.createElement('a');
+                        a.href = fullBase64;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        loadingMsg.innerHTML = '<i class="fas fa-check-circle"></i> Download started!';
+                        setTimeout(() => loadingMsg.remove(), 2000);
+                        
+                    } catch (e) {
+                        console.error("Download failed:", e);
+                        loadingMsg.remove();
+                        alert("Failed to download large file: " + e.message);
+                    }
+                    
+                } else if (fileData.downloadURL) {
+                    // Standard small file (Firebase Storage URL)
+                    const a = document.createElement('a');
+                    a.href = fileData.downloadURL;
+                    a.download = fileName;
+                    a.target = '_blank';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    
+                } else if (fileData.blob instanceof File) {
+                    // Local blob (for recently uploaded files not yet in Storage)
+                    const url = URL.createObjectURL(fileData.blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 100);
+                    
+                } else {
+                    // Check if file data is stored as data URL in DOM
+                    const fileDiv = document.getElementById(fileId);
+                    if(fileDiv) {
+                        const blobData = fileDiv.getAttribute('data-file-blob');
+                        if(blobData) {
+                            // Convert data URL to blob and download
+                            const response = await fetch(blobData);
+                            const blob = await response.blob();
+                            const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
                             a.download = fileName;
@@ -6267,62 +7191,82 @@
                             return;
                         }
                     }
-                }
-                
-                // Check if file data is stored as data URL in DOM
-                const fileDiv = document.getElementById(fileId);
-                if(fileDiv) {
-                    const blobData = fileDiv.getAttribute('data-file-blob');
-                    if(blobData) {
-                        // Convert data URL to blob and download
-                        const response = await fetch(blobData);
-                        const blob = await response.blob();
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = fileName;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        setTimeout(() => URL.revokeObjectURL(url), 100);
-                        return;
-                    }
-                }
-                
-                // If file is stored in Firebase Storage, fetch download URL
-                if(auth && auth.currentUser && !isDemoMode && db) {
-                    try {
-                        // Get user document to find file reference
-                        const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
-                        if(userDoc.exists()) {
-                            const userData = userDoc.data();
-                            if(userData.docs && Array.isArray(userData.docs)) {
-                                // Try to find by fileId first, then by name and type
-                                let docItem = userData.docs.find(d => d.id === fileId);
-                                if(!docItem) {
-                                    docItem = userData.docs.find(d => d.name === fileName && d.type === docType);
-                                }
-                                
-                                if(docItem && docItem.downloadURL) {
-                                    // If download URL exists (from Firebase Storage), use it
-                                    const a = document.createElement('a');
-                                    a.href = docItem.downloadURL;
-                                    a.download = fileName;
-                                    a.target = '_blank';
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    document.body.removeChild(a);
-                                    return;
+                    
+                    // If we get here, the file metadata exists but content is missing
+                    console.error('File content missing for:', fileData);
+                    console.error('File data:', {
+                        id: fileData.id,
+                        name: fileData.name,
+                        isChunked: fileData.isChunked,
+                        chunkedFileId: fileData.chunkedFileId,
+                        downloadURL: fileData.downloadURL,
+                        hasBlob: !!fileData.blob
+                    });
+                    
+                    // Try one more time to get from database if it's chunked but chunkedFileId might be missing
+                    if (fileData.isChunked && !fileData.chunkedFileId && db && auth && auth.currentUser) {
+                        console.log('Attempting to find chunkedFileId in database...');
+                        try {
+                            const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                            if(userDoc.exists()) {
+                                const userData = userDoc.data();
+                                if(userData.docs && Array.isArray(userData.docs)) {
+                                    const dbFileData = userData.docs.find(d => d.id === fileId || (d.name === fileName && d.type === docType));
+                                    if(dbFileData && dbFileData.isChunked && dbFileData.chunkedFileId) {
+                                        console.log('Found chunkedFileId in database, retrying download...');
+                                        // Retry with the correct chunkedFileId
+                                        fileData.chunkedFileId = dbFileData.chunkedFileId;
+                                        fileData.chunkCount = dbFileData.chunkCount;
+                                        // Recursively call the function with updated data
+                                        // But we'll handle it inline to avoid recursion issues
+                                        const loadingMsg = document.createElement('div');
+                                        loadingMsg.id = 'dl-msg';
+                                        loadingMsg.style.cssText = "position:fixed; top:20px; right:20px; background:#333; color:white; padding:15px; border-radius:5px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.3);";
+                                        loadingMsg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reassembling large file...';
+                                        document.body.appendChild(loadingMsg);
+                                        
+                                        try {
+                                            let fullBase64 = "";
+                                            const count = dbFileData.chunkCount || 100;
+                                            
+                                            for (let i = 0; i < count; i++) {
+                                                loadingMsg.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Loading chunk ${i + 1}/${count}...`;
+                                                const chunkRef = doc(db, `file_data/${dbFileData.chunkedFileId}/chunks/${i}`);
+                                                const snap = await getDoc(chunkRef);
+                                                
+                                                if (snap.exists()) {
+                                                    fullBase64 += snap.data().data;
+                                                } else {
+                                                    break;
+                                                }
+                                            }
+                                            
+                                            const a = document.createElement('a');
+                                            a.href = fullBase64;
+                                            a.download = fileName;
+                                            document.body.appendChild(a);
+                                            a.click();
+                                            document.body.removeChild(a);
+                                            
+                                            loadingMsg.innerHTML = '<i class="fas fa-check-circle"></i> Download started!';
+                                            setTimeout(() => loadingMsg.remove(), 2000);
+                                            return;
+                                        } catch (e) {
+                                            console.error("Retry download failed:", e);
+                                            loadingMsg.remove();
+                                            alert("Failed to download file: " + e.message);
+                                            return;
+                                        }
+                                    }
                                 }
                             }
+                        } catch(e) {
+                            console.error("Error retrying download:", e);
                         }
-                    } catch(e) {
-                        console.error("Error fetching file from database:", e);
                     }
+                    
+                    alert(`File "${fileName}" content is missing. The file may need to be re-uploaded.`);
                 }
-                
-                // If we can't find the file, show message
-                alert(`File "${fileName}" is not available for download. The file may need to be re-uploaded.\n\nNote: For production, files should be stored in Firebase Storage for proper download functionality.`);
             } catch(error) {
                 console.error('Error in downloadStudentDocument:', error);
                 alert('Error downloading document. Please try again.');
@@ -6330,6 +7274,59 @@
         };
         
         window.removeUploadedFileById = async function(fileId, docType) {
+            // Find the file data to check if it's chunked
+            let fileData = null;
+            if(uploadedFiles[docType]) {
+                fileData = uploadedFiles[docType].find(f => f.id === fileId);
+            }
+            
+            // If not in local state, check currentApplication
+            if (!fileData && currentApplication && currentApplication.docs) {
+                fileData = currentApplication.docs.find(d => d.id === fileId);
+            }
+            
+            // If still not found and authenticated, check database
+            if (!fileData && auth && auth.currentUser && !isDemoMode && db) {
+                try {
+                        const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+                        if(userDoc.exists()) {
+                            const userData = userDoc.data();
+                            if(userData.docs && Array.isArray(userData.docs)) {
+                            fileData = userData.docs.find(d => d.id === fileId);
+                        }
+                    }
+                } catch(e) {
+                    console.error("Error fetching file data for removal:", e);
+                }
+            }
+            
+            // If it's a chunked file, delete all chunks from Firestore
+            if (fileData && fileData.isChunked && fileData.chunkedFileId && db && auth && auth.currentUser && !isDemoMode) {
+                try {
+                    const chunkCount = fileData.chunkCount || 100;
+                    // Delete chunks in batches
+                    const BATCH_SIZE = 500;
+                    let batch = writeBatch(db);
+                    let batchCount = 0;
+                    
+                    for (let i = 0; i < chunkCount; i++) {
+                        const chunkRef = doc(db, `file_data/${fileData.chunkedFileId}/chunks/${i}`);
+                        batch.delete(chunkRef);
+                        batchCount++;
+                        
+                        // Commit batch when it reaches limit or is the last chunk
+                        if (batchCount >= BATCH_SIZE || i === chunkCount - 1) {
+                            await batch.commit();
+                            batch = writeBatch(db);
+                            batchCount = 0;
+                        }
+                    }
+                    console.log(`Deleted ${chunkCount} chunks for file ${fileId}`);
+                    } catch(e) {
+                    console.error("Error deleting chunks:", e);
+                }
+            }
+            
             // Remove from data structure
             if(uploadedFiles[docType]) {
                 uploadedFiles[docType] = uploadedFiles[docType].filter(f => f.id !== fileId);
@@ -6406,7 +7403,7 @@
                                 
                                 // If student doesn't have a counselor, they can't send messages yet
                                 if(!counselorId) {
-                                    alert("You don't have a counselor assigned yet. A counselor will be assigned to you soon!");
+                                    showInfo("You don't have a counselor assigned yet. A counselor will be assigned to you soon!");
                                     // Remove the message from UI
                                     if(div && div.parentNode) {
                                         div.remove();
