@@ -746,10 +746,21 @@
         .dash-main { padding: 40px; background: var(--light); }
         
         .dash-menu-item {
-            display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; color: rgba(255,255,255,0.7); border-radius: 6px; margin-bottom: 5px; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; color: rgba(255,255,255,0.7); border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: all 0.2s ease; font-weight: 500;
         }
-        .dash-menu-item:hover, .dash-menu-item.active { background: rgba(255,255,255,0.1); color: white; }
-        .dash-menu-item i { width: 25px; }
+        .dash-menu-item:hover { 
+            background: rgba(255,255,255,0.1); 
+            color: white; 
+            transform: translateX(4px);
+        }
+        .dash-menu-item.active { 
+            background: rgba(255,255,255,0.15); 
+            color: white; 
+            font-weight: 600;
+            border-left: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .dash-menu-item i { width: 25px; font-size: 1rem; }
         .nav-badge-simple {
             background: rgba(255,255,255,0.2);
             color: white;
@@ -1288,9 +1299,135 @@
         .student-item-checkbox .student-name { font-weight: 600; color: var(--primary); margin-bottom: 3px; }
         .student-item-checkbox .student-details { font-size: 0.85rem; color: #666; }
         
-        .coun-action-btn { background: none; border: none; cursor: pointer; color: #999; padding: 5px; transition:0.2s; }
-        .coun-action-btn:hover { color: var(--primary); }
-        .coun-action-btn.delete:hover { color: var(--danger); }
+        .coun-action-btn { 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            color: #999; 
+            padding: 5px; 
+            transition: all 0.2s ease; 
+        }
+        .coun-action-btn:hover { 
+            color: var(--primary); 
+            background: #f0f8ff;
+            transform: scale(1.05);
+        }
+        .coun-action-btn.delete:hover { 
+            color: var(--danger); 
+            background: #fee;
+        }
+        
+        /* User Filter Tabs - Bootstrap Nav Tabs Enhancement */
+        .user-filter-tab {
+            transition: all 0.2s ease;
+            border: none !important;
+            border-radius: 0 !important;
+            font-weight: 500;
+        }
+        .user-filter-tab:hover:not(.active) {
+            background-color: #f8f9fa !important;
+            color: #495057 !important;
+        }
+        .user-filter-tab.active {
+            font-weight: 600;
+            border-bottom: 3px solid #007bff !important;
+        }
+        
+        /* Admin Users List Styling */
+        #admin-users-list .list-group-item {
+            border-left: none;
+            border-right: none;
+            padding: 1.25rem;
+            transition: all 0.2s ease;
+        }
+        #admin-users-list .list-group-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(2px);
+        }
+        #admin-users-list .list-group-item:first-child {
+            border-top: none;
+        }
+        #admin-users-list .list-group-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Enhanced Input Group */
+        .input-group-text {
+            border-color: #dee2e6;
+            transition: all 0.2s ease;
+        }
+        .input-group:focus-within .input-group-text {
+            border-color: #86b7fe;
+            background-color: #f8f9fa;
+        }
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        #admin-search-users {
+            transition: all 0.2s ease;
+        }
+        #admin-search-users:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        #admin-search-clear {
+            transition: all 0.2s ease;
+        }
+        #admin-search-clear:hover {
+            background-color: #f8f9fa;
+            color: #dc3545;
+        }
+        
+        /* Search Input Group Styling */
+        .input-group-lg .input-group-text {
+            padding: 0.75rem 1rem;
+        }
+        .input-group-lg .form-control {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+        }
+        .input-group.shadow-sm {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .form-select.shadow-sm {
+            border-radius: 0.5rem;
+        }
+        
+        /* Enhanced Filter Selects */
+        #admin-filter-role:focus,
+        #admin-filter-status:focus {
+            border-color: #86b7fe !important;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+        }
+        #admin-filter-role:hover,
+        #admin-filter-status:hover {
+            border-color: #ced4da;
+        }
+        
+        /* Search Input Focus */
+        #admin-search-users:focus {
+            box-shadow: none !important;
+        }
+        .input-group:focus-within {
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15) !important;
+        }
+        
+        /* Clear Button Hover */
+        #admin-search-clear:hover {
+            color: #dc3545 !important;
+            background-color: #f8f9fa;
+        }
+        
+        /* Card Enhancements */
+        .card {
+            border-radius: 0.5rem;
+        }
+        .card-header {
+            border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
 
         /* --- WORKSPACE DESIGN --- */
         .workspace-layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
@@ -4482,10 +4619,7 @@
                 </div>
                 <a class="dash-menu-item" id="back-to-counselor-link" onclick="showAdminView('dashboard')" style="display: none;"><i class="fas fa-arrow-left"></i> Back to Counselor Panel</a>
                 <a class="dash-menu-item active" onclick="showAdminView('dashboard')" id="admin-menu-dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
-                <a class="dash-menu-item" onclick="renderAdminUsers('all')" id="admin-menu-users"><i class="fas fa-users"></i> All Users</a>
-                <a class="dash-menu-item" onclick="renderAdminUsers('students')" id="admin-menu-students"><i class="fas fa-user-graduate"></i> Students</a>
-                <a class="dash-menu-item" onclick="renderAdminUsers('counselors')" id="admin-menu-counselors"><i class="fas fa-user-tie"></i> Counselors</a>
-                <a class="dash-menu-item" onclick="renderAdminUsers('admins')" id="admin-menu-admins"><i class="fas fa-user-shield"></i> Admins</a>
+                <a class="dash-menu-item" onclick="showAdminView('users')" id="admin-menu-users"><i class="fas fa-users"></i> All Users</a>
                 <a class="dash-menu-item" onclick="showAdminView('analytics')" id="admin-menu-analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
                 <a class="dash-menu-item" onclick="showAdminView('activity')" id="admin-menu-activity"><i class="fas fa-history"></i> Activity Logs</a>
                 <a class="dash-menu-item" onclick="showAdminView('contacts')" id="admin-menu-contacts"><i class="fas fa-envelope"></i> Contact Messages</a>
@@ -4564,78 +4698,90 @@
 
                 <!-- USERS MANAGEMENT VIEW -->
                 <div id="admin-users-view" style="display: none;">
-                    <div class="dash-card" style="margin-bottom: 20px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                            <div>
-                                <h2 style="margin-bottom: 10px;">User Management</h2>
-                                <p style="color: #666; margin: 0;">Manage user roles, create profiles, and assign counselors to students.</p>
+                    <!-- Header Card -->
+                    <div class="card shadow-sm mb-4 border-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="bg-primary bg-gradient rounded-3 d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
+                                        <i class="fas fa-users text-white fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="mb-1 fw-bold text-dark">User Management</h2>
+                                        <p class="text-muted mb-0 small">Manage user roles, create profiles, and assign counselors to students.</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success btn-lg d-flex align-items-center gap-2 shadow-sm" onclick="showCreateUserModal()">
+                                    <i class="fas fa-user-plus"></i> Create New User
+                                </button>
                             </div>
-                            <button class="btn btn-success" onclick="showCreateUserModal()"><i class="fas fa-user-plus"></i> Create New User</button>
                         </div>
                     </div>
 
-                    <!-- Search and Filter Bar -->
-                    <div class="dash-card" style="margin-bottom: 20px;">
-                        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-                            <div style="flex: 1; min-width: 200px;">
-                                <input type="text" id="admin-search-users" placeholder="Search by name, email..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" onkeyup="filterAdminUsers()">
-                            </div>
-                            <select id="admin-filter-role" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" onchange="filterAdminUsers()">
-                                <option value="all">All Roles</option>
-                                <option value="student">Students</option>
-                                <option value="counselor">Counselors</option>
-                                <option value="admin">Admins</option>
-                            </select>
-                            <select id="admin-filter-status" style="padding: 10px; border: 1px solid #ddd; border-radius: 4px;" onchange="filterAdminUsers()">
-                                <option value="all">All Status</option>
-                                <option value="Draft">Draft</option>
-                                <option value="Submitted">Submitted</option>
-                                <option value="In Review">In Review</option>
-                            </select>
-                            <button class="btn btn-outline" onclick="clearAdminFilters()"><i class="fas fa-times"></i> Clear</button>
-                        </div>
-                    </div>
 
                     <!-- Bulk Actions -->
-                    <div class="dash-card" style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; display: none;" id="admin-bulk-actions">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                            <span id="admin-selected-count" style="font-weight: 600; color: #007bff;">0 users selected</span>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn btn-sm btn-danger" onclick="bulkDeleteUsers()"><i class="fas fa-trash"></i> Delete Selected</button>
-                                <button class="btn btn-sm btn-primary" onclick="bulkAssignCounselor()"><i class="fas fa-user-tie"></i> Assign Counselor</button>
-                                <button class="btn btn-sm btn-outline" onclick="clearUserSelection()"><i class="fas fa-times"></i> Clear Selection</button>
+                    <div class="card shadow-sm mb-4 border-0 bg-light" id="admin-bulk-actions" style="display: none;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                <span id="admin-selected-count" class="fw-bold text-primary fs-6">
+                                    <i class="fas fa-check-circle me-2"></i>0 users selected
+                                </span>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-danger btn-sm" onclick="bulkDeleteUsers()">
+                                        <i class="fas fa-trash me-1"></i> Delete Selected
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="clearUserSelection()">
+                                        <i class="fas fa-times me-1"></i> Clear
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dash-card" style="padding: 0;">
-                        <div style="padding: 20px; background: #fff; border-bottom: 1px solid #eee;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                <h3 id="admin-list-header" style="margin:0;">All Users</h3>
-                                <div style="display: flex; gap: 10px; align-items: center;">
-                                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                                        <input type="checkbox" id="admin-select-all" onchange="toggleSelectAllUsers()">
-                                        <span style="font-size: 0.9rem;">Select All</span>
+                    <!-- Filter Tabs -->
+                    <div class="card shadow-sm mb-4 border-0">
+                        <div class="card-body p-0">
+                            <ul class="nav nav-tabs nav-justified border-0" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link user-filter-tab active" id="filter-tab-all" onclick="switchUserFilter('all')" type="button" role="tab">
+                                        <i class="fas fa-users me-2"></i>All Users
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link user-filter-tab" id="filter-tab-students" onclick="switchUserFilter('students')" type="button" role="tab">
+                                        <i class="fas fa-user-graduate me-2"></i>Students
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link user-filter-tab" id="filter-tab-counselors" onclick="switchUserFilter('counselors')" type="button" role="tab">
+                                        <i class="fas fa-user-tie me-2"></i>Counselors
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link user-filter-tab" id="filter-tab-admins" onclick="switchUserFilter('admins')" type="button" role="tab">
+                                        <i class="fas fa-user-shield me-2"></i>Admins
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Users List -->
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 id="admin-list-header" class="mb-0 d-flex align-items-center gap-2">
+                                    <i class="fas fa-users text-primary"></i>All Users
+                                </h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="admin-select-all" onchange="toggleSelectAllUsers()">
+                                    <label class="form-check-label small text-muted" for="admin-select-all">
+                                        Select All
                                     </label>
                                 </div>
                             </div>
-                            <div class="search-filter-bar">
-                                <input type="text" id="admin-search-users" class="search-input" placeholder="Search users..." onkeyup="filterAdminUsers()">
-                                <select id="admin-filter-role" class="filter-select" onchange="filterAdminUsers()">
-                                    <option value="all">All Roles</option>
-                                    <option value="student">Students</option>
-                                    <option value="counselor">Counselors</option>
-                                    <option value="admin">Admins</option>
-                                </select>
-                                <select id="admin-filter-status" class="filter-select" onchange="filterAdminUsers()">
-                                    <option value="all">All Status</option>
-                                    <option value="draft">Draft</option>
-                                    <option value="submitted">Submitted</option>
-                                </select>
-                                <button class="btn btn-sm" onclick="clearAdminFilters()" style="padding: 10px 15px;"><i class="fas fa-times"></i> Clear</button>
-                            </div>
                         </div>
-                        <div id="admin-users-list" style="max-height: 600px; overflow-y: auto;">
+                        <div id="admin-users-list" class="list-group list-group-flush" style="max-height: 600px; overflow-y: auto;">
                             <!-- Populated by JS -->
                         </div>
                     </div>
@@ -4644,27 +4790,55 @@
                 <!-- ANALYTICS VIEW -->
                 <div id="admin-analytics-view" style="display: none;">
                     <div class="dash-card" style="margin-bottom: 20px;">
-                        <h2 style="margin-bottom: 10px;"><i class="fas fa-chart-bar"></i> Analytics & Reports</h2>
-                        <p style="color: #666;">Detailed insights and statistics</p>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-chart-bar" style="font-size: 1.5rem; color: white;"></i>
+                            </div>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.5rem; font-weight: 600; color: #1f2937;">Analytics & Reports</h2>
+                                <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 0.95rem;">Detailed insights and statistics</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="grid-2" style="margin-bottom: 20px; gap: 20px;">
-                        <div class="dash-card">
-                            <h3 style="margin-bottom: 15px;"><i class="fas fa-user-plus"></i> New Users (Last 30 Days)</h3>
+                        <div class="dash-card" style="border-left: 4px solid #007bff;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                <div style="width: 40px; height: 40px; background: #e7f3ff; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-plus" style="color: #007bff; font-size: 1.2rem;"></i>
+                                </div>
+                                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1f2937;">New Users (Last 30 Days)</h3>
+                            </div>
                             <div id="admin-new-users-chart" style="height: 200px; display: flex; align-items: center; justify-content: center; color: #999;">
-                                Loading chart...
+                                <div style="text-align: center;">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #007bff;"></i>
+                                    <p style="margin-top: 10px;">Loading chart...</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="dash-card">
-                            <h3 style="margin-bottom: 15px;"><i class="fas fa-file-alt"></i> Application Status</h3>
+                        <div class="dash-card" style="border-left: 4px solid #ffc107;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                <div style="width: 40px; height: 40px; background: #fffbf0; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-file-alt" style="color: #ffc107; font-size: 1.2rem;"></i>
+                                </div>
+                                <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1f2937;">Application Status</h3>
+                            </div>
                             <div id="admin-status-chart" style="height: 200px; display: flex; align-items: center; justify-content: center; color: #999;">
-                                Loading chart...
+                                <div style="text-align: center;">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #ffc107;"></i>
+                                    <p style="margin-top: 10px;">Loading chart...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dash-card">
-                        <h3 style="margin-bottom: 15px;"><i class="fas fa-table"></i> Detailed Statistics</h3>
+                    <div class="dash-card" style="border-left: 4px solid #28a745;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            <div style="width: 40px; height: 40px; background: #f0f9f4; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-table" style="color: #28a745; font-size: 1.2rem;"></i>
+                            </div>
+                            <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1f2937;">Detailed Statistics</h3>
+                        </div>
                         <div id="admin-detailed-stats" style="overflow-x: auto;">
                             <!-- Populated by JS -->
                         </div>
@@ -4953,6 +5127,107 @@
                     </p>
                 </div>
                 <button class="btn btn-primary" style="width: 100%;" onclick="saveUserChanges()"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASSIGN COUNSELOR TO STUDENT MODAL -->
+    <div id="assign-counselor-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-tie"></i> Assign Counselor to Student</h3>
+                <button class="modal-close" onclick="closeAssignCounselorModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div class="alert alert-primary mb-4">
+                    <p class="mb-0">
+                        <strong><i class="fas fa-user-graduate me-2"></i>Selected Student:</strong> 
+                        <span id="assign-counselor-student-name">Unknown</span>
+                    </p>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" id="assign-counselor-search" class="form-control" placeholder="Search counselors by name or email..." onkeyup="filterAssignCounselorList()">
+                    </div>
+                </div>
+                
+                <div id="assign-counselor-list" style="max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px;">
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                        <p>Loading counselors...</p>
+                    </div>
+                </div>
+                
+                <div class="mt-3 d-flex justify-content-between align-items-center">
+                    <span class="text-muted">
+                        <span id="assign-counselor-selected-count">0</span> counselor(s) selected
+                    </span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary" onclick="closeAssignCounselorModal()">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </button>
+                        <button class="btn btn-primary" onclick="saveCounselorAssignment()">
+                            <i class="fas fa-save me-2"></i>Assign Counselor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASSIGN STUDENTS TO COUNSELOR MODAL -->
+    <div id="assign-students-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-graduate"></i> Assign Students to Counselor</h3>
+                <button class="modal-close" onclick="closeAssignStudentsModal()">&times;</button>
+            </div>
+            <div style="padding: 20px;">
+                <div class="alert alert-primary mb-4">
+                    <p class="mb-0">
+                        <strong><i class="fas fa-user-tie me-2"></i>Selected Counselor:</strong> 
+                        <span id="assign-students-counselor-name">Unknown</span>
+                    </p>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" id="assign-students-search" class="form-control" placeholder="Search students by name or email..." onkeyup="filterAssignStudentsList()">
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="assign-students-show-assigned" onchange="filterAssignStudentsList()">
+                        <label class="form-check-label" for="assign-students-show-assigned">
+                            Show already assigned students
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="assign-students-list" style="max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px;">
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                        <p>Loading students...</p>
+                    </div>
+                </div>
+                
+                <div class="mt-3 d-flex justify-content-between align-items-center">
+                    <span class="text-muted">
+                        <span id="assign-students-selected-count">0</span> student(s) selected
+                    </span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary" onclick="closeAssignStudentsModal()">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </button>
+                        <button class="btn btn-primary" onclick="saveStudentsAssignment()">
+                            <i class="fas fa-save me-2"></i>Assign Selected Students
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -7820,10 +8095,16 @@
                 }
                 // Wait a bit to ensure Firebase is ready, then show dashboard
                 setTimeout(() => {
-                    if(typeof showAdminView === 'function') {
-                        showAdminView('dashboard');
-                    } else if(typeof renderAdminUsers === 'function') {
-                        renderAdminUsers('all');
+                    try {
+                        if(typeof showAdminView === 'function') {
+                            showAdminView('dashboard');
+                        } else if(typeof renderAdminUsers === 'function') {
+                            renderAdminUsers('all');
+                        } else {
+                            console.error('Admin functions not available');
+                        }
+                    } catch(e) {
+                        console.error('Error initializing admin panel:', e);
                     }
                 }, 100);
             } else if (page === 'blogs') {
@@ -7846,25 +8127,73 @@
         };
 
         // --- ADMIN FUNCTIONS ---
-        window.renderAdminUsers = async function(filter = 'all') {
-            // Show users view
-            showAdminView('users');
+        
+        // Get current active filter
+        window.getCurrentUserFilter = function() {
+            const activeTab = document.querySelector('.user-filter-tab.active');
+            if(activeTab) {
+                const tabId = activeTab.id;
+                if(tabId === 'filter-tab-all') return 'all';
+                if(tabId === 'filter-tab-students') return 'students';
+                if(tabId === 'filter-tab-counselors') return 'counselors';
+                if(tabId === 'filter-tab-admins') return 'admins';
+            }
+            return 'all'; // Default
+        };
+        
+        // Switch user filter tab
+        window.switchUserFilter = function(filter) {
+            // Update filter tabs (Bootstrap nav-tabs)
+            document.querySelectorAll('.user-filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // Update active menu item (exclude back link)
+            const tabId = `filter-tab-${filter}`;
+            const activeTab = document.getElementById(tabId);
+            if(activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // Render users with the selected filter
+            renderAdminUsers(filter);
+        };
+        
+        window.renderAdminUsers = async function(filter = 'all') {
+            // Show users view (but don't call renderAdminUsers again to avoid infinite loop)
+            const usersView = document.getElementById('admin-users-view');
+            const dashboardView = document.getElementById('admin-dashboard-view');
+            const analyticsView = document.getElementById('admin-analytics-view');
+            const activityView = document.getElementById('admin-activity-view');
+            const contactsView = document.getElementById('admin-contacts-view');
+            const blogsView = document.getElementById('admin-blogs-view');
+            
+            if(usersView) usersView.style.display = 'block';
+            if(dashboardView) dashboardView.style.display = 'none';
+            if(analyticsView) analyticsView.style.display = 'none';
+            if(activityView) activityView.style.display = 'none';
+            if(contactsView) contactsView.style.display = 'none';
+            if(blogsView) blogsView.style.display = 'none';
+            
+            // Update menu items - activate All Users menu item
             document.querySelectorAll('.dash-menu-item').forEach(item => {
-                // Skip the back to counselor link
                 if(item.id === 'back-to-counselor-link') return;
-                
-                const itemText = item.textContent || '';
-                if((filter === 'all' && itemText.includes('All Users')) ||
-                   (filter === 'students' && itemText.includes('Students')) ||
-                   (filter === 'counselors' && itemText.includes('Counselors')) ||
-                   (filter === 'admins' && itemText.includes('Admins'))) {
+                if(item.id === 'admin-menu-users') {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
                 }
             });
+            
+            // Update filter tabs (Bootstrap nav-tabs)
+            document.querySelectorAll('.user-filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const tabId = `filter-tab-${filter}`;
+            const activeTab = document.getElementById(tabId);
+            if(activeTab) {
+                activeTab.classList.add('active');
+            }
             
             const list = document.getElementById('admin-users-list');
             const header = document.getElementById('admin-list-header');
@@ -7874,27 +8203,69 @@
                 return;
             }
             
-            // Update header
-            const headers = {
-                'all': 'All Users',
-                'students': 'Students',
-                'counselors': 'Counselors',
-                'admins': 'Administrators'
+            // Update header with icon and count
+            const headerConfig = {
+                'all': { icon: 'fa-users', color: '#007bff', text: 'All Users' },
+                'students': { icon: 'fa-user-graduate', color: '#28a745', text: 'Students' },
+                'counselors': { icon: 'fa-user-tie', color: '#ffc107', text: 'Counselors' },
+                'admins': { icon: 'fa-user-shield', color: '#dc3545', text: 'Administrators' }
             };
-            if(header) header.innerText = headers[filter] || 'All Users';
             
-            list.innerHTML = "<div style='padding:20px; color:#999; text-align:center;'><i class='fas fa-spinner fa-spin'></i> Loading users...</div>";
+            const config = headerConfig[filter] || headerConfig['all'];
+            if(header) {
+                header.innerHTML = `<i class="fas ${config.icon}" style="color: ${config.color};"></i>${config.text}`;
+                header.style.display = 'flex';
+                header.style.alignItems = 'center';
+                header.style.gap = '8px';
+            }
+            
+            list.innerHTML = `
+                <div style='padding: 60px 20px; text-align: center;'>
+                    <div style='width: 60px; height: 60px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;'>
+                        <i class='fas fa-spinner fa-spin' style='font-size: 2rem; color: #007bff;'></i>
+                    </div>
+                    <p style='color: #6b7280; margin: 0; font-size: 0.95rem; font-weight: 500;'>Loading users...</p>
+                </div>
+            `;
             
             if(!db) {
-                list.innerHTML = "<div style='padding:20px; color:var(--danger); text-align:center;'><i class='fas fa-exclamation-triangle'></i> Database not initialized.</div>";
+                list.innerHTML = `
+                    <div style='padding: 60px 20px; text-align: center;'>
+                        <div style='width: 80px; height: 80px; background: #fef2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;'>
+                            <i class='fas fa-exclamation-triangle' style='font-size: 2.5rem; color: #dc3545;'></i>
+                        </div>
+                        <h3 style='color: #374151; margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600;'>Database not initialized</h3>
+                        <p style='color: #6b7280; margin: 0; font-size: 0.9rem;'>Please refresh the page or contact support</p>
+                    </div>
+                `;
                 return;
             }
             
             try {
                 let allUsers = [];
+                const counselorMap = {}; // Map counselor IDs to their names
+                
+                // Get all counselors first to build the map
+                const counselorsSnapshot = await getDocs(collection(db, "counselors"));
+                counselorsSnapshot.forEach((doc) => {
+                    const counselorData = doc.data();
+                    if(!counselorData.deleted) {
+                        counselorMap[doc.id] = counselorData.name || counselorData.email || 'Unknown Counselor';
+                    }
+                });
+                
+                // Also get counselor names from users collection
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                usersSnapshot.forEach((doc) => {
+                    const userData = doc.data();
+                    if(userData.deleted) return;
+                    const role = userData.role || 'student';
+                    if(role === 'counselor' && !counselorMap[doc.id]) {
+                        counselorMap[doc.id] = `${userData.fname || ''} ${userData.lname || ''}`.trim() || userData.email || 'Unknown Counselor';
+                    }
+                });
                 
                 // Get all users from users collection (exclude deleted)
-                const usersSnapshot = await getDocs(collection(db, "users"));
                 usersSnapshot.forEach((doc) => {
                     const userData = doc.data();
                     // Skip deleted users
@@ -7908,6 +8279,7 @@
                         role: role,
                         milestone: userData.milestone || null,
                         counselorId: userData.counselorId || null,
+                        counselorName: userData.counselorId ? (counselorMap[userData.counselorId] || 'Unknown Counselor') : null,
                         status: userData.status || 'Draft',
                         createdAt: userData.createdAt || null,
                         updatedAt: userData.updatedAt || null
@@ -7915,7 +8287,6 @@
                 });
                 
                 // Get counselors from counselors collection (for those not in users)
-                const counselorsSnapshot = await getDocs(collection(db, "counselors"));
                 counselorsSnapshot.forEach((doc) => {
                     const counselorData = doc.data();
                     // Skip deleted counselors
@@ -7930,6 +8301,7 @@
                             lname: '',
                             role: 'counselor',
                             counselorId: null,
+                            counselorName: null,
                             status: null,
                             createdAt: counselorData.createdAt || null,
                             updatedAt: counselorData.updatedAt || null
@@ -7943,12 +8315,16 @@
                     }
                 });
                 
-                // Filter users
+                // Filter users and count students for counselors
                 let filteredUsers = allUsers;
                 if(filter === 'students') {
                     filteredUsers = allUsers.filter(u => u.role === 'student');
                 } else if(filter === 'counselors') {
                     filteredUsers = allUsers.filter(u => u.role === 'counselor');
+                    // Count students assigned to each counselor
+                    filteredUsers.forEach(counselor => {
+                        counselor.studentCount = allUsers.filter(u => u.role === 'student' && u.counselorId === counselor.id).length;
+                    });
                 } else if(filter === 'admins') {
                     filteredUsers = allUsers.filter(u => u.role === 'admin');
                 }
@@ -7956,21 +8332,62 @@
                 list.innerHTML = "";
                 
                 if(filteredUsers.length === 0) {
-                    list.innerHTML = `<div style='padding:20px; color:#999; text-align:center;'><i class='fas fa-users' style='font-size: 2rem; opacity: 0.3; margin-bottom: 10px;'></i><p>No ${filter} users found.</p></div>`;
+                    const emptyIcons = {
+                        'all': 'fa-users',
+                        'students': 'fa-user-graduate',
+                        'counselors': 'fa-user-tie',
+                        'admins': 'fa-user-shield'
+                    };
+                    const emptyMessages = {
+                        'all': 'No users found',
+                        'students': 'No students found',
+                        'counselors': 'No counselors found',
+                        'admins': 'No administrators found'
+                    };
+                    const icon = emptyIcons[filter] || 'fa-users';
+                    const message = emptyMessages[filter] || 'No users found';
+                    list.innerHTML = `
+                        <div style='padding: 60px 20px; text-align: center;'>
+                            <div style='width: 80px; height: 80px; background: #f3f4f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;'>
+                                <i class='fas ${icon}' style='font-size: 2.5rem; color: #9ca3af;'></i>
+                            </div>
+                            <h3 style='color: #374151; margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600;'>${message}</h3>
+                            <p style='color: #6b7280; margin: 0; font-size: 0.9rem;'>Get started by creating a new user</p>
+                        </div>
+                    `;
                     return;
                 }
                 
-                // Render users
+                // Render users with Bootstrap styling
                 filteredUsers.forEach(u => {
                     const div = document.createElement('div');
-                    div.className = 'student-item';
-                    div.style.padding = '15px';
+                    div.className = 'list-group-item';
                     
-                    const roleBadge = {
-                        'admin': '<span style="background: #dc3545; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-user-shield"></i> Admin</span>',
-                        'counselor': '<span style="background: #007bff; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-user-tie"></i> Counselor</span>',
-                        'student': '<span style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;"><i class="fas fa-user-graduate"></i> Student</span>'
+                    // Role-specific colors and icons
+                    const roleConfig = {
+                        'admin': {
+                            color: '#dc3545',
+                            bgColor: '#fee',
+                            icon: 'fa-user-shield',
+                            label: 'Admin'
+                        },
+                        'counselor': {
+                            color: '#007bff',
+                            bgColor: '#e7f3ff',
+                            icon: 'fa-user-tie',
+                            label: 'Counselor'
+                        },
+                        'student': {
+                            color: '#28a745',
+                            bgColor: '#f0f9f4',
+                            icon: 'fa-user-graduate',
+                            label: 'Student'
+                        }
                     };
+                    
+                    const config = roleConfig[u.role] || roleConfig['student'];
+                    
+                    const roleBadge = `<span style="background: ${config.color}; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;"><i class="fas ${config.icon}"></i> ${config.label}</span>`;
                     
                     const userName = `${u.fname || ''} ${u.lname || ''}`.trim() || u.email || 'Unknown User';
                     
@@ -7986,27 +8403,90 @@
                         'Visa Denied': '#dc3545'
                     };
                     const milestoneBadge = (u.role === 'student' && u.milestone) ? 
-                        `<span style="background: ${milestoneColors[u.milestone] || '#6c757d'}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; margin-left: 8px; font-weight: 500;">${u.milestone}</span>` : '';
+                        `<span style="background: ${milestoneColors[u.milestone] || '#6c757d'}; color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; margin-left: 8px; font-weight: 500; display: inline-flex; align-items: center;">${u.milestone}</span>` : '';
+                    
+                    // Status badge
+                    const statusColors = {
+                        'Draft': '#6c757d',
+                        'Submitted': '#007bff',
+                        'In Review': '#ffc107',
+                        'Approved': '#28a745',
+                        'Rejected': '#dc3545'
+                    };
+                    const statusBadge = (u.status && u.role === 'student') ? 
+                        `<span style="background: ${statusColors[u.status] || '#6c757d'}; color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: 500; display: inline-flex; align-items: center; margin-left: 8px;">${u.status}</span>` : '';
+                    
+                    // Format dates
+                    const createdDate = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
                     
                     div.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                            <input type="checkbox" data-user-id="${u.id}" onchange="updateBulkActions()" style="width: 18px; height: 18px; cursor: pointer;">
-                            <div style="flex: 1;">
-                                <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
-                                    ${userName}${milestoneBadge}
+                        <div class="d-flex align-items-center gap-3 w-100">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" data-user-id="${u.id}" onchange="updateBulkActions()" style="accent-color: ${config.color};">
+                            </div>
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="d-flex align-items-center flex-wrap gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: ${config.bgColor}; color: ${config.color};">
+                                            <i class="fas ${config.icon}"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-bold text-dark">${userName}</h6>
+                                    </div>
+                                    ${roleBadge}
+                                    ${milestoneBadge}
+                                    ${statusBadge}
                                 </div>
-                                <div style="font-size: 0.85rem; color: #666; margin-bottom: 5px;">
-                                    <i class="fas fa-envelope" style="margin-right: 5px;"></i>${u.email}
-                                    ${u.role ? ` • ${roleBadge[u.role] || ''}` : ''}
-                                    ${u.status ? ` • <span style="color: #999;">Status: ${u.status}</span>` : ''}
+                                <div class="d-flex flex-wrap gap-3 align-items-center small text-muted">
+                                    <span class="d-flex align-items-center gap-1">
+                                        <i class="fas fa-envelope"></i>
+                                        <span class="text-break">${u.email}</span>
+                                    </span>
+                                    ${u.role === 'student' && u.counselorName ? `
+                                    <span class="d-flex align-items-center gap-1">
+                                        <i class="fas fa-user-tie text-primary"></i>
+                                        <span><strong>Counselor:</strong> ${u.counselorName}</span>
+                                    </span>
+                                    ` : ''}
+                                    ${u.role === 'student' && !u.counselorName ? `
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="fas fa-exclamation-circle me-1"></i>No Counselor Assigned
+                                    </span>
+                                    ` : ''}
+                                    ${u.role === 'counselor' && u.studentCount !== undefined ? `
+                                    <span class="d-flex align-items-center gap-1">
+                                        <i class="fas fa-user-graduate text-success"></i>
+                                        <span><strong>Students:</strong> ${u.studentCount} assigned</span>
+                                    </span>
+                                    ` : ''}
+                                    <span class="d-flex align-items-center gap-1">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Joined: ${createdDate}</span>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div style="display: flex; gap: 10px;">
-                            <button class="coun-action-btn" title="Edit" onclick="editAdminUser('${u.id}')"><i class="fas fa-edit"></i></button>
-                            ${u.role !== 'admin' ? `<button class="coun-action-btn delete" title="Delete" onclick="deleteAdminUser('${u.id}', '${u.role}')"><i class="fas fa-trash"></i></button>` : ''}
+                            <div class="d-flex gap-2 flex-shrink-0">
+                                ${u.role === 'counselor' ? `
+                                <button class="btn btn-sm btn-info" title="Assign Students to Counselor" onclick="assignStudentsToCounselor('${u.id}', '${userName}')">
+                                    <i class="fas fa-user-graduate me-1"></i>Assign Students
+                                </button>
+                                ` : ''}
+                                ${u.role === 'student' ? `
+                                <button class="btn btn-sm btn-info" title="Assign Counselor to Student" onclick="assignCounselorToStudent('${u.id}', '${userName}')">
+                                    <i class="fas fa-user-tie me-1"></i>Assign Counselor
+                                </button>
+                                ` : ''}
+                                <button class="btn btn-sm btn-outline-primary" title="Edit User" onclick="editAdminUser('${u.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                ${u.role !== 'admin' ? `<button class="btn btn-sm btn-outline-danger" title="Delete User" onclick="deleteAdminUser('${u.id}', '${u.role}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>` : ''}
+                            </div>
                         </div>
                     `;
+                    
+                    // Bootstrap list-group-item already has hover effects from CSS
+                    
                     list.appendChild(div);
                 });
             } catch(e) {
@@ -8015,7 +8495,16 @@
                 if(e.message && e.message.includes('permission') || e.message.includes('Permission')) {
                     errorMsg = 'Permission denied. Please ensure you are logged in as an admin and your admin role is properly set in the database.';
                 }
-                list.innerHTML = `<div style='padding:20px; color:var(--danger); text-align:center;'><i class='fas fa-exclamation-triangle'></i> Error loading users: ${errorMsg}<br><small style='margin-top:10px; display:block;'>If you are an admin, please check that your user document exists and has role='admin' set.</small></div>`;
+                list.innerHTML = `
+                    <div style='padding: 60px 20px; text-align: center;'>
+                        <div style='width: 80px; height: 80px; background: #fef2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;'>
+                            <i class='fas fa-exclamation-triangle' style='font-size: 2.5rem; color: #dc3545;'></i>
+                        </div>
+                        <h3 style='color: #374151; margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 600;'>Error loading users</h3>
+                        <p style='color: #6b7280; margin: 0 0 15px 0; font-size: 0.9rem;'>${errorMsg}</p>
+                        <small style='color: #9ca3af; display: block; font-size: 0.85rem;'>If you are an admin, please check that your user document exists and has role='admin' set.</small>
+                    </div>
+                `;
             }
         };
         
@@ -8083,12 +8572,9 @@
                 
                 alert('User created successfully!');
                 closeCreateUserModal();
-                const activeItem = document.querySelector('.dash-menu-item.active');
-                const activeText = activeItem ? activeItem.textContent : '';
-                const filter = activeText.includes('Students') ? 'students' : 
-                              activeText.includes('Counselors') ? 'counselors' :
-                              activeText.includes('Admins') ? 'admins' : 'all';
-                renderAdminUsers(filter);
+                // Refresh with current filter
+                const currentFilter = getCurrentUserFilter();
+                renderAdminUsers(currentFilter);
             } catch(err) {
                 console.error('Error creating user:', err);
                 alert(`Error creating user: ${err.message}`);
@@ -8222,12 +8708,9 @@
                 
                 alert('User updated successfully!');
                 closeEditUserModal();
-                const activeItem = document.querySelector('.dash-menu-item.active');
-                const activeText = activeItem ? activeItem.textContent : '';
-                const activeFilter = activeText.includes('Students') ? 'students' : 
-                                   activeText.includes('Counselors') ? 'counselors' :
-                                   activeText.includes('Admins') ? 'admins' : 'all';
-                renderAdminUsers(activeFilter);
+                // Refresh with current filter
+                const currentFilter = getCurrentUserFilter();
+                renderAdminUsers(currentFilter);
             } catch(e) {
                 console.error('Error updating user:', e);
                 alert(`Error updating user: ${e.message}`);
@@ -8261,12 +8744,9 @@
                 }
                 
                 alert('User deleted successfully!');
-                const activeItem = document.querySelector('.dash-menu-item.active');
-                const activeText = activeItem ? activeItem.textContent : '';
-                const activeFilter = activeText.includes('Students') ? 'students' : 
-                                   activeText.includes('Counselors') ? 'counselors' :
-                                   activeText.includes('Admins') ? 'admins' : 'all';
-                renderAdminUsers(activeFilter);
+                // Refresh with current filter
+                const currentFilter = getCurrentUserFilter();
+                renderAdminUsers(currentFilter);
             } catch(e) {
                 console.error('Error deleting user:', e);
                 alert(`Error deleting user: ${e.message}`);
@@ -8299,6 +8779,7 @@
             } else if(view === 'users') {
                 document.getElementById('admin-users-view').style.display = 'block';
                 document.getElementById('admin-menu-users').classList.add('active');
+                // Load all users by default
                 renderAdminUsers('all');
             } else if(view === 'analytics') {
                 document.getElementById('admin-analytics-view').style.display = 'block';
@@ -8332,7 +8813,15 @@
 
         // Load dashboard statistics
         window.loadAdminDashboard = async function() {
-            if(!db) return;
+            if(!db) {
+                console.warn('Database not initialized, skipping dashboard load');
+                // Show error message in dashboard
+                const activityEl = document.getElementById('admin-recent-activity');
+                if(activityEl) {
+                    activityEl.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">Database not initialized</div>';
+                }
+                return;
+            }
             
             try {
                 const usersSnapshot = await getDocs(collection(db, "users"));
@@ -8379,11 +8868,16 @@
                     }
                 });
                 
-                // Update statistics
-                document.getElementById('admin-stat-total').textContent = totalUsers;
-                document.getElementById('admin-stat-students').textContent = students;
-                document.getElementById('admin-stat-counselors').textContent = counselors;
-                document.getElementById('admin-stat-admins').textContent = admins;
+                // Update statistics (check if elements exist)
+                const statTotal = document.getElementById('admin-stat-total');
+                const statStudents = document.getElementById('admin-stat-students');
+                const statCounselors = document.getElementById('admin-stat-counselors');
+                const statAdmins = document.getElementById('admin-stat-admins');
+                
+                if(statTotal) statTotal.textContent = totalUsers;
+                if(statStudents) statStudents.textContent = students;
+                if(statCounselors) statCounselors.textContent = counselors;
+                if(statAdmins) statAdmins.textContent = admins;
                 
                 // Render pie chart (simple text-based)
                 const pieChart = document.getElementById('admin-pie-chart');
@@ -8427,10 +8921,27 @@
                     `;
                 }).join('');
                 
-                document.getElementById('admin-recent-activity').innerHTML = activityHtml || '<div style="text-align: center; padding: 20px; color: #999;">No recent activity</div>';
+                const activityEl = document.getElementById('admin-recent-activity');
+                if(activityEl) {
+                    activityEl.innerHTML = activityHtml || '<div style="text-align: center; padding: 20px; color: #999;">No recent activity</div>';
+                }
                 
             } catch(e) {
                 console.error('Error loading dashboard:', e);
+                // Show error in UI
+                const activityEl = document.getElementById('admin-recent-activity');
+                if(activityEl) {
+                    activityEl.innerHTML = `<div style="text-align: center; padding: 20px; color: #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error loading dashboard: ${e.message}</p>
+                    </div>`;
+                }
+                // Also update stats to show error
+                const statElements = ['admin-stat-total', 'admin-stat-students', 'admin-stat-counselors', 'admin-stat-admins'];
+                statElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) el.textContent = '-';
+                });
             }
         };
 
@@ -8476,14 +8987,19 @@
                 
                 // Render new users chart
                 document.getElementById('admin-new-users-chart').innerHTML = `
-                    <div style="text-align: center;">
-                        <div style="font-size: 3rem; color: #007bff; font-weight: bold;">${newUsers}</div>
-                        <div style="color: #666; margin-top: 10px;">New users in last 30 days</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #e7f3ff 0%, #cfe2ff 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 4px solid #007bff;">
+                            <div style="font-size: 3rem; color: #007bff; font-weight: bold;">${newUsers}</div>
+                        </div>
+                        <div style="color: #6b7280; font-size: 0.95rem; font-weight: 500;">New users in last 30 days</div>
                     </div>
                 `;
                 
                 // Render status chart
-                const statusHtml = Object.entries(statusCounts).filter(([status, count]) => count > 0).map(([status, count]) => {
+                const statusCountsArray = Object.entries(statusCounts).filter(([status, count]) => count > 0);
+                const maxCount = statusCountsArray.length > 0 ? Math.max(...statusCountsArray.map(([_, count]) => count)) : 1;
+                
+                const statusHtml = statusCountsArray.length > 0 ? statusCountsArray.map(([status, count]) => {
                     const colors = {
                         'Draft': '#6c757d',
                         'Submitted': '#007bff',
@@ -8491,53 +9007,75 @@
                         'Approved': '#28a745',
                         'Rejected': '#dc3545'
                     };
+                    const bgColors = {
+                        'Draft': '#f3f4f6',
+                        'Submitted': '#e7f3ff',
+                        'In Review': '#fffbf0',
+                        'Approved': '#f0f9f4',
+                        'Rejected': '#fef2f2'
+                    };
+                    const percentage = maxCount > 0 ? (count / maxCount) * 100 : 0;
                     return `
-                        <div style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>${status}</span>
-                                <span style="font-weight: 600;">${count}</span>
+                        <div style="margin-bottom: 18px; padding: 12px; background: ${bgColors[status] || '#f9fafb'}; border-radius: 8px; border-left: 3px solid ${colors[status] || '#007bff'};">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-weight: 600; color: #1f2937; font-size: 0.95rem;">${status}</span>
+                                <span style="font-weight: 700; color: ${colors[status] || '#007bff'}; font-size: 1.1rem;">${count}</span>
                             </div>
-                            <div style="background: #f0f0f0; height: 20px; border-radius: 10px; overflow: hidden;">
-                                <div style="background: ${colors[status] || '#007bff'}; height: 100%; width: ${(count / Math.max(...Object.values(statusCounts))) * 100}%;"></div>
+                            <div style="background: #e5e7eb; height: 8px; border-radius: 10px; overflow: hidden;">
+                                <div style="background: ${colors[status] || '#007bff'}; height: 100%; width: ${percentage}%; transition: width 0.3s ease; border-radius: 10px;"></div>
                             </div>
                         </div>
                     `;
-                }).join('');
+                }).join('') : '<div style="text-align: center; padding: 40px; color: #9ca3af;"><i class="fas fa-inbox" style="font-size: 2rem; opacity: 0.3; margin-bottom: 10px;"></i><p>No status data available</p></div>';
                 
-                document.getElementById('admin-status-chart').innerHTML = statusHtml || '<div style="text-align: center; color: #999;">No status data</div>';
+                document.getElementById('admin-status-chart').innerHTML = statusHtml;
                 
                 // Detailed stats table
                 const statsHtml = `
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead>
-                            <tr style="background: #f8f9fa;">
-                                <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Metric</th>
-                                <th style="padding: 12px; text-align: right; border-bottom: 2px solid #ddd;">Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Total Users</td>
-                                <td style="padding: 10px; text-align: right; border-bottom: 1px solid #eee;" id="analytics-total">-</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">New Users (30 days)</td>
-                                <td style="padding: 10px; text-align: right; border-bottom: 1px solid #eee;">${newUsers}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Students</td>
-                                <td style="padding: 10px; text-align: right; border-bottom: 1px solid #eee;" id="analytics-students">-</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #eee;">Counselors</td>
-                                <td style="padding: 10px; text-align: right; border-bottom: 1px solid #eee;" id="analytics-counselors">-</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px;">Admins</td>
-                                <td style="padding: 10px; text-align: right;" id="analytics-admins">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <th style="padding: 16px; text-align: left; border-bottom: none; color: white; font-weight: 600; font-size: 0.95rem;">
+                                        <i class="fas fa-chart-line" style="margin-right: 8px;"></i>Metric
+                                    </th>
+                                    <th style="padding: 16px; text-align: right; border-bottom: none; color: white; font-weight: 600; font-size: 0.95rem;">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #f9fafb;">
+                                    <td style="padding: 14px; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 500;">
+                                        <i class="fas fa-users" style="margin-right: 8px; color: #007bff;"></i>Total Users
+                                    </td>
+                                    <td style="padding: 14px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 700; color: #1f2937; font-size: 1.1rem;" id="analytics-total">-</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 500;">
+                                        <i class="fas fa-user-plus" style="margin-right: 8px; color: #28a745;"></i>New Users (30 days)
+                                    </td>
+                                    <td style="padding: 14px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 700; color: #1f2937; font-size: 1.1rem;">${newUsers}</td>
+                                </tr>
+                                <tr style="background: #f9fafb;">
+                                    <td style="padding: 14px; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 500;">
+                                        <i class="fas fa-user-graduate" style="margin-right: 8px; color: #28a745;"></i>Students
+                                    </td>
+                                    <td style="padding: 14px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 700; color: #1f2937; font-size: 1.1rem;" id="analytics-students">-</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px; border-bottom: 1px solid #e5e7eb; color: #374151; font-weight: 500;">
+                                        <i class="fas fa-user-tie" style="margin-right: 8px; color: #ffc107;"></i>Counselors
+                                    </td>
+                                    <td style="padding: 14px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 700; color: #1f2937; font-size: 1.1rem;" id="analytics-counselors">-</td>
+                                </tr>
+                                <tr style="background: #f9fafb;">
+                                    <td style="padding: 14px; color: #374151; font-weight: 500;">
+                                        <i class="fas fa-user-shield" style="margin-right: 8px; color: #dc3545;"></i>Admins
+                                    </td>
+                                    <td style="padding: 14px; text-align: right; font-weight: 700; color: #1f2937; font-size: 1.1rem;" id="analytics-admins">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 `;
                 document.getElementById('admin-detailed-stats').innerHTML = statsHtml;
                 
@@ -9746,19 +10284,88 @@
 
         // Filter and search functions
         window.filterAdminUsers = function() {
-            const searchTerm = document.getElementById('admin-search-users').value.toLowerCase();
+            const searchTerm = document.getElementById('admin-search-users').value.toLowerCase().trim();
             const roleFilter = document.getElementById('admin-filter-role').value;
             const statusFilter = document.getElementById('admin-filter-status').value;
             
-            const items = document.querySelectorAll('#admin-users-list .student-item');
+            const items = document.querySelectorAll('#admin-users-list .list-group-item');
+            let visibleCount = 0;
+            
             items.forEach(item => {
                 const text = item.textContent.toLowerCase();
-                const matchesSearch = !searchTerm || text.includes(searchTerm);
-                const matchesRole = roleFilter === 'all' || text.includes(roleFilter);
-                const matchesStatus = statusFilter === 'all' || text.includes(statusFilter);
                 
-                item.style.display = (matchesSearch && matchesRole && matchesStatus) ? 'flex' : 'none';
+                // Search matching
+                const matchesSearch = !searchTerm || 
+                    text.includes(searchTerm) ||
+                    item.querySelector('h6')?.textContent.toLowerCase().includes(searchTerm) ||
+                    item.querySelector('.text-break')?.textContent.toLowerCase().includes(searchTerm);
+                
+                // Role matching
+                let matchesRole = true;
+                if(roleFilter !== 'all') {
+                    if(roleFilter === 'student') {
+                        matchesRole = text.includes('student') || item.querySelector('.badge')?.textContent.includes('Student');
+                    } else if(roleFilter === 'counselor') {
+                        matchesRole = text.includes('counselor') || item.querySelector('.badge')?.textContent.includes('Counselor');
+                    } else if(roleFilter === 'admin') {
+                        matchesRole = text.includes('admin') || item.querySelector('.badge')?.textContent.includes('Admin');
+                    }
+                }
+                
+                // Status matching
+                let matchesStatus = true;
+                if(statusFilter !== 'all') {
+                    matchesStatus = text.includes(statusFilter.toLowerCase());
+                }
+                
+                const shouldShow = matchesSearch && matchesRole && matchesStatus;
+                item.style.display = shouldShow ? '' : 'none';
+                
+                if(shouldShow) visibleCount++;
             });
+            
+            // Show/hide empty state
+            const list = document.getElementById('admin-users-list');
+            let emptyState = list.querySelector('.no-results-message');
+            
+            if(visibleCount === 0 && items.length > 0) {
+                if(!emptyState) {
+                    emptyState = document.createElement('div');
+                    emptyState.className = 'no-results-message text-center py-5';
+                    emptyState.innerHTML = `
+                        <div class="mb-3">
+                            <i class="fas fa-search fa-3x text-muted opacity-50"></i>
+                        </div>
+                        <h5 class="text-muted mb-2">No users found</h5>
+                        <p class="text-muted mb-3">Try adjusting your search or filters</p>
+                        <button class="btn btn-outline-primary btn-sm" onclick="clearAdminFilters()">
+                            <i class="fas fa-redo me-1"></i>Clear Filters
+                        </button>
+                    `;
+                    list.appendChild(emptyState);
+                }
+                emptyState.style.display = 'block';
+            } else if(emptyState) {
+                emptyState.style.display = 'none';
+            }
+            
+            updateSearchClearButton();
+        };
+        
+        // Update search clear button visibility
+        window.updateSearchClearButton = function() {
+            const searchInput = document.getElementById('admin-search-users');
+            const clearButton = document.getElementById('admin-search-clear');
+            if(clearButton && searchInput) {
+                clearButton.style.display = searchInput.value.trim() ? 'block' : 'none';
+            }
+        };
+        
+        // Clear search input only
+        window.clearSearchInput = function() {
+            document.getElementById('admin-search-users').value = '';
+            filterAdminUsers();
+            document.getElementById('admin-search-users').focus();
         };
 
         window.clearAdminFilters = function() {
@@ -9766,6 +10373,7 @@
             document.getElementById('admin-filter-role').value = 'all';
             document.getElementById('admin-filter-status').value = 'all';
             filterAdminUsers();
+            document.getElementById('admin-search-users').focus();
         };
 
         // Bulk operations
@@ -9821,56 +10429,490 @@
                 }
                 alert(`${selected.length} user(s) deleted successfully!`);
                 clearUserSelection();
-                renderAdminUsers('all');
+                // Refresh with current filter
+                const currentFilter = getCurrentUserFilter();
+                renderAdminUsers(currentFilter);
             } catch(e) {
                 console.error('Error bulk deleting users:', e);
                 alert(`Error deleting users: ${e.message}`);
             }
         };
 
-        window.bulkAssignCounselor = async function() {
-            const selected = Array.from(document.querySelectorAll('#admin-users-list input[type="checkbox"][data-user-id]:checked'))
-                .map(cb => cb.getAttribute('data-user-id'));
-            
-            if(selected.length === 0) {
-                alert('No users selected');
+        // Assign counselor to a student (student-first approach)
+        window.assignCounselorToStudent = async function(studentId, studentName) {
+            if(!db) {
+                alert('Database not initialized');
                 return;
             }
             
-            // Get all counselors
-            const counselorsSnapshot = await getDocs(collection(db, "counselors"));
-            const counselors = [];
-            counselorsSnapshot.forEach(doc => {
-                const data = doc.data();
-                if(!data.deleted) {
-                    counselors.push({ id: doc.id, name: data.name || data.email || 'Unknown' });
+            // Get student info
+            let studentInfo = { id: studentId, name: studentName, currentCounselorId: null };
+            try {
+                const studentDoc = await getDoc(doc(db, "users", studentId));
+                if(studentDoc.exists()) {
+                    const userData = studentDoc.data();
+                    if(!studentName) {
+                        studentInfo.name = `${userData.fname || ''} ${userData.lname || ''}`.trim() || userData.email || 'Unknown Student';
+                    }
+                    studentInfo.currentCounselorId = userData.counselorId || null;
                 }
-            });
+            } catch(e) {
+                console.error('Error loading student:', e);
+            }
+            
+            // Store student info
+            const modal = document.getElementById('assign-counselor-modal');
+            modal.setAttribute('data-student-id', studentId);
+            if(studentInfo.currentCounselorId) {
+                modal.setAttribute('data-current-counselor-id', studentInfo.currentCounselorId);
+            } else {
+                modal.removeAttribute('data-current-counselor-id');
+            }
+            document.getElementById('assign-counselor-student-name').textContent = studentInfo.name;
+            
+            // Load all counselors
+            try {
+                const counselors = [];
+                const counselorMap = {};
+                
+                // Get counselors from counselors collection
+                const counselorsSnapshot = await getDocs(collection(db, "counselors"));
+                counselorsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    if(!data.deleted) {
+                        const counselorName = data.name || data.email || 'Unknown Counselor';
+                        counselorMap[doc.id] = counselorName;
+                        counselors.push({
+                            id: doc.id,
+                            name: counselorName,
+                            email: data.email || 'N/A',
+                            studentCount: data.studentCount || 0
+                        });
+                    }
+                });
+                
+                // Also get counselors from users collection
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                usersSnapshot.forEach(doc => {
+                    const userData = doc.data();
+                    if(userData.role === 'counselor' && !userData.deleted) {
+                        const counselorName = `${userData.fname || ''} ${userData.lname || ''}`.trim() || userData.email || 'Unknown Counselor';
+                        if(!counselors.find(c => c.id === doc.id)) {
+                            counselors.push({
+                                id: doc.id,
+                                name: counselorName,
+                                email: userData.email || 'N/A',
+                                studentCount: 0
+                            });
+                        }
+                    }
+                });
+                
+                // Count students for each counselor
+                usersSnapshot.forEach(doc => {
+                    const userData = doc.data();
+                    if(userData.role === 'student' && userData.counselorId) {
+                        const counselor = counselors.find(c => c.id === userData.counselorId);
+                        if(counselor) {
+                            counselor.studentCount = (counselor.studentCount || 0) + 1;
+                        }
+                    }
+                });
+                
+                // Store counselors for filtering
+                window.assignCounselorList = counselors;
+                renderAssignCounselorList(counselors, studentInfo.currentCounselorId);
+                
+                // Show modal
+                document.getElementById('assign-counselor-modal').classList.add('active');
+            } catch(e) {
+                console.error('Error loading counselors:', e);
+                alert(`Error loading counselors: ${e.message}`);
+            }
+        };
+        
+        // Render counselors list for assignment
+        window.renderAssignCounselorList = function(counselors, currentCounselorId) {
+            const list = document.getElementById('assign-counselor-list');
             
             if(counselors.length === 0) {
-                alert('No counselors available');
+                list.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-user-tie fa-2x mb-2 opacity-50"></i>
+                        <p>No counselors available</p>
+                    </div>
+                `;
                 return;
             }
             
-            const counselorOptions = counselors.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-            const counselorId = prompt(`Select counselor ID:\n\n${counselors.map((c, i) => `${i+1}. ${c.name} (${c.id})`).join('\n')}\n\nEnter counselor ID:`, '');
+            list.innerHTML = `
+                <div class="card mb-2 border-secondary">
+                    <div class="card-body py-2">
+                        <div class="form-check d-flex align-items-center">
+                            <input class="form-check-input" type="radio" 
+                                name="counselor-radio" 
+                                id="counselor-none"
+                                value=""
+                                ${!currentCounselorId ? 'checked' : ''}
+                                onchange="updateAssignCounselorCount()"
+                                style="flex-shrink: 0;">
+                            <div class="ms-3 flex-grow-1">
+                                <label class="form-check-label w-100" style="cursor: pointer;">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>None (Unassign)</strong>
+                                            <span class="badge bg-secondary ms-2">Remove Counselor</span>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted d-block">Remove the current counselor assignment</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ` + counselors.map(counselor => {
+                const isChecked = currentCounselorId === counselor.id ? 'checked' : '';
+                const isCurrent = currentCounselorId === counselor.id;
+                
+                return `
+                    <div class="card mb-2 ${isCurrent ? 'border-success' : ''}">
+                        <div class="card-body py-2">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input" type="radio" 
+                                    name="counselor-radio" 
+                                    id="counselor-${counselor.id}"
+                                    value="${counselor.id}"
+                                    ${isChecked}
+                                    onchange="updateAssignCounselorCount()"
+                                    style="flex-shrink: 0;">
+                                <div class="ms-3 flex-grow-1">
+                                    <label class="form-check-label w-100" style="cursor: pointer;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>${counselor.name}</strong>
+                                                ${isCurrent ? '<span class="badge bg-success ms-2">Currently Assigned</span>' : ''}
+                                                <span class="badge bg-info ms-2">${counselor.studentCount || 0} students</span>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted d-block">${counselor.email}</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
             
-            if(!counselorId) return;
+            updateAssignCounselorCount();
+        };
+        
+        // Filter counselors list
+        window.filterAssignCounselorList = function() {
+            const searchTerm = document.getElementById('assign-counselor-search').value.toLowerCase();
+            
+            if(!window.assignCounselorList) return;
+            
+            let filtered = window.assignCounselorList;
+            
+            // Filter by search term
+            if(searchTerm) {
+                filtered = filtered.filter(c => 
+                    c.name.toLowerCase().includes(searchTerm) || 
+                    c.email.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            const modal = document.getElementById('assign-counselor-modal');
+            const currentCounselorId = modal.getAttribute('data-current-counselor-id') || null;
+            renderAssignCounselorList(filtered, currentCounselorId);
+        };
+        
+        // Update selected count
+        window.updateAssignCounselorCount = function() {
+            const checked = document.querySelector('#assign-counselor-list input[type="radio"]:checked');
+            document.getElementById('assign-counselor-selected-count').textContent = checked ? '1' : '0';
+        };
+        
+        // Close assign counselor modal
+        window.closeAssignCounselorModal = function() {
+            document.getElementById('assign-counselor-modal').classList.remove('active');
+            window.assignCounselorList = null;
+        };
+        
+        // Save counselor assignment
+        window.saveCounselorAssignment = async function() {
+            const modal = document.getElementById('assign-counselor-modal');
+            const studentId = modal.getAttribute('data-student-id');
+            
+            if(!studentId) {
+                alert('No student selected');
+                return;
+            }
+            
+            const checked = document.querySelector('#assign-counselor-list input[type="radio"]:checked');
+            if(!checked) {
+                alert('Please select a counselor or choose "None" to unassign');
+                return;
+            }
+            
+            const counselorId = checked.value;
             
             try {
-                for(const userId of selected) {
-                    await updateDoc(doc(db, "users", userId), {
-                        counselorId: counselorId,
-                        assignedAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    });
+                const updateData = {
+                    updatedAt: new Date().toISOString()
+                };
+                
+                if(counselorId) {
+                    updateData.counselorId = counselorId;
+                    updateData.assignedAt = new Date().toISOString();
+                } else {
+                    updateData.counselorId = null;
+                    updateData.assignedAt = null;
                 }
-                alert(`${selected.length} user(s) assigned to counselor successfully!`);
-                clearUserSelection();
-                renderAdminUsers('all');
+                
+                await updateDoc(doc(db, "users", studentId), updateData);
+                
+                const action = counselorId ? 'assigned' : 'unassigned';
+                alert(`Successfully ${action} counselor!`);
+                closeAssignCounselorModal();
+                const currentFilter = getCurrentUserFilter();
+                renderAdminUsers(currentFilter);
             } catch(e) {
-                console.error('Error bulk assigning counselor:', e);
-                alert(`Error assigning counselor: ${e.message}`);
+                console.error('Error saving assignment:', e);
+                alert(`Error: ${e.message}`);
+            }
+        };
+        
+        // Assign students to a counselor (counselor-first approach)
+        window.assignStudentsToCounselor = async function(counselorId, counselorName) {
+            if(!db) {
+                alert('Database not initialized');
+                return;
+            }
+            
+            // Store counselor info
+            document.getElementById('assign-students-modal').setAttribute('data-counselor-id', counselorId);
+            document.getElementById('assign-students-counselor-name').textContent = counselorName;
+            
+            // Load all students
+            try {
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                const students = [];
+                const counselorMap = {};
+                
+                // Get counselor names
+                const counselorsSnapshot = await getDocs(collection(db, "counselors"));
+                counselorsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    if(!data.deleted) {
+                        counselorMap[doc.id] = data.name || data.email || 'Unknown';
+                    }
+                });
+                
+                usersSnapshot.forEach(doc => {
+                    const userData = doc.data();
+                    if(userData.deleted) return;
+                    if(userData.role === 'student') {
+                        const counselorName = userData.counselorId ? (counselorMap[userData.counselorId] || 'Unknown Counselor') : null;
+                        students.push({
+                            id: doc.id,
+                            name: `${userData.fname || ''} ${userData.lname || ''}`.trim() || userData.email || 'Unknown Student',
+                            email: userData.email || 'N/A',
+                            counselorId: userData.counselorId || null,
+                            counselorName: counselorName,
+                            isAssigned: !!userData.counselorId,
+                            isAssignedToThis: userData.counselorId === counselorId
+                        });
+                    }
+                });
+                
+                // Store students for filtering
+                window.assignStudentsList = students;
+                renderAssignStudentsList(students, counselorId);
+                
+                // Show modal
+                document.getElementById('assign-students-modal').classList.add('active');
+            } catch(e) {
+                console.error('Error loading students:', e);
+                alert(`Error loading students: ${e.message}`);
+            }
+        };
+        
+        // Render students list for assignment
+        window.renderAssignStudentsList = function(students, counselorId) {
+            const list = document.getElementById('assign-students-list');
+            const showAssigned = document.getElementById('assign-students-show-assigned').checked;
+            
+            // Filter students
+            let filtered = students;
+            if(!showAssigned) {
+                filtered = students.filter(s => !s.isAssigned || s.isAssignedToThis);
+            }
+            
+            if(filtered.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-users fa-2x mb-2 opacity-50"></i>
+                        <p>No students available</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = filtered.map(student => {
+                const isChecked = student.isAssignedToThis ? 'checked' : '';
+                const isDisabled = student.isAssigned && !student.isAssignedToThis ? 'disabled' : '';
+                const wasAssigned = student.isAssignedToThis ? 'data-was-assigned="true"' : '';
+                const assignedBadge = student.isAssignedToThis ? 
+                    '<span class="badge bg-success ms-2">Currently Assigned</span>' : 
+                    (student.isAssigned ? '<span class="badge bg-warning text-dark ms-2">Assigned to ' + (student.counselorName || 'Another Counselor') + '</span>' : 
+                    '<span class="badge bg-secondary ms-2">Available</span>');
+                
+                return `
+                    <div class="card mb-2 ${student.isAssignedToThis ? 'border-success' : ''}">
+                        <div class="card-body py-2">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input" type="checkbox" 
+                                    data-student-id="${student.id}" 
+                                    ${isChecked} 
+                                    ${isDisabled}
+                                    ${wasAssigned}
+                                    onchange="updateAssignStudentsCount()"
+                                    style="flex-shrink: 0;">
+                                <div class="ms-3 flex-grow-1">
+                                    <label class="form-check-label w-100" style="cursor: ${isDisabled ? 'not-allowed' : 'pointer'};">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>${student.name}</strong>
+                                                ${assignedBadge}
+                                            </div>
+                                        </div>
+                                        <small class="text-muted d-block">${student.email}</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateAssignStudentsCount();
+        };
+        
+        // Filter students list
+        window.filterAssignStudentsList = function() {
+            const searchTerm = document.getElementById('assign-students-search').value.toLowerCase();
+            const showAssigned = document.getElementById('assign-students-show-assigned').checked;
+            const counselorId = document.getElementById('assign-students-modal').getAttribute('data-counselor-id');
+            
+            if(!window.assignStudentsList) return;
+            
+            let filtered = window.assignStudentsList;
+            
+            // Filter by search term
+            if(searchTerm) {
+                filtered = filtered.filter(s => 
+                    s.name.toLowerCase().includes(searchTerm) || 
+                    s.email.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Filter by assigned status
+            if(!showAssigned) {
+                filtered = filtered.filter(s => !s.isAssigned || s.isAssignedToThis);
+            }
+            
+            renderAssignStudentsList(filtered, counselorId);
+        };
+        
+        // Update selected count
+        window.updateAssignStudentsCount = function() {
+            const checked = document.querySelectorAll('#assign-students-list input[type="checkbox"]:checked:not([disabled])');
+            document.getElementById('assign-students-selected-count').textContent = checked.length;
+        };
+        
+        // Close assign students modal
+        window.closeAssignStudentsModal = function() {
+            document.getElementById('assign-students-modal').classList.remove('active');
+            window.assignStudentsList = null;
+        };
+        
+        // Save students assignment
+        window.saveStudentsAssignment = async function() {
+            const modal = document.getElementById('assign-students-modal');
+            const counselorId = modal.getAttribute('data-counselor-id');
+            
+            if(!counselorId) {
+                alert('No counselor selected');
+                return;
+            }
+            
+            const checked = Array.from(document.querySelectorAll('#assign-students-list input[type="checkbox"]:checked:not([disabled])'))
+                .map(cb => cb.getAttribute('data-student-id'));
+            
+            if(checked.length === 0) {
+                alert('Please select at least one student to assign');
+                return;
+            }
+            
+            // Also get students that should be unassigned (were checked but now unchecked)
+            const allCheckboxes = document.querySelectorAll('#assign-students-list input[type="checkbox"][data-student-id]');
+            const previouslyAssigned = Array.from(allCheckboxes)
+                .filter(cb => cb.hasAttribute('data-was-assigned'))
+                .map(cb => cb.getAttribute('data-student-id'))
+                .filter(id => !checked.includes(id));
+            
+            try {
+                let assignCount = 0;
+                let unassignCount = 0;
+                let errorCount = 0;
+                
+                // Assign selected students
+                for(const studentId of checked) {
+                    try {
+                        await updateDoc(doc(db, "users", studentId), {
+                            counselorId: counselorId,
+                            assignedAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        });
+                        assignCount++;
+                    } catch(e) {
+                        console.error(`Error assigning student ${studentId}:`, e);
+                        errorCount++;
+                    }
+                }
+                
+                // Unassign students that were previously assigned but now unchecked
+                for(const studentId of previouslyAssigned) {
+                    try {
+                        await updateDoc(doc(db, "users", studentId), {
+                            counselorId: null,
+                            assignedAt: null,
+                            updatedAt: new Date().toISOString()
+                        });
+                        unassignCount++;
+                    } catch(e) {
+                        console.error(`Error unassigning student ${studentId}:`, e);
+                        errorCount++;
+                    }
+                }
+                
+                if(assignCount > 0 || unassignCount > 0) {
+                    let message = '';
+                    if(assignCount > 0) message += `Assigned ${assignCount} student(s). `;
+                    if(unassignCount > 0) message += `Unassigned ${unassignCount} student(s). `;
+                    if(errorCount > 0) message += `${errorCount} error(s) occurred.`;
+                    
+                    alert(message.trim());
+                    closeAssignStudentsModal();
+                    const currentFilter = getCurrentUserFilter();
+                    renderAdminUsers(currentFilter);
+                } else {
+                    alert('No changes made');
+                }
+            } catch(e) {
+                console.error('Error saving assignment:', e);
+                alert(`Error: ${e.message}`);
             }
         };
 
