@@ -1940,6 +1940,67 @@
 
         .wizard-content { display: none; animation: fadeIn 0.4s; }
         .wizard-content.active { display: block; }
+        
+        /* Progress Indicator Styles */
+        .progress-section {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-section:hover {
+            background: #f0f0f0;
+        }
+        
+        /* Preview Group Styles */
+        .preview-group {
+            margin-bottom: 15px;
+        }
+        
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .preview-value {
+            font-size: 1rem;
+            color: var(--text-dark);
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+        
+        /* Field Error Styles */
+        .field-error {
+            display: none;
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            padding-left: 5px;
+            animation: fadeIn 0.3s;
+        }
+        
+        .field-error::before {
+            content: "⚠ ";
+            font-weight: bold;
+        }
+        
+        /* Input error state */
+        input:invalid:not(:placeholder-shown),
+        select:invalid:not(:placeholder-shown) {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.1);
+        }
+        
+        input:valid:not(:placeholder-shown),
+        select:valid:not(:placeholder-shown) {
+            border-color: var(--success);
+        }
 
         /* --- GREEN LIGHT INDICATOR --- */
         .doc-status-light { width: 12px; height: 12px; border-radius: 50%; background: #ccc; display: inline-block; margin-right: 10px; vertical-align: middle; transition: 0.3s; }
@@ -4033,6 +4094,31 @@
             <div class="dash-main">
                 <h2 style="margin-bottom: 30px;" id="app-page-title">Application Wizard</h2>
                 
+                <!-- Progress Indicator -->
+                <div id="form-progress" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: 600; color: var(--primary);">Application Progress</span>
+                        <span id="progress-percentage" style="font-weight: 600; color: var(--accent);">0%</span>
+                    </div>
+                    <div style="background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div id="progress-bar" style="background: linear-gradient(90deg, var(--primary), var(--accent)); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                    </div>
+                    <div id="progress-sections" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; font-size: 0.85rem;">
+                        <div class="progress-section" data-section="basic">
+                            <i class="fas fa-circle" style="color: #ccc; margin-right: 5px;"></i> Basic Info
+                        </div>
+                        <div class="progress-section" data-section="destination">
+                            <i class="fas fa-circle" style="color: #ccc; margin-right: 5px;"></i> Destination
+                        </div>
+                        <div class="progress-section" data-section="education">
+                            <i class="fas fa-circle" style="color: #ccc; margin-right: 5px;"></i> Education
+                        </div>
+                        <div class="progress-section" data-section="documents">
+                            <i class="fas fa-circle" style="color: #ccc; margin-right: 5px;"></i> Documents
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- WIZARD STEP INDICATOR -->
                 <div id="wizard-steps" class="step-indicator">
                     <div class="step active" id="step-ind-1">
@@ -4045,6 +4131,10 @@
                     </div>
                     <div class="step" id="step-ind-3">
                         <div class="step-circle">3</div>
+                        <div class="step-label">Education</div>
+                    </div>
+                    <div class="step" id="step-ind-4">
+                        <div class="step-circle">4</div>
                         <div class="step-label">Documents</div>
                     </div>
                 </div>
@@ -4057,25 +4147,56 @@
                         <!-- STEP 1 -->
                         <div id="wizard-step-1" class="wizard-content active">
                             <h3><i class="fas fa-user-edit"></i> Basic Information</h3>
+                            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Fields marked with <span style="color: var(--danger);">*</span> are required.</p>
                             <div style="margin-top: 20px;">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                    <input type="text" placeholder="First Name" id="app-fname">
-                                    <input type="text" placeholder="Last Name" id="app-lname">
+                                    <div>
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">First Name <span style="color: var(--danger);">*</span></label>
+                                        <input type="text" placeholder="First Name" id="app-fname" required>
+                                        <div id="error-fname" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                    </div>
+                                    <div>
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Last Name <span style="color: var(--danger);">*</span></label>
+                                        <input type="text" placeholder="Last Name" id="app-lname" required>
+                                        <div id="error-lname" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                    </div>
                                 </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                    <input type="date" placeholder="Date of Birth" id="app-dob">
-                                    <select id="app-gender">
-                                        <option value="" disabled selected>Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Other</option>
-                                    </select>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                                    <div>
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Date of Birth</label>
+                                        <input type="date" placeholder="Date of Birth" id="app-dob">
+                                        <div id="error-dob" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                    </div>
+                                    <div>
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Gender</label>
+                                        <select id="app-gender">
+                                            <option value="" disabled selected>Select Gender</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <input type="text" placeholder="Citizenship" id="app-citizen">
-                                <input type="text" placeholder="Phone Number" id="app-phone">
-                                <input type="text" placeholder="Current Address" id="app-address">
+                                <div style="margin-top: 15px;">
+                                    <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Citizenship</label>
+                                    <input type="text" placeholder="Citizenship" id="app-citizen">
+                                </div>
+                                <div style="margin-top: 15px;">
+                                    <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Phone Number <span style="color: var(--danger);">*</span></label>
+                                    <input type="text" placeholder="Phone Number" id="app-phone" required>
+                                    <div id="error-phone" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                </div>
+                                <div style="margin-top: 15px;">
+                                    <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Current Address</label>
+                                    <input type="text" placeholder="Current Address" id="app-address">
+                                </div>
                                 
-                                <div style="text-align: right; margin-top: 20px;">
+                                <div id="step1-save-status" style="margin-top: 15px; font-size: 0.85rem; color: #666; text-align: right; min-height: 20px;"></div>
+                                
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                    <button id="btn-save-draft-1" class="btn btn-outline" onclick="saveApplicationDraft(); showSuccess('Draft saved! You can continue later.');" title="Save your progress and continue later">
+                                        <i class="fas fa-save"></i> Save Draft
+                                    </button>
                                     <button class="btn" onclick="goToStep(2)">Next: Study Preferences <i class="fas fa-arrow-right"></i></button>
                                 </div>
                             </div>
@@ -4084,46 +4205,170 @@
                         <!-- STEP 2 -->
                         <div id="wizard-step-2" class="wizard-content">
                             <h3><i class="fas fa-globe"></i> Study Destination</h3>
+                            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Fields marked with <span style="color: var(--danger);">*</span> are required.</p>
                             <div style="margin-top: 20px;">
-                                <label style="font-size: 0.9rem; font-weight: 600;">1. Select Target Country</label>
-                                <select id="app-country" onchange="updateLocations()">
-                                    <option value="" disabled selected>Choose Country...</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="USA">USA</option>
-                                    <option value="Australia">Australia</option>
-                                    <option value="UK">UK</option>
-                                </select>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 5px;">1. Select Target Country <span style="color: var(--danger);">*</span></label>
+                                    <select id="app-country" onchange="updateLocations()" required>
+                                        <option value="" disabled selected>Choose Country...</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="USA">USA</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="UK">UK</option>
+                                    </select>
+                                    <div id="error-country" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                </div>
 
-                                <label style="font-size: 0.9rem; font-weight: 600;">2. Select Location (State/Province)</label>
-                                <select id="app-state" disabled onchange="updateUniversities()">
-                                    <option value="" disabled selected>Select Country First</option>
-                                </select>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 5px;">2. Select Location (State/Province)</label>
+                                    <select id="app-state" disabled onchange="updateUniversities()">
+                                        <option value="" disabled selected>Select Country First</option>
+                                    </select>
+                                </div>
 
-                                <label style="font-size: 0.9rem; font-weight: 600;">3. Select University/College</label>
-                                <select id="app-university" disabled onchange="handleAddUniversity()">
-                                    <option value="" disabled selected>Select Location First</option>
-                                </select>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 5px;">3. Select University/College <span style="color: var(--danger);">*</span></label>
+                                    <select id="app-university" disabled onchange="handleAddUniversity()">
+                                        <option value="" disabled selected>Select Location First</option>
+                                    </select>
+                                    <div id="error-universities" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                </div>
 
                                 <!-- SELECTED LIST -->
-                                <div id="selected-universities-list" style="margin-top: 10px; min-height: 20px;"></div>
+                                <div id="selected-universities-list" style="margin-top: 10px; min-height: 20px; margin-bottom: 15px;">
+                                    <p style="font-size: 0.85rem; color: #999; font-style: italic; margin: 0;">No universities selected yet. Please select at least one university.</p>
+                                </div>
 
-                                <label style="font-size: 0.9rem; font-weight: 600; margin-top: 15px; display: block;">4. Preferred Intake</label>
-                                <select id="app-intake">
-                                    <option value="" disabled selected>Select Intake Season</option>
-                                    <option>Fall (Sept) 2025</option>
-                                    <option>Winter (Jan) 2026</option>
-                                    <option>Summer (May) 2026</option>
-                                </select>
+                                <div style="margin-bottom: 15px;">
+                                    <label style="font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 5px;">4. Preferred Intake <span style="color: var(--danger);">*</span></label>
+                                    <select id="app-intake" required>
+                                        <option value="" disabled selected>Select Intake Season</option>
+                                        <option>Fall (Sept) 2025</option>
+                                        <option>Winter (Jan) 2026</option>
+                                        <option>Summer (May) 2026</option>
+                                    </select>
+                                    <div id="error-intake" class="field-error" style="display: none; color: var(--danger); font-size: 0.85rem; margin-top: 5px;"></div>
+                                </div>
+
+                                <div id="step2-save-status" style="margin-top: 15px; font-size: 0.85rem; color: #666; text-align: right; min-height: 20px;"></div>
 
                                 <div style="display: flex; justify-content: space-between; margin-top: 30px;">
                                     <button class="btn btn-outline" style="color: var(--text-dark); border-color: #ddd;" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
-                                    <button class="btn" onclick="goToStep(3)">Next: Documents <i class="fas fa-arrow-right"></i></button>
+                                    <div style="display: flex; gap: 10px;">
+                                        <button id="btn-save-draft-2" class="btn btn-outline" onclick="saveApplicationDraft(); showSuccess('Draft saved! You can continue later.');" title="Save your progress and continue later">
+                                            <i class="fas fa-save"></i> Save Draft
+                                        </button>
+                                        <button class="btn" onclick="goToStep(3)">Next: Education <i class="fas fa-arrow-right"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- STEP 3 -->
+                        <!-- STEP 3: Education -->
                         <div id="wizard-step-3" class="wizard-content">
+                            <h3><i class="fas fa-graduation-cap"></i> Education Details</h3>
+                            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Enter your educational qualifications and percentages.</p>
+                            <div style="margin-top: 20px;">
+                                <!-- SLC Section -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee;">
+                                    <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1rem;">
+                                        <i class="fas fa-school"></i> SLC (School Leaving Certificate)
+                                    </h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">SLC Percentage (%)</label>
+                                            <input type="number" placeholder="Enter percentage" id="app-slc-percentage" min="0" max="100" step="0.01" style="width: 100%;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Year Completed</label>
+                                            <input type="number" placeholder="e.g., 2018" id="app-slc-year" min="1990" max="2030" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- +2 Section -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee;">
+                                    <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1rem;">
+                                        <i class="fas fa-book"></i> +2 (Higher Secondary Education)
+                                    </h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">+2 Percentage (%)</label>
+                                            <input type="number" placeholder="Enter percentage" id="app-plus2-percentage" min="0" max="100" step="0.01" style="width: 100%;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Year Completed</label>
+                                            <input type="number" placeholder="e.g., 2020" id="app-plus2-year" min="1990" max="2030" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Stream/Faculty (Optional)</label>
+                                        <input type="text" placeholder="e.g., Science, Management, Arts" id="app-plus2-stream" style="width: 100%;">
+                                    </div>
+                                </div>
+
+                                <!-- Bachelor's Section -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee;">
+                                    <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1rem;">
+                                        <i class="fas fa-university"></i> Bachelor's Degree
+                                    </h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Bachelor's Percentage (%)</label>
+                                            <input type="number" placeholder="Enter percentage" id="app-bachelors-percentage" min="0" max="100" step="0.01" style="width: 100%;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Year Completed</label>
+                                            <input type="number" placeholder="e.g., 2024" id="app-bachelors-year" min="1990" max="2030" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Degree Name (Optional)</label>
+                                        <input type="text" placeholder="e.g., B.Sc., BBA, B.A." id="app-bachelors-degree" style="width: 100%;">
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Institution/University (Optional)</label>
+                                        <input type="text" placeholder="Name of institution" id="app-bachelors-institution" style="width: 100%;">
+                                    </div>
+                                </div>
+
+                                <!-- Additional Education (Optional) -->
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee;">
+                                    <h4 style="color: var(--primary); margin-bottom: 15px; font-size: 1rem;">
+                                        <i class="fas fa-certificate"></i> Additional Qualifications (Optional)
+                                    </h4>
+                                    <div>
+                                        <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Master's or Other Degree</label>
+                                        <input type="text" placeholder="e.g., M.Sc., MBA, M.A." id="app-masters-degree" style="width: 100%; margin-bottom: 10px;">
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Percentage (%)</label>
+                                            <input type="number" placeholder="Enter percentage" id="app-masters-percentage" min="0" max="100" step="0.01" style="width: 100%;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size: 0.85rem; color: #666; display: block; margin-bottom: 5px;">Year Completed</label>
+                                            <input type="number" placeholder="e.g., 2026" id="app-masters-year" min="1990" max="2030" style="width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="step3-save-status" style="margin-top: 15px; font-size: 0.85rem; color: #666; text-align: right; min-height: 20px;"></div>
+
+                                <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                                    <button class="btn btn-outline" style="color: var(--text-dark); border-color: #ddd;" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                                    <div style="display: flex; gap: 10px;">
+                                        <button id="btn-save-draft-3" class="btn btn-outline" onclick="saveApplicationDraft(); showSuccess('Draft saved! You can continue later.');" title="Save your progress and continue later">
+                                            <i class="fas fa-save"></i> Save Draft
+                                        </button>
+                                        <button class="btn" onclick="goToStep(4)">Next: Documents <i class="fas fa-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4: Documents -->
+                        <div id="wizard-step-4" class="wizard-content">
                             <h3><i class="fas fa-cloud-upload-alt"></i> Upload Documents</h3>
                             <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Upload required documents for IRCC compliance. Ensure scans are clear.</p>
                             
@@ -4208,10 +4453,15 @@
                             </div>
 
                             <div style="display: flex; justify-content: space-between; margin-top: 30px;">
-                                <button class="btn btn-outline" style="color: var(--text-dark); border-color: #ddd;" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+                                <button class="btn btn-outline" style="color: var(--text-dark); border-color: #ddd;" onclick="goToStep(3)"><i class="fas fa-arrow-left"></i> Back</button>
                                 
-                                <button id="btn-app-save" class="btn" onclick="saveApplication()">Preview Application</button>
-                                <button id="btn-app-update" class="btn btn-success" style="display:none;" onclick="updateProfile()">Update Profile</button>
+                                <div style="display: flex; gap: 10px;">
+                                    <button id="btn-save-draft" class="btn btn-outline" onclick="saveApplicationDraft(); showSuccess('Draft saved! You can continue later.');" title="Save your progress and continue later">
+                                        <i class="fas fa-save"></i> Save Draft
+                                    </button>
+                                    <button id="btn-app-save" class="btn" onclick="saveApplication()">Preview Application</button>
+                                    <button id="btn-app-update" class="btn btn-success" style="display:none;" onclick="updateProfile()">Update Profile</button>
+                                </div>
                             </div>
                         </div>
 
@@ -4228,6 +4478,18 @@
                             <button class="btn btn-secondary" onclick="editApplication()"><i class="fas fa-edit"></i> Edit</button>
                             <button class="btn btn-success" onclick="submitApplication()"><i class="fas fa-paper-plane"></i> Submit Application</button>
                         </div>
+                    </div>
+
+                    <!-- Read-Only View (After Submission) -->
+                    <div id="app-readonly-view" class="dash-card" style="display: none;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                            <h3><i class="fas fa-file-check"></i> My Application</h3>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span id="readonly-status-badge" class="status-badge status-submitted"><i class="fas fa-check-circle"></i> Submitted</span>
+                                <button id="btn-edit-application" class="btn btn-primary" onclick="enableEditMode()"><i class="fas fa-edit"></i> Edit Application</button>
+                            </div>
+                        </div>
+                        <div id="readonly-content"></div>
                     </div>
                 </div>
             </div>
@@ -6033,25 +6295,114 @@
 
         // --- WIZARD LOGIC (FIXED) ---
         let currentStep = 1;
+        // Helper function to clear field errors
+        function clearFieldErrors() {
+            document.querySelectorAll('.field-error').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+        }
+
+        // Helper function to show field error
+        function showFieldError(fieldId, message) {
+            const errorEl = document.getElementById('error-' + fieldId);
+            if(errorEl) {
+                errorEl.textContent = message;
+                errorEl.style.display = 'block';
+            }
+        }
+
+        // Validate Step 1
+        function validateStep1() {
+            clearFieldErrors();
+            let isValid = true;
+            const errors = [];
+
+            const fname = document.getElementById('app-fname')?.value?.trim();
+            const lname = document.getElementById('app-lname')?.value?.trim();
+            const phone = document.getElementById('app-phone')?.value?.trim();
+            const dob = document.getElementById('app-dob')?.value;
+
+            if(!fname) {
+                showFieldError('fname', 'First name is required');
+                isValid = false;
+            } else if(fname.length < 2) {
+                showFieldError('fname', 'First name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if(!lname) {
+                showFieldError('lname', 'Last name is required');
+                isValid = false;
+            } else if(lname.length < 2) {
+                showFieldError('lname', 'Last name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if(!phone) {
+                showFieldError('phone', 'Phone number is required');
+                isValid = false;
+            } else if(!/^[\d\s\-\+\(\)]+$/.test(phone) || phone.replace(/\D/g, '').length < 10) {
+                showFieldError('phone', 'Please enter a valid phone number (at least 10 digits)');
+                isValid = false;
+            }
+
+            if(dob) {
+                const birthDate = new Date(dob);
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                if(age < 16 || age > 100) {
+                    showFieldError('dob', 'Please enter a valid date of birth');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        // Validate Step 2
+        function validateStep2() {
+            clearFieldErrors();
+            let isValid = true;
+
+            const country = document.getElementById('app-country')?.value;
+            const intake = document.getElementById('app-intake')?.value;
+            const universities = selectedUnis || [];
+
+            if(!country) {
+                showFieldError('country', 'Please select a target country');
+                isValid = false;
+            }
+
+            if(!intake) {
+                showFieldError('intake', 'Please select a preferred intake');
+                isValid = false;
+            }
+
+            if(universities.length === 0) {
+                showFieldError('universities', 'Please select at least one university/college');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
         window.goToStep = async function(n) {
             try {
-            // Validate step 1 if moving forward
-            if(n === 2 && currentStep === 1) {
-                    const fname = document.getElementById('app-fname');
-                    const lname = document.getElementById('app-lname');
-                    const phone = document.getElementById('app-phone');
-                    if(!fname || !lname || !phone) {
-                        console.error('Form fields not found');
-                        return;
-                    }
-                    if(!fname.value || !lname.value || !phone.value) {
-                        showWarning("Please fill in First Name, Last Name and Phone Number.");
-                        return;
-                    }
-                }
+                // Don't validate - allow free navigation (like Walmart form)
+                // Users can fill any section at any time
                 
                 // Save current step data before moving (both forward and backward)
                 await saveFormDataIncrementally();
+                
+                // Show save status
+                const saveStatusEl = document.getElementById(`step${currentStep}-save-status`);
+                if(saveStatusEl) {
+                    saveStatusEl.innerHTML = '<i class="fas fa-check-circle" style="color: var(--success);"></i> Progress saved';
+                    setTimeout(() => {
+                        if(saveStatusEl) saveStatusEl.innerHTML = '';
+                    }, 2000);
+                }
                 
                 // Switch tabs - remove inline display styles and use CSS classes
                 document.querySelectorAll('.wizard-content').forEach(el => {
@@ -6066,14 +6417,14 @@
                 targetStep.classList.add('active');
                 targetStep.style.display = ''; // Ensure no inline style blocks CSS
             
-            // Update Indicators
-            document.querySelectorAll('.step').forEach((el, index) => {
-                const stepNum = index + 1;
-                el.classList.remove('active', 'completed');
-                if(stepNum < n) el.classList.add('completed');
-                if(stepNum === n) el.classList.add('active');
-            });
-            currentStep = n;
+                // Update Indicators
+                document.querySelectorAll('.step').forEach((el, index) => {
+                    const stepNum = index + 1;
+                    el.classList.remove('active', 'completed');
+                    if(stepNum < n) el.classList.add('completed');
+                    if(stepNum === n) el.classList.add('active');
+                });
+                currentStep = n;
                 
                 // If moving to step 2, restore country selection and update locations
                 if(n === 2 && currentApplication.country) {
@@ -6144,10 +6495,27 @@
 
         function updateSelectedList() {
             const list = document.getElementById('selected-universities-list');
-            list.innerHTML = selectedUnis.map(u => 
-                `<span class="uni-tag">${u} <i class="fas fa-times" onclick="removeUni('${u}')"></i></span>`
-            ).join('');
-            document.getElementById('dash-colleges-count').innerText = selectedUnis.length;
+            if(list) {
+                if(selectedUnis.length === 0) {
+                    list.innerHTML = '<p style="font-size: 0.85rem; color: #999; font-style: italic; margin: 0;">No universities selected yet. Please select at least one university.</p>';
+                } else {
+                    list.innerHTML = selectedUnis.map(u => 
+                        `<span class="uni-tag">${u} <i class="fas fa-times" onclick="removeUni('${u}')"></i></span>`
+                    ).join('');
+                }
+            }
+            const dashCollegesCount = document.getElementById('dash-colleges-count');
+            if(dashCollegesCount) {
+                dashCollegesCount.innerText = selectedUnis.length;
+            }
+            
+            // Clear university error if universities are selected
+            if(selectedUnis.length > 0) {
+                const errorEl = document.getElementById('error-universities');
+                if(errorEl) {
+                    errorEl.style.display = 'none';
+                }
+            }
         }
 
         // Function to collect current form data
@@ -6187,6 +6555,19 @@
                 state: document.getElementById('app-state')?.value || '',
                 intake: document.getElementById('app-intake')?.value || '',
                 universities: selectedUnis,
+                // Education fields
+                slcPercentage: document.getElementById('app-slc-percentage')?.value || '',
+                slcYear: document.getElementById('app-slc-year')?.value || '',
+                plus2Percentage: document.getElementById('app-plus2-percentage')?.value || '',
+                plus2Year: document.getElementById('app-plus2-year')?.value || '',
+                plus2Stream: document.getElementById('app-plus2-stream')?.value || '',
+                bachelorsPercentage: document.getElementById('app-bachelors-percentage')?.value || '',
+                bachelorsYear: document.getElementById('app-bachelors-year')?.value || '',
+                bachelorsDegree: document.getElementById('app-bachelors-degree')?.value || '',
+                bachelorsInstitution: document.getElementById('app-bachelors-institution')?.value || '',
+                mastersDegree: document.getElementById('app-masters-degree')?.value || '',
+                mastersPercentage: document.getElementById('app-masters-percentage')?.value || '',
+                mastersYear: document.getElementById('app-masters-year')?.value || '',
                 docs: docsArray, // Include documents in form data
                 lastStep: currentStep, // Track which step they were on
                 status: currentApplication.status || 'Draft',
@@ -6205,17 +6586,113 @@
                     await setDoc(doc(db, "users", auth.currentUser.uid), currentApplication, { merge: true });
                     console.log('Form data saved successfully');
                 } catch(e) { 
-                    console.error("Save error", e); 
+                    console.error("Save error", e);
+                    // Don't show error to user for auto-save, just log it
                 }
             } else if(isDemoMode) {
                 localStorage.setItem('demoApp', JSON.stringify(currentApplication));
                 console.log('Form data saved to localStorage (demo mode)');
             }
+            
+            // Update progress after saving
+            updateProgress();
+        }
+        
+        // Auto-save functionality - save form data periodically
+        let autoSaveInterval = null;
+        function startAutoSave() {
+            if(autoSaveInterval) clearInterval(autoSaveInterval);
+            autoSaveInterval = setInterval(async () => {
+                if(currentStep && currentApplication) {
+                    await saveFormDataIncrementally();
+                }
+            }, 30000); // Auto-save every 30 seconds
+        }
+        
+        function stopAutoSave() {
+            if(autoSaveInterval) {
+                clearInterval(autoSaveInterval);
+                autoSaveInterval = null;
+            }
+        }
+
+        // Calculate and update progress
+        function updateProgress() {
+            if(!currentApplication) {
+                document.getElementById('progress-bar').style.width = '0%';
+                document.getElementById('progress-percentage').textContent = '0%';
+                return;
+            }
+            
+            let completed = 0;
+            const total = 4; // 4 sections: Basic, Destination, Education, Documents
+            
+            // Check Basic Info section
+            const basicComplete = currentApplication.fname && currentApplication.lname && currentApplication.phone;
+            if(basicComplete) {
+                completed++;
+                updateSectionProgress('basic', true);
+            } else {
+                updateSectionProgress('basic', false);
+            }
+            
+            // Check Destination section
+            const destComplete = currentApplication.country && currentApplication.intake && 
+                                 currentApplication.universities && currentApplication.universities.length > 0;
+            if(destComplete) {
+                completed++;
+                updateSectionProgress('destination', true);
+            } else {
+                updateSectionProgress('destination', false);
+            }
+            
+            // Check Education section
+            const eduComplete = (currentApplication.slcPercentage || currentApplication.plus2Percentage || currentApplication.bachelorsPercentage);
+            if(eduComplete) {
+                completed++;
+                updateSectionProgress('education', true);
+            } else {
+                updateSectionProgress('education', false);
+            }
+            
+            // Check Documents section
+            const docsComplete = currentApplication.docs && currentApplication.docs.length > 0;
+            if(docsComplete) {
+                completed++;
+                updateSectionProgress('documents', true);
+            } else {
+                updateSectionProgress('documents', false);
+            }
+            
+            const percentage = Math.round((completed / total) * 100);
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-percentage').textContent = percentage + '%';
+        }
+        
+        function updateSectionProgress(section, isComplete) {
+            const sectionEl = document.querySelector(`.progress-section[data-section="${section}"]`);
+            if(sectionEl) {
+                const icon = sectionEl.querySelector('i');
+                if(isComplete) {
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.color = 'var(--success)';
+                    sectionEl.style.color = 'var(--success)';
+                    sectionEl.style.fontWeight = '600';
+                } else {
+                    icon.className = 'fas fa-circle';
+                    icon.style.color = '#ccc';
+                    sectionEl.style.color = '#666';
+                    sectionEl.style.fontWeight = '400';
+                }
+            }
         }
 
         // Function to load and populate form data
         function loadFormData() {
-            if(!currentApplication || Object.keys(currentApplication).length === 0) return;
+            if(!currentApplication || Object.keys(currentApplication).length === 0) {
+                updateProgress();
+                return;
+            }
             
             // Step 1 fields - check if elements exist before setting values
             const fnameEl = document.getElementById('app-fname');
@@ -6270,6 +6747,33 @@
                 selectedUnis = [...currentApplication.universities];
                 updateSelectedList();
             }
+            
+            // Step 3 - Education fields
+            const slcPercentageEl = document.getElementById('app-slc-percentage');
+            const slcYearEl = document.getElementById('app-slc-year');
+            const plus2PercentageEl = document.getElementById('app-plus2-percentage');
+            const plus2YearEl = document.getElementById('app-plus2-year');
+            const plus2StreamEl = document.getElementById('app-plus2-stream');
+            const bachelorsPercentageEl = document.getElementById('app-bachelors-percentage');
+            const bachelorsYearEl = document.getElementById('app-bachelors-year');
+            const bachelorsDegreeEl = document.getElementById('app-bachelors-degree');
+            const bachelorsInstitutionEl = document.getElementById('app-bachelors-institution');
+            const mastersDegreeEl = document.getElementById('app-masters-degree');
+            const mastersPercentageEl = document.getElementById('app-masters-percentage');
+            const mastersYearEl = document.getElementById('app-masters-year');
+            
+            if(slcPercentageEl && currentApplication.slcPercentage) slcPercentageEl.value = currentApplication.slcPercentage;
+            if(slcYearEl && currentApplication.slcYear) slcYearEl.value = currentApplication.slcYear;
+            if(plus2PercentageEl && currentApplication.plus2Percentage) plus2PercentageEl.value = currentApplication.plus2Percentage;
+            if(plus2YearEl && currentApplication.plus2Year) plus2YearEl.value = currentApplication.plus2Year;
+            if(plus2StreamEl && currentApplication.plus2Stream) plus2StreamEl.value = currentApplication.plus2Stream;
+            if(bachelorsPercentageEl && currentApplication.bachelorsPercentage) bachelorsPercentageEl.value = currentApplication.bachelorsPercentage;
+            if(bachelorsYearEl && currentApplication.bachelorsYear) bachelorsYearEl.value = currentApplication.bachelorsYear;
+            if(bachelorsDegreeEl && currentApplication.bachelorsDegree) bachelorsDegreeEl.value = currentApplication.bachelorsDegree;
+            if(bachelorsInstitutionEl && currentApplication.bachelorsInstitution) bachelorsInstitutionEl.value = currentApplication.bachelorsInstitution;
+            if(mastersDegreeEl && currentApplication.mastersDegree) mastersDegreeEl.value = currentApplication.mastersDegree;
+            if(mastersPercentageEl && currentApplication.mastersPercentage) mastersPercentageEl.value = currentApplication.mastersPercentage;
+            if(mastersYearEl && currentApplication.mastersYear) mastersYearEl.value = currentApplication.mastersYear;
             
             // Restore uploaded documents - only if not already loaded to prevent duplicates
             if(currentApplication.docs && currentApplication.docs.length > 0) {
@@ -6372,10 +6876,14 @@
                     if(stepNum === stepToShow) el.classList.add('active');
                 });
             }
+            
+            // Update progress after loading
+            updateProgress();
         }
 
-        window.saveApplication = async function() {
-            // Collect all form data
+        // Save application without validation (like Walmart form - save anytime)
+        window.saveApplicationDraft = async function() {
+            // Collect all form data without validation
             const formData = collectFormData();
             currentApplication = { ...currentApplication, ...formData };
             
@@ -6383,48 +6891,417 @@
             if(auth && auth.currentUser && !isDemoMode) {
                 try {
                     await setDoc(doc(db, "users", auth.currentUser.uid), currentApplication, { merge: true });
-                } catch(e) { console.error("Save error", e); }
+                } catch(e) { 
+                    console.error("Save error", e);
+                }
             } else if(isDemoMode) {
                 localStorage.setItem('demoApp', JSON.stringify(currentApplication));
             }
             
-            const previewHTML = `
-                <div class="preview-group"><div class="preview-label">Full Name</div><div class="preview-value">${currentApplication.fname} ${currentApplication.lname}</div></div>
-                <div class="preview-group"><div class="preview-label">Contact</div><div class="preview-value">${currentApplication.phone}</div></div>
-                <div class="preview-group"><div class="preview-label">Target</div><div class="preview-value">${currentApplication.country}</div></div>
-                <div class="preview-group"><div class="preview-label">Intake</div><div class="preview-value">${currentApplication.intake}</div></div>
-                <div class="preview-group"><div class="preview-label">Universities</div><div class="preview-value">${currentApplication.universities.join(', ') || 'None'}</div></div>
-            `;
+            // Update progress
+            updateProgress();
+        };
+
+        window.saveApplication = async function() {
+            // Collect all form data (no validation required for preview - like Walmart)
+            const formData = collectFormData();
+            currentApplication = { ...currentApplication, ...formData };
+            
+            // Save draft
+            await saveApplicationDraft();
+            
+            // Show preview
+            const previewHTML = generatePreviewHTML();
             document.getElementById('preview-content').innerHTML = previewHTML;
             document.getElementById('app-form-view').style.display = 'none';
-            document.getElementById('wizard-steps').style.display = 'none'; // Hide steps in preview
+            document.getElementById('wizard-steps').style.display = 'none';
             document.getElementById('app-preview-view').style.display = 'block';
-            document.getElementById('dash-countries-count').innerText = currentApplication.country ? "1" : "0";
+            document.getElementById('app-readonly-view').style.display = 'none';
+            
+            // Update status badge
+            const statusBadge = document.getElementById('preview-status-badge');
+            if(statusBadge) {
+                statusBadge.className = 'status-badge status-draft';
+                statusBadge.textContent = 'Draft';
+            }
+            
+            const dashCountriesCount = document.getElementById('dash-countries-count');
+            if(dashCountriesCount) {
+                dashCountriesCount.innerText = currentApplication.country ? "1" : "0";
+            }
         };
+
+        // Generate comprehensive preview HTML
+        function generatePreviewHTML() {
+            const formatDate = (dateStr) => {
+                if(!dateStr) return 'N/A';
+                try {
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                } catch(e) {
+                    return dateStr;
+                }
+            };
+
+            return `
+                <div style="display: grid; gap: 25px;">
+                    <!-- Section 1: Basic Information -->
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 20px; background: #f8f9fa;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 8px;">
+                            <i class="fas fa-user-edit"></i> Basic Information
+                        </h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="preview-group">
+                                <div class="preview-label">First Name</div>
+                                <div class="preview-value">${currentApplication.fname || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Last Name</div>
+                                <div class="preview-value">${currentApplication.lname || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Date of Birth</div>
+                                <div class="preview-value">${formatDate(currentApplication.dob)}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Gender</div>
+                                <div class="preview-value">${currentApplication.gender || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Citizenship</div>
+                                <div class="preview-value">${currentApplication.citizen || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Phone Number</div>
+                                <div class="preview-value">${currentApplication.phone || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group" style="grid-column: 1 / -1;">
+                                <div class="preview-label">Current Address</div>
+                                <div class="preview-value">${currentApplication.address || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Study Destination -->
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 20px; background: #f8f9fa;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 8px;">
+                            <i class="fas fa-globe"></i> Study Destination
+                        </h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="preview-group">
+                                <div class="preview-label">Target Country</div>
+                                <div class="preview-value">${currentApplication.country || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Location (State/Province)</div>
+                                <div class="preview-value">${currentApplication.state || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group">
+                                <div class="preview-label">Preferred Intake</div>
+                                <div class="preview-value">${currentApplication.intake || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                            </div>
+                            <div class="preview-group" style="grid-column: 1 / -1;">
+                                <div class="preview-label">Selected Universities/Colleges</div>
+                                <div class="preview-value">
+                                    ${currentApplication.universities && currentApplication.universities.length > 0 
+                                        ? '<ul style="margin: 10px 0; padding-left: 20px;">' + currentApplication.universities.map(u => `<li>${u}</li>`).join('') + '</ul>'
+                                        : '<span style="color: #999; font-style: italic;">No universities selected</span>'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Education -->
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 20px; background: #f8f9fa;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 8px;">
+                            <i class="fas fa-graduation-cap"></i> Education Details
+                        </h4>
+                        <div style="display: grid; gap: 20px;">
+                            <!-- SLC -->
+                            ${currentApplication.slcPercentage || currentApplication.slcYear ? `
+                                <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary);">
+                                    <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 0.95rem;"><i class="fas fa-school"></i> SLC (School Leaving Certificate)</h5>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div class="preview-group">
+                                            <div class="preview-label">Percentage</div>
+                                            <div class="preview-value">${currentApplication.slcPercentage ? currentApplication.slcPercentage + '%' : '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                        <div class="preview-group">
+                                            <div class="preview-label">Year Completed</div>
+                                            <div class="preview-value">${currentApplication.slcYear || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            <!-- +2 -->
+                            ${currentApplication.plus2Percentage || currentApplication.plus2Year ? `
+                                <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid var(--accent);">
+                                    <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 0.95rem;"><i class="fas fa-book"></i> +2 (Higher Secondary Education)</h5>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div class="preview-group">
+                                            <div class="preview-label">Percentage</div>
+                                            <div class="preview-value">${currentApplication.plus2Percentage ? currentApplication.plus2Percentage + '%' : '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                        <div class="preview-group">
+                                            <div class="preview-label">Year Completed</div>
+                                            <div class="preview-value">${currentApplication.plus2Year || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                    </div>
+                                    ${currentApplication.plus2Stream ? `
+                                        <div class="preview-group" style="margin-top: 10px;">
+                                            <div class="preview-label">Stream/Faculty</div>
+                                            <div class="preview-value">${currentApplication.plus2Stream}</div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                            
+                            <!-- Bachelor's -->
+                            ${currentApplication.bachelorsPercentage || currentApplication.bachelorsYear ? `
+                                <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid var(--success);">
+                                    <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 0.95rem;"><i class="fas fa-university"></i> Bachelor's Degree</h5>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div class="preview-group">
+                                            <div class="preview-label">Percentage</div>
+                                            <div class="preview-value">${currentApplication.bachelorsPercentage ? currentApplication.bachelorsPercentage + '%' : '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                        <div class="preview-group">
+                                            <div class="preview-label">Year Completed</div>
+                                            <div class="preview-value">${currentApplication.bachelorsYear || '<span style="color: #999; font-style: italic;">Not provided</span>'}</div>
+                                        </div>
+                                    </div>
+                                    ${currentApplication.bachelorsDegree ? `
+                                        <div class="preview-group" style="margin-top: 10px;">
+                                            <div class="preview-label">Degree Name</div>
+                                            <div class="preview-value">${currentApplication.bachelorsDegree}</div>
+                                        </div>
+                                    ` : ''}
+                                    ${currentApplication.bachelorsInstitution ? `
+                                        <div class="preview-group" style="margin-top: 10px;">
+                                            <div class="preview-label">Institution/University</div>
+                                            <div class="preview-value">${currentApplication.bachelorsInstitution}</div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                            
+                            <!-- Master's -->
+                            ${currentApplication.mastersDegree || currentApplication.mastersPercentage || currentApplication.mastersYear ? `
+                                <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid var(--accent);">
+                                    <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 0.95rem;"><i class="fas fa-certificate"></i> Additional Qualifications</h5>
+                                    ${currentApplication.mastersDegree ? `
+                                        <div class="preview-group">
+                                            <div class="preview-label">Degree Name</div>
+                                            <div class="preview-value">${currentApplication.mastersDegree}</div>
+                                        </div>
+                                    ` : ''}
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                                        ${currentApplication.mastersPercentage ? `
+                                            <div class="preview-group">
+                                                <div class="preview-label">Percentage</div>
+                                                <div class="preview-value">${currentApplication.mastersPercentage}%</div>
+                                            </div>
+                                        ` : ''}
+                                        ${currentApplication.mastersYear ? `
+                                            <div class="preview-group">
+                                                <div class="preview-label">Year Completed</div>
+                                                <div class="preview-value">${currentApplication.mastersYear}</div>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            
+                            ${!currentApplication.slcPercentage && !currentApplication.plus2Percentage && !currentApplication.bachelorsPercentage ? 
+                                '<p style="color: #999; font-style: italic; text-align: center; padding: 20px;">No education details provided</p>' : ''}
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Documents -->
+                    <div style="border: 1px solid #eee; border-radius: 8px; padding: 20px; background: #f8f9fa;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 8px;">
+                            <i class="fas fa-cloud-upload-alt"></i> Uploaded Documents
+                        </h4>
+                        <div class="preview-group">
+                            <div class="preview-label">Documents</div>
+                            <div class="preview-value">
+                                ${currentApplication.docs && currentApplication.docs.length > 0 
+                                    ? `<div style="margin-top: 10px;">
+                                        ${currentApplication.docs.map(doc => `
+                                            <div style="padding: 8px; background: white; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 8px;">
+                                                <i class="fas fa-file"></i> <strong>${doc.type}:</strong> ${doc.name} 
+                                                ${doc.size ? `(${(doc.size / 1024).toFixed(2)} KB)` : ''}
+                                            </div>
+                                        `).join('')}
+                                       </div>`
+                                    : '<span style="color: #999; font-style: italic;">No documents uploaded</span>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate read-only view HTML (same as preview but styled differently)
+        function generateReadOnlyHTML() {
+            return generatePreviewHTML();
+        }
 
         window.editApplication = function() {
             document.getElementById('app-form-view').style.display = 'block';
             document.getElementById('wizard-steps').style.display = 'flex';
             document.getElementById('app-preview-view').style.display = 'none';
+            document.getElementById('app-readonly-view').style.display = 'none';
         };
 
+        // Enable edit mode from read-only view
+        window.enableEditMode = function() {
+            if(confirm("Do you want to edit your submitted application? Changes will be saved as a new draft.")) {
+                // Change status back to Draft
+                currentApplication.status = 'Draft';
+                
+                // Save status change
+                if(auth && auth.currentUser && !isDemoMode) {
+                    setDoc(doc(db, "users", auth.currentUser.uid), { status: 'Draft' }, { merge: true }).catch(e => console.error("Error:", e));
+                } else if(isDemoMode) {
+                    localStorage.setItem('demoApp', JSON.stringify(currentApplication));
+                }
+                
+                // Show form in edit mode
+                document.getElementById('app-readonly-view').style.display = 'none';
+                document.getElementById('app-form-view').style.display = 'block';
+                document.getElementById('wizard-steps').style.display = 'flex';
+                document.getElementById('form-progress').style.display = 'block'; // Show progress in edit mode
+                document.getElementById('app-preview-view').style.display = 'none';
+                
+                // Make all fields editable
+                makeFormEditable();
+                
+                // Update UI and progress
+                updateDashboardUI();
+                updateProgress();
+                
+                // Start auto-save
+                startAutoSave();
+                
+                showSuccess("Application is now editable. You can make changes and save them.");
+            }
+        };
+
+        // Make form fields read-only
+        function makeFormReadOnly() {
+            const formFields = document.querySelectorAll('#app-form-view input, #app-form-view select, #app-form-view textarea');
+            formFields.forEach(field => {
+                field.disabled = true;
+                field.style.backgroundColor = '#f5f5f5';
+                field.style.cursor = 'not-allowed';
+            });
+            
+            // Disable file inputs and upload buttons
+            document.querySelectorAll('#app-form-view .doc-file-input').forEach(input => {
+                input.disabled = true;
+            });
+            document.querySelectorAll('#app-form-view button[onclick*="handleUpload"]').forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            });
+            
+            // Hide navigation buttons
+            document.querySelectorAll('#app-form-view .btn[onclick*="goToStep"]').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+
+        // Make form fields editable
+        function makeFormEditable() {
+            const formFields = document.querySelectorAll('#app-form-view input, #app-form-view select, #app-form-view textarea');
+            formFields.forEach(field => {
+                field.disabled = false;
+                field.style.backgroundColor = '';
+                field.style.cursor = '';
+            });
+            
+            // Enable file inputs and upload buttons
+            document.querySelectorAll('#app-form-view .doc-file-input').forEach(input => {
+                input.disabled = false;
+            });
+            document.querySelectorAll('#app-form-view button[onclick*="handleUpload"]').forEach(btn => {
+                btn.disabled = false;
+                btn.style.opacity = '';
+                btn.style.cursor = '';
+            });
+            
+            // Show navigation buttons
+            document.querySelectorAll('#app-form-view .btn[onclick*="goToStep"]').forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+        }
+
         window.submitApplication = async function() {
-            if(confirm("Submit Application?")) {
+            // Optional: Show warning if required fields are missing (but allow submission anyway)
+            const missingFields = [];
+            if(!currentApplication.fname || !currentApplication.lname) missingFields.push('Name');
+            if(!currentApplication.phone) missingFields.push('Phone Number');
+            if(!currentApplication.country) missingFields.push('Target Country');
+            
+            let confirmMessage = "Are you sure you want to submit your application?";
+            if(missingFields.length > 0) {
+                confirmMessage = `Warning: Some recommended fields are missing (${missingFields.join(', ')}). Are you sure you want to submit your application? You can edit it later if needed.`;
+            } else {
+                confirmMessage = "Are you sure you want to submit your application? Once submitted, it will be read-only until you click 'Edit'.";
+            }
+            
+            if(confirm(confirmMessage)) {
+                // Collect latest form data
+                const formData = collectFormData();
+                currentApplication = { ...currentApplication, ...formData };
                 currentApplication.status = 'Submitted';
+                currentApplication.submittedAt = new Date().toISOString();
                 
                 // SAVE TO FIRESTORE
                 if(auth && auth.currentUser && !isDemoMode) {
                     try {
-                        await setDoc(doc(db, "users", auth.currentUser.uid), { status: 'Submitted' }, { merge: true });
-                    } catch(e) { console.error("Submit error", e); }
+                        await setDoc(doc(db, "users", auth.currentUser.uid), currentApplication, { merge: true });
+                    } catch(e) { 
+                        console.error("Submit error", e);
+                        showError("Failed to submit application. Please try again.");
+                        return;
+                    }
                 } else if(isDemoMode) {
                     localStorage.setItem('demoApp', JSON.stringify(currentApplication));
                 }
 
-                showSuccess("Submitted! Your Profile is now created.");
-                window.router('student');
+                // Show read-only view
+                showReadOnlyView();
+                
+                showSuccess("Application submitted successfully! Your application is now read-only. Click 'Edit Application' to make changes.");
             }
         };
+
+        // Show read-only view after submission
+        function showReadOnlyView() {
+            const readonlyHTML = generateReadOnlyHTML();
+            document.getElementById('readonly-content').innerHTML = readonlyHTML;
+            
+            // Hide form and preview, show read-only view
+            document.getElementById('app-form-view').style.display = 'none';
+            document.getElementById('app-preview-view').style.display = 'none';
+            document.getElementById('wizard-steps').style.display = 'none';
+            document.getElementById('form-progress').style.display = 'none'; // Hide progress in read-only
+            document.getElementById('app-readonly-view').style.display = 'block';
+            
+            // Update status badge
+            const statusBadge = document.getElementById('readonly-status-badge');
+            if(statusBadge) {
+                statusBadge.className = 'status-badge status-submitted';
+                statusBadge.innerHTML = '<i class="fas fa-check-circle"></i> Submitted';
+            }
+            
+            // Update dashboard UI
+            updateDashboardUI();
+        }
 
         window.updateProfile = async function() {
             // Collect all form data
@@ -6445,65 +7322,47 @@
         };
 
         function updateDashboardUI() {
-            const isSubmitted = currentApplication.status === 'Submitted';
+            const isSubmitted = currentApplication && currentApplication.status === 'Submitted';
             
             if (isSubmitted) {
                 // Show Profile Widget on Dashboard
-                document.getElementById('dash-profile-view').style.display = 'block';
-                document.getElementById('dash-full-name').innerText = currentApplication.fname + ' ' + currentApplication.lname;
-                document.getElementById('dash-phone').innerText = currentApplication.phone;
-                document.getElementById('dash-address').innerText = currentApplication.address;
-                document.getElementById('dash-target').innerText = currentApplication.country;
-                document.getElementById('dash-intake-val').innerText = currentApplication.intake;
+                const dashProfileView = document.getElementById('dash-profile-view');
+                if(dashProfileView) dashProfileView.style.display = 'block';
+                const dashFullName = document.getElementById('dash-full-name');
+                if(dashFullName) dashFullName.innerText = (currentApplication.fname || '') + ' ' + (currentApplication.lname || '');
+                const dashPhone = document.getElementById('dash-phone');
+                if(dashPhone) dashPhone.innerText = currentApplication.phone || 'N/A';
+                const dashAddress = document.getElementById('dash-address');
+                if(dashAddress) dashAddress.innerText = currentApplication.address || 'N/A';
+                const dashTarget = document.getElementById('dash-target');
+                if(dashTarget) dashTarget.innerText = currentApplication.country || 'N/A';
+                const dashIntake = document.getElementById('dash-intake-val');
+                if(dashIntake) dashIntake.innerText = currentApplication.intake || 'N/A';
                 
-                // Update Application Page UI to "Profile Mode"
-                document.getElementById('student-side-app-link').innerHTML = '<i class="fas fa-user-circle"></i> My Profile';
-                document.getElementById('app-page-title').innerText = 'My Student Profile';
+                // Update Application Page UI
+                const studentSideAppLink = document.getElementById('student-side-app-link');
+                if(studentSideAppLink) studentSideAppLink.innerHTML = '<i class="fas fa-user-circle"></i> My Profile';
+                const appPageTitle = document.getElementById('app-page-title');
+                if(appPageTitle) appPageTitle.innerText = 'My Application';
                 
-                // Switch buttons: Hide Save, Show Update
-                document.getElementById('btn-app-save').style.display = 'none';
-                document.getElementById('btn-app-update').style.display = 'block';
-                
-                // Ensure form is visible and step 3 (docs) is active, hide wizard nav
-                document.getElementById('wizard-steps').style.display = 'none'; // Hide numbers
-                document.getElementById('app-form-view').style.display = 'block';
-                document.getElementById('app-preview-view').style.display = 'none';
-                
-                // Show all sections at once for profile editing instead of wizard
-                document.querySelectorAll('.wizard-content').forEach(el => {
-                    el.style.display = 'block';
-                    el.classList.add('active'); // Ensure visiblity
-                });
-                
-                // Hide navigation buttons within wizard (Next/Back)
-                document.querySelectorAll('.wizard-content .btn, .wizard-content .btn-outline').forEach(btn => {
-                    if(btn.innerHTML.includes('Next') || btn.innerHTML.includes('Back')) {
-                        btn.style.display = 'none';
-                    }
-                });
-
-            } else {
-                // Revert to "Application" Mode
-                document.getElementById('dash-profile-view').style.display = 'none';
-                document.getElementById('student-side-app-link').innerHTML = '<i class="fas fa-file-alt"></i> Application Form';
-                document.getElementById('app-page-title').innerText = 'Application Wizard';
-                document.getElementById('btn-app-save').style.display = 'block';
-                document.getElementById('btn-app-update').style.display = 'none';
-                document.getElementById('wizard-steps').style.display = 'flex';
-                
-                // Reset wizard visibility - use CSS classes instead of inline styles
-                document.querySelectorAll('.wizard-content').forEach(el => {
-                    el.style.display = ''; // Remove inline display style
-                    el.classList.remove('active');
-                });
-                const step1 = document.getElementById('wizard-step-1');
-                if(step1) {
-                    step1.classList.add('active');
-                    step1.style.display = ''; // Ensure no inline style blocks CSS
+                // Show read-only view when on application page
+                if(document.getElementById('page-student-apps') && document.getElementById('page-student-apps').classList.contains('active')) {
+                    showReadOnlyView();
                 }
                 
-                // Restore buttons
-                document.querySelectorAll('.wizard-content button').forEach(btn => btn.style.display = 'inline-block');
+            } else {
+                // Revert to "Application" Mode
+                const dashProfileView = document.getElementById('dash-profile-view');
+                if(dashProfileView) dashProfileView.style.display = 'none';
+                const studentSideAppLink = document.getElementById('student-side-app-link');
+                if(studentSideAppLink) studentSideAppLink.innerHTML = '<i class="fas fa-file-alt"></i> Application Form';
+                const appPageTitle = document.getElementById('app-page-title');
+                if(appPageTitle) appPageTitle.innerText = 'Application Wizard';
+                
+                // Show form view (not read-only)
+                if(document.getElementById('app-readonly-view')) {
+                    document.getElementById('app-readonly-view').style.display = 'none';
+                }
             }
         }
 
@@ -7676,25 +8535,46 @@
             
             try {
                 let availableStudents = [];
+                const currentCounselorId = auth && auth.currentUser ? auth.currentUser.uid : null;
                 
-                // Get all students from Firebase who have created profiles
-                if(db) {
+                // Refresh counselorStudents array first to get latest data
+                if(db && currentCounselorId) {
                     try {
+                        // Get all students assigned to this counselor
+                        const allUsersSnapshot = await getDocs(collection(db, "users"));
+                        const myStudentIds = new Set();
+                        allUsersSnapshot.forEach((doc) => {
+                            const userData = doc.data();
+                            if(userData.counselorId === currentCounselorId) {
+                                myStudentIds.add(doc.id);
+                            }
+                        });
+                        
+                        // Now get all students from Firebase
                         const usersSnapshot = await getDocs(collection(db, "users"));
+                        console.log(`Found ${usersSnapshot.size} total users in database`);
+                        
                         usersSnapshot.forEach((doc) => {
                             const userData = doc.data();
-                            // Include students who have at least basic info (name or submitted application)
-                            if(userData.fname || userData.status) {
-                                // Check if student is already in counselor's list
-                                const existingStudent = counselorStudents.find(s => 
-                                    String(s.id) === String(doc.id) || 
-                                    (s.email && userData.email && s.email === userData.email)
-                                );
+                            if(!userData) {
+                                console.warn(`Document ${doc.id} has no data`);
+                                return;
+                            }
+                            
+                            // Include ALL students who have created accounts (not just those with fname/status)
+                            // This includes new students who just signed up
+                            const hasStudentData = userData.fname || userData.email || userData.status || userData.role === 'student';
+                            
+                            if(hasStudentData) {
+                                // Check if student is already assigned to this counselor
+                                const isAssignedToMe = userData.counselorId === currentCounselorId;
+                                const isInMyList = myStudentIds.has(doc.id);
                                 
-                                if(!existingStudent) {
+                                // Only show if not already assigned to me
+                                if(!isAssignedToMe && !isInMyList) {
                                     availableStudents.push({
                                         id: doc.id,
-                                        name: `${userData.fname || ''} ${userData.lname || ''}`.trim() || 'Unknown Student',
+                                        name: `${userData.fname || ''} ${userData.lname || ''}`.trim() || userData.email?.split('@')[0] || 'New Student',
                                         email: userData.email || 'noemail@example.com',
                                         fname: userData.fname || '',
                                         lname: userData.lname || '',
@@ -7706,18 +8586,37 @@
                                         citizen: userData.citizen || '',
                                         state: userData.state || '',
                                         intake: userData.intake || '',
-                                        universities: userData.universities || [],
+                                        universities: Array.isArray(userData.universities) ? userData.universities : [],
                                         status: userData.status || 'Draft',
-                                        docs: userData.docs || [],
+                                        docs: Array.isArray(userData.docs) ? userData.docs : [],
                                         counselorId: userData.counselorId || null,
-                                        updatedAt: userData.updatedAt || null
+                                        updatedAt: userData.updatedAt || null,
+                                        role: userData.role || 'student'
                                     });
                                 }
                             }
                         });
+                        
+                        console.log(`Found ${availableStudents.length} available students`);
                     } catch(e) {
                         console.error("Error loading students:", e);
+                        listContainer.innerHTML = `
+                            <div style="text-align: center; padding: 40px; color: var(--danger);">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                <p>Error loading students: ${e.message || 'Unknown error'}</p>
+                                <button class="btn btn-sm" onclick="addStudent()" style="margin-top: 15px;">Try Again</button>
+                            </div>
+                        `;
+                        return;
                     }
+                } else if(!db) {
+                    listContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--danger);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <p>Database not initialized. Please refresh the page.</p>
+                        </div>
+                    `;
+                    return;
                 }
                 
                 // Display available students
@@ -8049,11 +8948,14 @@
                 
                 // Load data from Firestore or localStorage
                 if(page === 'student-apps') {
-                if(isDemoMode) {
-                    const saved = localStorage.getItem('demoApp');
-                    if(saved) {
-                        currentApplication = JSON.parse(saved);
-                        selectedUnis = currentApplication.universities || [];
+                    // Stop auto-save if it was running from another page
+                    stopAutoSave();
+                    
+                    if(isDemoMode) {
+                        const saved = localStorage.getItem('demoApp');
+                        if(saved) {
+                            currentApplication = JSON.parse(saved);
+                            selectedUnis = currentApplication.universities || [];
                         }
                     } else if(auth && auth.currentUser) {
                         // Data should already be loaded in auth state handler, but ensure it's loaded
@@ -8066,7 +8968,20 @@
                         }).catch(e => console.error('Error loading data:', e));
                     }
                     // Load form data after a small delay to ensure DOM is ready
-                    setTimeout(() => loadFormData(), 100);
+                    setTimeout(() => {
+                        loadFormData();
+                        // Check if application is submitted - show read-only view
+                        if(currentApplication && currentApplication.status === 'Submitted') {
+                            showReadOnlyView();
+                        } else {
+                            // Start auto-save when form is loaded (only if not submitted)
+                            startAutoSave();
+                        }
+                        updateDashboardUI();
+                    }, 100);
+                } else if(page === 'student') {
+                    // Stop auto-save when leaving application page
+                    stopAutoSave();
                 }
                 updateDashboardUI();
             } else if (page === 'counselor') {
